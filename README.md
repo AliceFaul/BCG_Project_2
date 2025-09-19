@@ -10,6 +10,14 @@ Project 2 là một dự án game 2D Top-Down RPG của team BCG.
 
 * 2D RPG, Action
 
+# **TÍNH NĂNG**
+* Combat System
+* Quest System
+* NPC System
+* Save/Load System
+* Skill tree
+* Story/Cutscene
+
 # **QUY TẮC**
 
 * Mỗi cuối ngày phải push task lên Git mặc kệ xong hay không xong
