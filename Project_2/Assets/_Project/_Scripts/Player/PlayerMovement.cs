@@ -2,7 +2,7 @@
 
 namespace _Project._Scripts.Player
 {
-    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Các biến movement")]
@@ -10,7 +10,9 @@ namespace _Project._Scripts.Player
 
         //Các biến trạng thái
         private Rigidbody2D _rb;
+        private Animator _anim;
         private Vector2 _moveInput;
+        private Vector2 _lastInput;
         private float _currentSpeed;
 
         //Các biến bool kiểm soát trạng thái di chuyển của Player
@@ -18,10 +20,9 @@ namespace _Project._Scripts.Player
 
         private void Awake()
         {
-            if(_rb == null)
-            {
-                _rb = GetComponent<Rigidbody2D>();
-            }
+            //Tham chiếu các component của player 
+            _rb = GetComponent<Rigidbody2D>();
+            _anim = GetComponent<Animator>();
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,6 +49,10 @@ namespace _Project._Scripts.Player
             if(_canMove)
             {
                 _moveInput = PlayerInput.Instance._moveInput;
+                if(_moveInput != Vector2.zero)
+                {
+                    _lastInput = _moveInput;
+                }
             }
             else
             {
@@ -61,6 +66,17 @@ namespace _Project._Scripts.Player
             {
                 return;
             }
+            _anim.SetBool("isMoving", true);
+            _anim.SetFloat("InputX", _moveInput.x);
+            _anim.SetFloat("InputY", _moveInput.y);
+
+            if(_moveInput == Vector2.zero)
+            {
+                _anim.SetBool("isMoving", false);
+                _anim.SetFloat("LastInputX", _lastInput.x);
+                _anim.SetFloat("LastInputY", _lastInput.y);
+            }
+
             _moveInput.Normalize();
 
             _rb.linearVelocity = _moveInput * _currentSpeed;
