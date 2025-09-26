@@ -47,8 +47,7 @@ namespace _Project._Scripts.Player
         {
             if(_canMove)
             {
-                _moveInput.x = Input.GetAxisRaw("Horizontal");
-                _moveInput.y = Input.GetAxisRaw("Vertical");
+                _moveInput = PlayerInput.Instance._moveInput;
             }
             else
             {
