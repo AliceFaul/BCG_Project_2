@@ -8,6 +8,7 @@ namespace _Project._Scripts.Player
 
         //Các thông số input
         public Vector2 _moveInput { get; private set; }
+        public bool _attackInput { get; private set; }
 
         private void Awake()
         {
@@ -33,6 +34,7 @@ namespace _Project._Scripts.Player
         public void HandlePCInput()
         {
             _moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            _attackInput = Input.GetMouseButtonDown(0);
         }
         #endregion
     }
