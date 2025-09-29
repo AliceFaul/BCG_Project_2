@@ -11,12 +11,16 @@ namespace _Project._Scripts.Player
         //Các biến trạng thái
         private Rigidbody2D _rb;
         private Animator _anim;
+        [SerializeField] private PlayerState _state;
         private Vector2 _moveInput;
+        private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed;
 
         //Các biến bool kiểm soát trạng thái di chuyển của Player
-        private bool _canMove = true;
+        private bool _canMove = false;
+        private bool _canAttack = false;
+        private bool _inputBuffered = false;
 
         private void Awake()
         {
@@ -28,6 +32,8 @@ namespace _Project._Scripts.Player
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            SetPlayerControl(true);
+            ChangeState(PlayerState.Idle);
             _currentSpeed = _moveSpeed;
         }
 
@@ -43,13 +49,17 @@ namespace _Project._Scripts.Player
             Movement();
         }
 
+        #region Input Movement
         //Hàm xử lý tất cả các Input liên quan đến di chuyển
         void ProcessInput()
         {
-            if(_canMove)
+            if (PlayerInput.Instance == null) return;
+
+            //Input Di chuyển
+            if (_canMove)
             {
                 _moveInput = PlayerInput.Instance._moveInput;
-                if(_moveInput != Vector2.zero)
+                if (_moveInput != Vector2.zero)
                 {
                     _lastInput = _moveInput;
                 }
@@ -58,28 +68,126 @@ namespace _Project._Scripts.Player
             {
                 _moveInput = Vector2.zero;
             }
-        }
 
+            //Input tấn công
+            if (_canAttack && PlayerInput.Instance._attackInput)
+            {
+                ChangeState(PlayerState.Attack);
+            }
+        }
+        #endregion
+
+        #region Movement, Attack Event
+        //Hàm di chuyển
         void Movement()
         {
-            if(!_canMove)
+            if (!_canMove || _state == PlayerState.Attack)
             {
+                _rb.linearVelocity = Vector2.zero;
                 return;
             }
-            _anim.SetBool("isMoving", true);
-            _anim.SetFloat("InputX", _moveInput.x);
-            _anim.SetFloat("InputY", _moveInput.y);
 
-            if(_moveInput == Vector2.zero)
+            if (_moveInput == Vector2.zero)
             {
-                _anim.SetBool("isMoving", false);
-                _anim.SetFloat("LastInputX", _lastInput.x);
-                _anim.SetFloat("LastInputY", _lastInput.y);
+                ChangeState(PlayerState.Idle);
+            }
+            else
+            {
+                ChangeState(PlayerState.Walk);
             }
 
             _moveInput.Normalize();
 
             _rb.linearVelocity = _moveInput * _currentSpeed;
         }
+
+        //Hàm gọi trong Animation Event
+        public void EnableCombo()
+        {
+            if(_inputBuffered)
+            {
+                _anim.SetBool("canCombo", true);
+                _inputBuffered = false;
+            }
+        }
+
+        //Hàm gọi trong Animation Event
+        public void DisableCombo()
+        {
+            _anim.SetBool("canCombo", false);
+            _inputBuffered = false;
+        }
+
+        //Hàm gọi trong Animation Event
+        public void EndAttack()
+        {
+            if (_inputBuffered) return;
+
+            ChangeState(PlayerState.Idle);
+        }
+
+        #endregion
+
+        #region Control Player State, Animation
+        //Hàm điều khiển chuyển động của Player
+        private void SetPlayerControl(bool _isEnabled)
+        {
+            _canMove = _isEnabled;
+            _canAttack = _isEnabled;
+        }
+
+        void ChangeState(PlayerState _newState)
+        {
+            if (_anim == null) return;
+
+            _state = _newState;
+
+            switch (_state)
+            {
+                case PlayerState.Idle:
+                    //Chạy animation idle của Player
+                    _anim.SetBool("isMoving", false);
+                    _anim.SetFloat("LastInputX", _lastInput.x);
+                    _anim.SetFloat("LastInputY", _lastInput.y);
+                    break;
+                case PlayerState.Walk:
+                    //Chạy animation walk của Player
+                    _anim.SetBool("isMoving", true);
+                    _anim.SetFloat("InputX", _moveInput.x);
+                    _anim.SetFloat("InputY", _moveInput.y);
+                    break;
+                case PlayerState.Attack:
+                    //Nếu chuột ở ngoài màn hình game sẽ return
+                    if (Input.mousePosition.x < 0 || Input.mousePosition.x > Screen.width ||
+                        Input.mousePosition.y < 0 || Input.mousePosition.y > Screen.height)
+                    {
+                        return;
+                    }
+
+                    _anim.SetBool("isMoving", false);
+
+                    //Lấy hướng của chuột
+                    _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    _mousePosition.z = 0;
+                    Vector2 dir = (_mousePosition - transform.position).normalized;
+
+                    //Chạy animation Attack của Player
+                    if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
+                    {
+                        _anim.SetTrigger("Attack");
+                        _anim.SetFloat("MouseInputX", dir.x);
+                        _anim.SetFloat("MouseInputY", dir.y);
+                    }
+                    else
+                    {
+                        _inputBuffered = true;
+                    }
+                    break;
+            }
+        }
+        #endregion
     }
+
+    public enum PlayerState { Idle, Walk, Attack }
 }
