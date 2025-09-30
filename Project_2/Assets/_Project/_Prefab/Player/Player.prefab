@@ -177,6 +177,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 3
+  _state: 0
+  _attackCD: 1.2
 --- !u!95 &297884192612695280
 Animator:
   serializedVersion: 7

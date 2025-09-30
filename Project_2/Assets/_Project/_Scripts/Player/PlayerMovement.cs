@@ -2,20 +2,22 @@
 
 namespace _Project._Scripts.Player
 {
-    [RequireComponent(typeof(Rigidbody2D), typeof(Animator))]
+    [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(PlayerState))]
     public class PlayerMovement : MonoBehaviour
     {
         [Header("Các biến movement")]
         [SerializeField] private float _moveSpeed = 3f;
 
-        //Các biến trạng thái
+        [Tooltip("Các biến trạng thái")]
         private Rigidbody2D _rb;
         private Animator _anim;
         [SerializeField] private PlayerState _state;
         private Vector2 _moveInput;
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
-        private float _currentSpeed;
+        private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
+        private float _attackTimer; //Biến đếm thời gian khi cooldown hết
+        [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
 
         //Các biến bool kiểm soát trạng thái di chuyển của Player
         private bool _canMove = false;
@@ -32,14 +34,18 @@ namespace _Project._Scripts.Player
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            SetPlayerControl(true);
-            ChangeState(PlayerState.Idle);
-            _currentSpeed = _moveSpeed;
+            InitializeMovement();
         }
 
         // Update is called once per frame
         void Update()
         {
+            //Đếm thời gian cho đến lượt tấn công tiếp theo
+            if(_attackTimer >= 0)
+            {
+                _attackTimer -= Time.deltaTime;
+            }
+
             ProcessInput();
         }
 
@@ -47,6 +53,14 @@ namespace _Project._Scripts.Player
         void FixedUpdate()
         {
             Movement();
+        }
+
+        //Hàm khởi tạo khi mới bắt đầu
+        void InitializeMovement()
+        {
+            SetPlayerControl(true);
+            ChangeState(PlayerState.Idle);
+            _currentSpeed = _moveSpeed;
         }
 
         #region Input Movement
@@ -70,7 +84,7 @@ namespace _Project._Scripts.Player
             }
 
             //Input tấn công
-            if (_canAttack && PlayerInput.Instance._attackInput)
+            if (_canAttack && PlayerInput.Instance._attackInput && _attackTimer <= 0)
             {
                 ChangeState(PlayerState.Attack);
             }
@@ -124,6 +138,7 @@ namespace _Project._Scripts.Player
             if (_inputBuffered) return;
 
             ChangeState(PlayerState.Idle);
+            _attackTimer = _attackCD;
         }
 
         #endregion
