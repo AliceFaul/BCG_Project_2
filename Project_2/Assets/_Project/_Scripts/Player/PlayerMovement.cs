@@ -12,16 +12,21 @@ namespace _Project._Scripts.Player
         private Rigidbody2D _rb;
         private Animator _anim;
         [SerializeField] private PlayerState _state;
+        PlayerStamina _playerStamina;
         private Vector2 _moveInput;
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
+        [SerializeField] private float _dashDistance = 0.5f; //Khoảng cách lướt nhẹ về phía hướng đánh
+        [SerializeField] private float _dashFinalAttack = 2f; //Khoảng cách lướt nhanh về phía hướng đánh ở đòn cuối
+        private Vector3 _beginAttackPos; //Vị trí trước khi đánh để quay về khi kết thúc chuỗi combo
+        [SerializeField] private float _attackStamina = 15f; //Lượng stamina cần để thực hiện tấn công
 
         //Các biến bool kiểm soát trạng thái di chuyển của Player
-        private bool _canMove = false;
-        private bool _canAttack = false;
+        [HideInInspector] public bool _canMove = false;
+        [HideInInspector] public bool _canAttack = false;
         private bool _inputBuffered = false;
 
         private void Awake()
@@ -61,6 +66,7 @@ namespace _Project._Scripts.Player
             SetPlayerControl(true);
             ChangeState(PlayerState.Idle);
             _currentSpeed = _moveSpeed;
+            _playerStamina = GetComponent<PlayerStamina>();
         }
 
         #region Input Movement
@@ -84,7 +90,8 @@ namespace _Project._Scripts.Player
             }
 
             //Input tấn công
-            if (_canAttack && PlayerInput.Instance._attackInput && _attackTimer <= 0)
+            if (_canAttack && PlayerInput.Instance._attackInput && _attackTimer <= 0 &&
+                _playerStamina._currentStamina >= _attackStamina)
             {
                 ChangeState(PlayerState.Attack);
             }
@@ -133,10 +140,38 @@ namespace _Project._Scripts.Player
         }
 
         //Hàm gọi trong Animation Event
+        public void DashFinalAttack()
+        {
+            _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _mousePosition.z = 0;
+            Vector2 _dir = (_mousePosition - transform.position).normalized;
+
+            if(_mousePosition != null)
+            {
+                _rb.MovePosition(_rb.position + _dashFinalAttack * _dir);
+            }
+        }
+
+        //Hàm gọi trong Animation Event
         public void EndAttack()
         {
             if (_inputBuffered) return;
 
+            ChangeState(PlayerState.Idle);
+            _attackTimer = _attackCD;
+        }
+
+        //Hàm gọi trong Animation Event
+        public void EndFinalAttack()
+        {
+            Invoke(nameof(EndDashFinalAttack), 0.17f);
+        }
+
+        void EndDashFinalAttack()
+        {
+            if (_inputBuffered) return;
+
+            _rb.position = _beginAttackPos;
             ChangeState(PlayerState.Idle);
             _attackTimer = _attackCD;
         }
@@ -180,6 +215,7 @@ namespace _Project._Scripts.Player
                     }
 
                     _anim.SetBool("isMoving", false);
+                    _playerStamina.ChangeStamina(-_attackStamina);
 
                     //Lấy hướng của chuột
                     _mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -190,9 +226,11 @@ namespace _Project._Scripts.Player
                     if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
                         _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
                     {
+                        _beginAttackPos = _rb.position;
                         _anim.SetTrigger("Attack");
                         _anim.SetFloat("MouseInputX", dir.x);
                         _anim.SetFloat("MouseInputY", dir.y);
+                        _rb.MovePosition(_rb.position + _dashDistance * dir);
                     }
                     else
                     {
