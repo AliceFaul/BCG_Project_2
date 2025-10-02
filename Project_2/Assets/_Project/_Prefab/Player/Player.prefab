@@ -94,7 +94,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: cfd83c83d6c74ec47a32fb0fc1d38de9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -237,7 +237,6 @@ MonoBehaviour:
   _state: 0
   _attackCD: 1.2
   _dashDistance: 0.7
-  _dashFinalAttack: 3
   _attackStamina: 5
   _canMove: 0
   _canAttack: 0
@@ -253,8 +252,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d40079a71c4f0f4c866cad7fd8c00ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _objectDissolve: {fileID: 2100000, guid: b1519e2569406904889ed03e4035f888, type: 2}
+  _damageFlash: {fileID: 2100000, guid: cfd83c83d6c74ec47a32fb0fc1d38de9, type: 2}
   _maxHealth: 100
   _currentHealth: 0
+  _deadColor: {r: 0, g: 0, b: 0, a: 1}
+  _flashColor: {r: 1, g: 1, b: 1, a: 1}
+  _flashTime: 0.25
+  _flashSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -46.381687
+      outSlope: -46.381687
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.0120429285
+      value: 0.44142866
+      inSlope: -28.85376
+      outSlope: -28.85376
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.050431605
+      value: 0.006644994
+      inSlope: -0.06200709
+      outSlope: -0.06200709
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17188561
+    - serializedVersion: 3
+      time: 0.15
+      value: 1
+      inSlope: -0.09075444
+      outSlope: -0.09075444
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.18924116
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.25
+      value: 0
+      inSlope: -10.000001
+      outSlope: -10.000001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &951875001355187789
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ namespace _Project._Scripts.Player
         [SerializeField] private float _moveOffset = 0.2f;
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             MoveAttackPoint();
         }

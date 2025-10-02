@@ -21,7 +21,7 @@ namespace _Project._Scripts.Player
         }
 
         // Update is called once per frame
-        void FixedUpdate()
+        void Update()
         {
             RecoveryStamina(_recoveryAmount);
         }
