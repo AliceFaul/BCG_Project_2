@@ -2,6 +2,7 @@
 
 namespace _Project._Scripts.Player
 {
+    //Script Di chuyển và điều khiển toàn bộ animation của Player
     [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(PlayerState))]
     public class PlayerMovement : MonoBehaviour
     {
