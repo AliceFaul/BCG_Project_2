@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -9,9 +10,25 @@ public class EnemyAI : MonoBehaviour
     private Transform targetPlayer; // player khi phát hiện
     private bool isChasing = false; // trạng thái có đang dí không
 
+    [Header("Máu Enemy")]
+    [SerializeField] private int maxHealth = 100;   // máu tối đa
+    private int currentHealth;                      // máu hiện tại
+    [SerializeField] private HealthBar healthBar;   // script thanh máu
+
     private void Reset()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        // khởi tạo máu ban đầu
+        currentHealth = maxHealth;
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     private void Update()
@@ -42,5 +59,26 @@ public class EnemyAI : MonoBehaviour
             targetPlayer = null;
             isChasing = false;
         }
+    }
+
+    // Enemy bị đánh
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Enemy chết!");
+        Destroy(gameObject);
     }
 }
