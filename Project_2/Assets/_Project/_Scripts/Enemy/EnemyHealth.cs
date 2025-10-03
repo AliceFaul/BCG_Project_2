@@ -1,28 +1,30 @@
 ﻿using System.Collections;
-using _Project._Scripts.Core;
 using UnityEngine;
+using UnityEngine.UI;
+using _Project._Scripts.Core;
+using System;
 
-namespace _Project._Scripts.Player
+namespace _Project._Scripts.Enemies
 {
-    [RequireComponent(typeof(PlayerMovement), typeof(Material))]
-    public class PlayerHealth : MonoBehaviour, IDamageable
+    public class EnemyHealth : MonoBehaviour, IDamageable
     {
-        PlayerMovement _movement;
+        //Biến event gửi tín hiệu qua movement để ngừng di chuyển
+        public event Action OnDead;
+
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
-        [Header("Các thông số máu")]
-        [SerializeField] private float _maxHealth = 100f; //Máu tối đa của người chơi
-        [SerializeField] private float _currentHealth; //Máu hiện tại của người chơi
-
-        [Space(10)]
+        [SerializeField] private float _maxHealth = 100f; //Lượng máu tối đa
+        private float _currentHealth; //Lượng máu hiện tại
+        [SerializeField] private Image _healthBar; //Health bar của gameobject
 
         [Header("Các thông số khi trúng đòn và chết")]
         //Setup hiệu ứng khi chết
         private float _fade = 1f;
         [Tooltip("Màu sắc khi chết")]
-        [SerializeField] private Color _deadColor = Color.black; //Khi chết, người chơi sẽ biến thành màu đen
+        [SerializeField] private Color _deadColor = Color.black;
 
         //Setup hiệu ứng khi trúng đòn đánh
+        [Tooltip("Chỉnh màu damage flash")]
         [ColorUsage(true, true)]
         [SerializeField] private Color _flashColor = Color.white;
         [SerializeField] private float _flashTime = 0.25f;
@@ -32,56 +34,63 @@ namespace _Project._Scripts.Player
         void Start()
         {
             _currentHealth = _maxHealth;
-            _movement = GetComponent<PlayerMovement>();
+            UpdateHealthBar();
         }
 
-        //Hàm trừ máu, nếu damage là âm sẽ mất máu còn dương sẽ hồi máu
+        //Implement từ interface IDamageable để chịu sát thương
         public void TakeDamage(float damage)
         {
             _currentHealth += damage;
-
+            _currentHealth = Mathf.Max(_currentHealth, 0);
+            UpdateHealthBar();
             if(_currentHealth <= 0)
             {
                 _currentHealth = 0;
+                OnDead?.Invoke();
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
-                StartCoroutine(Dissolve(gameObject, _fade));
-                _movement._canMove = false;
+                StartCoroutine(Die(gameObject, _fade));
             }
 
-            StartCoroutine(DamageFlasher());
+            StartCoroutine(DamageFlash());
         }
 
-        #region Dead Effect
-        //Hàm Coroutine để sử dụng hiệu ứng dissolve và disable player
-        IEnumerator Dissolve(GameObject player, float time)
+        //Hàm cập nhật thanh máu
+        void UpdateHealthBar()
+        {
+            if (_healthBar == null) return;
+
+            _healthBar.fillAmount = _currentHealth / _maxHealth;
+        }
+
+        //Tạch
+        IEnumerator Die(GameObject obj, float time)
         {
             SpriteRenderer sr = GetComponent<SpriteRenderer>();
             SpriteShaderController shaderController = GetComponent<SpriteShaderController>();
 
             sr.material = _objectDissolve;
-            yield return new WaitForSeconds(Random.Range(2f, 4f));
+            Debug.Log("Get Dissolve Material");
+            yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 4f));
 
-            float t = 0f;
+            float t = 1f;
 
-            while (t < 1f)
+            while (t > 0f)
             {
-                t += Time.deltaTime / time;
+                t -= Time.deltaTime / time;
                 shaderController.SetDissolve(t);
                 yield return null;
             }
 
-            player.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+            obj.SetActive(false);
         }
-        #endregion
 
-        #region Hit Effect
-        //Hàm Coroutine để sử dụng hiệu ứng trúng đòn
-        IEnumerator DamageFlasher()
+        //Hàm Coroutine để sử dụng hiệu ứng Damage Flash
+        IEnumerator DamageFlash()
         {
             SpriteShaderController shaderController = GetComponent<SpriteShaderController>();
-
             //Chỉnh màu
-            SetFlashColor();
+            _damageFlash.SetColor("_FlashColor", _flashColor);
 
             //Nội suy hiệu ứng
             float currentFlashAmount = 0f;
@@ -95,13 +104,5 @@ namespace _Project._Scripts.Player
                 yield return null;
             }
         }
-
-        //Hàm chỉnh màu cho hiệu ứng
-        void SetFlashColor()
-        {
-            _damageFlash.SetColor("_FlashColor", _flashColor);
-        }
-
-        #endregion
     }
 }

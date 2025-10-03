@@ -13,7 +13,7 @@ namespace _Project._Scripts.Player
 
         [Header("Các biến thiết lập")]
         [Tooltip("Dùng để gây sát thương")]
-        //[SerializeField] private float _damage = 15f;
+        [SerializeField] private float _damage = 15f;
         [SerializeField] private float _attackRange = 15f;
         [SerializeField] private float _moveOffset = 0.2f;
 
@@ -82,9 +82,15 @@ namespace _Project._Scripts.Player
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(_attackPoint.position, _attackRange, _enemyLayer);
 
-            if (hits.Length > 0)
+            foreach(var hit in hits)
             {
                 //Tham chiếu hàm trừ máu của Enemy
+                IDamageable damageable = hits[0].GetComponent<IDamageable>();
+                if(damageable != null)
+                {
+                    damageable.TakeDamage(-_damage);
+                    Debug.Log("Enemy take damage");
+                }
             }
         }
 
