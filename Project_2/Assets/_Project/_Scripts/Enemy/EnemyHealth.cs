@@ -81,7 +81,7 @@ namespace _Project._Scripts.Enemies
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
             obj.SetActive(false);
         }
 
