@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using _Project._Scripts.Core;
+using _Project._Scripts.UI;
 using UnityEngine;
 
 namespace _Project._Scripts.Player
@@ -33,14 +34,16 @@ namespace _Project._Scripts.Player
         {
             _currentHealth = _maxHealth;
             _movement = GetComponent<PlayerMovement>();
+            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
         }
 
         //Hàm trừ máu, nếu damage là âm sẽ mất máu còn dương sẽ hồi máu
         public void TakeDamage(float damage)
         {
             _currentHealth += damage;
+            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
 
-            if(_currentHealth <= 0)
+            if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;

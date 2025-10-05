@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.UI;
+using UnityEngine;
 
 namespace _Project._Scripts.Player
 {
@@ -18,6 +19,7 @@ namespace _Project._Scripts.Player
         void Start()
         {
             _currentStamina = _maxStamina;
+            HUDController.Instance.UpdateStaminaUI(_currentStamina, _maxStamina);
         }
 
         // Update is called once per frame
@@ -54,14 +56,17 @@ namespace _Project._Scripts.Player
                 _currentStamina += amount;
                 _recoverTimer = _recoverTime;
             }
+
+            HUDController.Instance.UpdateStaminaUI(_currentStamina, _maxStamina);
         }
 
         //Hàm điều khiển stamina, nếu amount là âm sẽ tiêu hao thể lực còn dương sẽ hồi thể lực
         public void ChangeStamina(float amount)
         {
             _currentStamina += amount;
+            HUDController.Instance.UpdateStaminaUI(_currentStamina, _maxStamina);
 
-            if(_currentStamina <= 0f)
+            if (_currentStamina <= 0f)
             {
                 _currentStamina = 0f;
             }
