@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Reptile_0
+      m_Hash: 776562950
+      m_Sprite: {fileID: 6156032726297556276, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6156032726297556276, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_1
+      m_Hash: 424565136
+      m_Sprite: {fileID: -1430511401354620805, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1430511401354620805, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_2
+      m_Hash: 4655146
+      m_Sprite: {fileID: -613766231379400643, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -613766231379400643, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_3
+      m_Hash: 926955708
+      m_Sprite: {fileID: -3624197258180533149, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3624197258180533149, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Reptile_0
+      m_Hash: 776562950
+      m_Sprite: {fileID: 6156032726297556276, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6156032726297556276, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_1
+      m_Hash: 424565136
+      m_Sprite: {fileID: -1430511401354620805, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1430511401354620805, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_2
+      m_Hash: 4655146
+      m_Sprite: {fileID: -613766231379400643, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -613766231379400643, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_3
+      m_Hash: 926955708
+      m_Sprite: {fileID: -3624197258180533149, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3624197258180533149, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_4
+      m_Hash: 690269471
+      m_Sprite: {fileID: -8588256460174210935, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8588256460174210935, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_5
+      m_Hash: 505650569
+      m_Sprite: {fileID: 6880475154457748703, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6880475154457748703, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_6
+      m_Hash: 120245299
+      m_Sprite: {fileID: 9138485257646618351, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9138485257646618351, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_7
+      m_Hash: 808320165
+      m_Sprite: {fileID: 9199568416701599017, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9199568416701599017, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_8
+      m_Hash: 546496820
+      m_Sprite: {fileID: -935550634455398301, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -935550634455398301, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_9
+      m_Hash: 395694498
+      m_Sprite: {fileID: -4123151536764360774, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4123151536764360774, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_10
+      m_Hash: 72155708
+      m_Sprite: {fileID: -416449663515335173, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -416449663515335173, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_11
+      m_Hash: 860500650
+      m_Sprite: {fileID: 6441235684894231443, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6441235684894231443, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_12
+      m_Hash: 709059344
+      m_Sprite: {fileID: 5151097888386605578, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 5151097888386605578, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_13
+      m_Hash: 491017094
+      m_Sprite: {fileID: 193354171, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 193354171, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_14
+      m_Hash: 52479525
+      m_Sprite: {fileID: 1016047683, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1016047683, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_15
+      m_Hash: 875034291
+      m_Sprite: {fileID: 1019881030, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1019881030, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 16
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Reptile_0
+      m_Hash: 776562950
+      m_Sprite: {fileID: 6156032726297556276, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6156032726297556276, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_1
+      m_Hash: 424565136
+      m_Sprite: {fileID: -1430511401354620805, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1430511401354620805, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_2
+      m_Hash: 4655146
+      m_Sprite: {fileID: -613766231379400643, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -613766231379400643, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    - m_Name: Reptile_3
+      m_Hash: 926955708
+      m_Sprite: {fileID: -3624197258180533149, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3624197258180533149, guid: 53b655dbdf9fc3241ab864f09224a5ad, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638954562117825189
+  m_Version: 1

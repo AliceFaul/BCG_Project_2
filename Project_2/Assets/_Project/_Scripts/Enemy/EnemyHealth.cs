@@ -29,6 +29,10 @@ namespace _Project._Scripts.Enemies
         [SerializeField] private Color _flashColor = Color.white;
         [SerializeField] private float _flashTime = 0.25f;
         [SerializeField] private AnimationCurve _flashSpeedCurve;
+        [Tooltip("Hiệu ứng particle phát ra khi bị player tấn công")]
+        [SerializeField] private ParticleSystem _damageParticle;
+
+        private bool _isDead = false;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -37,14 +41,20 @@ namespace _Project._Scripts.Enemies
             UpdateHealthBar();
         }
 
+        #region Take Damage, Update Health Bar Life Cycle
+
         //Implement từ interface IDamageable để chịu sát thương
         public void TakeDamage(float damage)
         {
+            if(_isDead) return;
+
             _currentHealth += damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
+            DamageParticle();
             UpdateHealthBar();
             if(_currentHealth <= 0)
             {
+                _isDead = true;
                 _currentHealth = 0;
                 OnDead?.Invoke();
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
@@ -62,6 +72,18 @@ namespace _Project._Scripts.Enemies
             _healthBar.fillAmount = _currentHealth / _maxHealth;
         }
 
+        void DamageParticle()
+        {
+            if(_damageParticle == null) return;
+
+            ParticleSystem damageParti = Instantiate(_damageParticle, transform.position, Quaternion.identity);
+            Debug.Log("Spawn particle");
+        }
+
+        #endregion
+
+        #region Coroutine Dead, Hit
+
         //Tạch
         IEnumerator Die(GameObject obj, float time)
         {
@@ -70,7 +92,7 @@ namespace _Project._Scripts.Enemies
 
             sr.material = _objectDissolve;
             Debug.Log("Get Dissolve Material");
-            yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 4f));
+            yield return new WaitForSeconds(2f);
 
             float t = 1f;
 
@@ -104,5 +126,7 @@ namespace _Project._Scripts.Enemies
                 yield return null;
             }
         }
+
+        #endregion
     }
 }

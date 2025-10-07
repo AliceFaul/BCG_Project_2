@@ -28,6 +28,8 @@ namespace _Project._Scripts.Player
             RecoveryStamina(_recoveryAmount);
         }
 
+        #region Stamina System
+
         //Hàm hồi phục stamina theo thời gian
         void RecoveryStamina(float amount)
         {
@@ -71,5 +73,7 @@ namespace _Project._Scripts.Player
                 _currentStamina = 0f;
             }
         }
+
+        #endregion
     }
 }

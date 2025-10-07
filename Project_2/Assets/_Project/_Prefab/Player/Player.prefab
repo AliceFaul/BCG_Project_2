@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2d7e27262347648a99858d6ea4b070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 3
+  _moveSpeed: 4
   _state: 0
   _attackCD: 1.2
   _dashDistance: 0.7
@@ -311,6 +311,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _damageParticle: {fileID: 1799141818267455260, guid: d4e4648e86dd10942976f499566951a9, type: 3}
 --- !u!114 &951875001355187789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,6 +348,8 @@ MonoBehaviour:
   _damage: 15
   _attackRange: 1.5
   _moveOffset: 0.2
+  _knockbackForce: 8
+  _stunTime: 1
 --- !u!114 &3867353841579611734
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,6 +28,9 @@ namespace _Project._Scripts.Player
         [SerializeField] private Color _flashColor = Color.white;
         [SerializeField] private float _flashTime = 0.25f;
         [SerializeField] private AnimationCurve _flashSpeedCurve;
+        [SerializeField] private ParticleSystem _damageParticle;
+
+        #region Heath Unity Life Cycle
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -41,6 +44,7 @@ namespace _Project._Scripts.Player
         public void TakeDamage(float damage)
         {
             _currentHealth += damage;
+            DamageParticle();
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
 
             if (_currentHealth <= 0)
@@ -54,6 +58,15 @@ namespace _Project._Scripts.Player
             StartCoroutine(DamageFlasher());
         }
 
+        void DamageParticle()
+        {
+            if (_damageParticle == null) return;
+
+            ParticleSystem damageParti = Instantiate(_damageParticle, transform.position, Quaternion.identity);
+        }
+
+        #endregion
+
         #region Dead Effect
         //Hàm Coroutine để sử dụng hiệu ứng dissolve và disable player
         IEnumerator Dissolve(GameObject player, float time)
@@ -62,13 +75,13 @@ namespace _Project._Scripts.Player
             SpriteShaderController shaderController = GetComponent<SpriteShaderController>();
 
             sr.material = _objectDissolve;
-            yield return new WaitForSeconds(Random.Range(2f, 4f));
+            yield return new WaitForSeconds(2f);
 
-            float t = 0f;
+            float t = 1f;
 
-            while (t < 1f)
+            while (t > 0f)
             {
-                t += Time.deltaTime / time;
+                t -= Time.deltaTime / time;
                 shaderController.SetDissolve(t);
                 yield return null;
             }

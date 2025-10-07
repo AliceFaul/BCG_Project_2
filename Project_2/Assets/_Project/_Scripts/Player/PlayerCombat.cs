@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.UI;
+using UnityEngine;
 
 namespace _Project._Scripts.Player
 {
@@ -16,12 +17,18 @@ namespace _Project._Scripts.Player
         [SerializeField] private float _damage = 15f;
         [SerializeField] private float _attackRange = 15f;
         [SerializeField] private float _moveOffset = 0.2f;
+        [Tooltip("Lực đẩy khi tấn công")]
+        [SerializeField] private float _knockbackForce = 10f; //Lực đẩy khi đánh trúng enemies
+        [Tooltip("Thời gian bị stun của enemies bị đánh trúng")]
+        [SerializeField] private float _stunTime = 1f; //Thời gian bị stun của enemies bị đánh trúng
 
         // Update is called once per frame
         void Update()
         {
             MoveAttackPoint();
         }
+
+        #region Setting Attack point
 
         //Hàm di chuyển attack point theo hướng tấn công
         void MoveAttackPoint()
@@ -71,6 +78,8 @@ namespace _Project._Scripts.Player
             }
         }
 
+        #endregion
+
         //Hàm gọi trong Animation Event
         public void Attack()
         {
@@ -85,11 +94,17 @@ namespace _Project._Scripts.Player
             foreach(var hit in hits)
             {
                 //Tham chiếu hàm trừ máu của Enemy
-                IDamageable damageable = hits[0].GetComponent<IDamageable>();
+                IDamageable damageable = hit.GetComponent<IDamageable>();
                 if(damageable != null)
                 {
                     damageable.TakeDamage(-_damage);
                     Debug.Log("Enemy take damage");
+                    DamagePopup.CreatePopup(hit.transform.position, _damage, false);
+                    IKnockbacked knockbacked = hit.GetComponent<IKnockbacked>();
+                    if (knockbacked != null)
+                    {
+                        knockbacked.Knockback(transform, _knockbackForce, _stunTime);
+                    }
                 }
             }
         }

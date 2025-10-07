@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace _Project._Scripts.Player
 {
     //Script Di chuyển và điều khiển toàn bộ animation của Player
     [RequireComponent(typeof(Rigidbody2D), typeof(Animator), typeof(PlayerState))]
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour, IKnockbacked
     {
         [Header("Các biến movement")]
         [SerializeField] private float _moveSpeed = 3f;
@@ -19,6 +20,7 @@ namespace _Project._Scripts.Player
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
+        [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
         [SerializeField] private float _dashDistance = 0.5f; //Khoảng cách lướt nhẹ về phía hướng đánh
@@ -28,6 +30,7 @@ namespace _Project._Scripts.Player
         [HideInInspector] public bool _canMove = false;
         [HideInInspector] public bool _canAttack = false;
         private bool _inputBuffered = false;
+        private bool _isKnockbacked = false;
 
         private void Awake()
         {
@@ -51,12 +54,15 @@ namespace _Project._Scripts.Player
                 _attackTimer -= Time.deltaTime;
             }
 
+            if (_isKnockbacked) return;
+
             ProcessInput();
         }
 
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
         void FixedUpdate()
         {
+            if (_isKnockbacked) return;
             Movement();
         }
 
@@ -144,6 +150,7 @@ namespace _Project._Scripts.Player
         {
             if (_inputBuffered) return;
 
+            _anim.SetBool("isAttacking", false);
             ChangeState(PlayerState.Idle);
             _attackTimer = _attackCD;
         }
@@ -186,7 +193,7 @@ namespace _Project._Scripts.Player
                         return;
                     }
 
-                    _anim.SetBool("isMoving", false);
+                    //_anim.SetBool("isMoving", false);
                     _playerStamina.ChangeStamina(-_attackStamina);
 
                     //Lấy hướng của chuột
@@ -198,7 +205,7 @@ namespace _Project._Scripts.Player
                     if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
                         _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
                     {
-                        _anim.SetTrigger("Attack");
+                        _anim.SetBool("isAttacking", true);
                         _anim.SetFloat("MouseInputX", dir.x);
                         _anim.SetFloat("MouseInputY", dir.y);
                         _rb.MovePosition(_rb.position + _dashDistance * dir);
@@ -210,6 +217,26 @@ namespace _Project._Scripts.Player
                     break;
             }
         }
+        #endregion
+
+        #region Knockback, Dash Setting
+
+        IEnumerator KnockbackCounter(float stunTime)
+        {
+            yield return new WaitForSeconds(stunTime);
+            _rb.linearVelocity = Vector2.zero;
+            _isKnockbacked = false;
+        }
+
+        public void Knockback(Transform obj, float knockbackForce, float stunTime)
+        {
+            _isKnockbacked = true;
+            Vector2 dir = (transform.position - obj.position).normalized;
+            _rb.linearVelocity = dir * knockbackForce;
+            StartCoroutine(KnockbackCounter(stunTime));
+            //Debug.Log("Player has knockbacked");
+        }
+
         #endregion
     }
 

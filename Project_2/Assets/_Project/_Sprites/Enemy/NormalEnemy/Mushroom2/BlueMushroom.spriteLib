@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: mushroom2_0
+      m_Hash: 115970839
+      m_Sprite: {fileID: -8630886842355845947, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8630886842355845947, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_1
+      m_Hash: 837723009
+      m_Sprite: {fileID: -8298922236386659319, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8298922236386659319, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_2
+      m_Hash: 686289467
+      m_Sprite: {fileID: 7476098707611971778, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7476098707611971778, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_3
+      m_Hash: 534823597
+      m_Sprite: {fileID: 2109959730, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2109959730, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: mushroom2_0
+      m_Hash: 115970839
+      m_Sprite: {fileID: -8630886842355845947, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8630886842355845947, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_1
+      m_Hash: 837723009
+      m_Sprite: {fileID: -8298922236386659319, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8298922236386659319, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_2
+      m_Hash: 686289467
+      m_Sprite: {fileID: 7476098707611971778, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7476098707611971778, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_3
+      m_Hash: 534823597
+      m_Sprite: {fileID: 2109959730, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2109959730, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_4
+      m_Hash: 25450254
+      m_Sprite: {fileID: 1364514890, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1364514890, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_5
+      m_Hash: 914581400
+      m_Sprite: {fileID: 464060600, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 464060600, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_6
+      m_Hash: 797586978
+      m_Sprite: {fileID: 219094819, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 219094819, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_7
+      m_Hash: 411895476
+      m_Sprite: {fileID: -483166503, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -483166503, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_8
+      m_Hash: 137501477
+      m_Sprite: {fileID: 396784211, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 396784211, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_9
+      m_Hash: 1060449203
+      m_Sprite: {fileID: -241263385, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -241263385, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_10
+      m_Hash: 777355828
+      m_Sprite: {fileID: 357286830, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 357286830, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_11
+      m_Hash: 424850082
+      m_Sprite: {fileID: -899283503, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -899283503, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_12
+      m_Hash: 6021912
+      m_Sprite: {fileID: -680382011, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -680382011, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_13
+      m_Hash: 928830350
+      m_Sprite: {fileID: -1738894419, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1738894419, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_14
+      m_Hash: 691553837
+      m_Sprite: {fileID: 269748658, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 269748658, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_15
+      m_Hash: 507475643
+      m_Sprite: {fileID: -1963226030, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1963226030, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 16
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: mushroom2_0
+      m_Hash: 115970839
+      m_Sprite: {fileID: -8630886842355845947, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8630886842355845947, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_1
+      m_Hash: 837723009
+      m_Sprite: {fileID: -8298922236386659319, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8298922236386659319, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_2
+      m_Hash: 686289467
+      m_Sprite: {fileID: 7476098707611971778, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7476098707611971778, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    - m_Name: mushroom2_3
+      m_Hash: 534823597
+      m_Sprite: {fileID: 2109959730, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2109959730, guid: 2709d8fe6b7a45142b459c4c15756c21, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638954557462629339
+  m_Version: 1

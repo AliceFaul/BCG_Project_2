@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Beast_0
+      m_Hash: 52151795
+      m_Sprite: {fileID: -5479620187238129941, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5479620187238129941, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_1
+      m_Hash: 874313061
+      m_Sprite: {fileID: 1868375579, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1868375579, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_2
+      m_Hash: 756393183
+      m_Sprite: {fileID: -243007425, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -243007425, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_3
+      m_Hash: 437425225
+      m_Sprite: {fileID: -1491820580, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1491820580, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Beast_0
+      m_Hash: 52151795
+      m_Sprite: {fileID: -5479620187238129941, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5479620187238129941, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_1
+      m_Hash: 874313061
+      m_Sprite: {fileID: 1868375579, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1868375579, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_2
+      m_Hash: 756393183
+      m_Sprite: {fileID: -243007425, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -243007425, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_3
+      m_Hash: 437425225
+      m_Sprite: {fileID: -1491820580, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1491820580, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_4
+      m_Hash: 74842602
+      m_Sprite: {fileID: -1423725087, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1423725087, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_5
+      m_Hash: 863056252
+      m_Sprite: {fileID: -1773444710, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1773444710, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_6
+      m_Hash: 712532166
+      m_Sprite: {fileID: -361458637, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -361458637, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_7
+      m_Hash: 494882896
+      m_Sprite: {fileID: 1406597761, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1406597761, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_8
+      m_Hash: 230706625
+      m_Sprite: {fileID: 117773619, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 117773619, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_9
+      m_Hash: 986152279
+      m_Sprite: {fileID: 794105206, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 794105206, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_10
+      m_Hash: 167204355
+      m_Sprite: {fileID: -2090216055, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -2090216055, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_11
+      m_Hash: 1055942293
+      m_Sprite: {fileID: -1200900928, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1200900928, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_12
+      m_Hash: 670644015
+      m_Sprite: {fileID: 1266841545, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1266841545, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_13
+      m_Hash: 285083577
+      m_Sprite: {fileID: 1711829749, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1711829749, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_14
+      m_Hash: 245010970
+      m_Sprite: {fileID: 615298210, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 615298210, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_15
+      m_Hash: 966632076
+      m_Sprite: {fileID: 240254777, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 240254777, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 16
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Beast_0
+      m_Hash: 52151795
+      m_Sprite: {fileID: -5479620187238129941, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -5479620187238129941, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_1
+      m_Hash: 874313061
+      m_Sprite: {fileID: 1868375579, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1868375579, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_2
+      m_Hash: 756393183
+      m_Sprite: {fileID: -243007425, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -243007425, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    - m_Name: Beast_3
+      m_Hash: 437425225
+      m_Sprite: {fileID: -1491820580, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1491820580, guid: ba0f43570d91d6243915b60b2bdbb7af, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638954522623756594
+  m_Version: 1

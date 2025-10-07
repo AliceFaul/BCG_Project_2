@@ -22,6 +22,10 @@ namespace _Project._Scripts.UI
         [SerializeField] private TMP_Text _staminaText; //Text thể lực
         [SerializeField] private Image _staminaImage; //Image thể lực
 
+        [Header("Asset UI của game")]
+        [Tooltip("Prefab để tạo Popup damage")]
+        public Transform _pfDamagePopup; //Prefab tạo damage popup
+
         private void Awake()
         {
             //Tạo Singleton
@@ -40,6 +44,10 @@ namespace _Project._Scripts.UI
             {
                 currentHealth = maxHealth;
             }
+            else if (currentHealth <= 0f)
+            {
+                currentHealth = 0f;
+            }
 
             _healthImage.fillAmount = currentHealth / maxHealth;
             _healthText.text = $"{currentHealth} / {maxHealth}";
@@ -53,6 +61,10 @@ namespace _Project._Scripts.UI
             {
                 currentEnergy = maxEnergy;
             }
+            else if(currentEnergy <= 0f)
+            {
+                currentEnergy = 0f;
+            }
 
             _energyImage.fillAmount = currentEnergy / maxEnergy;
             _energyText.text = $"{currentEnergy} / {maxEnergy}";
@@ -65,6 +77,10 @@ namespace _Project._Scripts.UI
             if(currentStamina >= maxStamina)
             {
                 currentStamina = maxStamina;
+            }
+            else if (currentStamina <= 0f)
+            {
+                currentStamina = 0f;
             }
 
             _staminaImage.fillAmount = currentStamina / maxStamina;
