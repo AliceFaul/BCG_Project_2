@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Lizard2_0
+      m_Hash: 301506437
+      m_Sprite: {fileID: 6928454045558523735, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6928454045558523735, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_1
+      m_Hash: 654290707
+      m_Sprite: {fileID: -6943177694916410561, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6943177694916410561, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_2
+      m_Hash: 1073151657
+      m_Sprite: {fileID: 1945447363031964183, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1945447363031964183, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_3
+      m_Hash: 150064703
+      m_Sprite: {fileID: 1556192907965301803, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1556192907965301803, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Lizard2_0
+      m_Hash: 301506437
+      m_Sprite: {fileID: 6928454045558523735, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6928454045558523735, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_1
+      m_Hash: 654290707
+      m_Sprite: {fileID: -6943177694916410561, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6943177694916410561, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_2
+      m_Hash: 1073151657
+      m_Sprite: {fileID: 1945447363031964183, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1945447363031964183, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_3
+      m_Hash: 150064703
+      m_Sprite: {fileID: 1556192907965301803, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1556192907965301803, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_4
+      m_Hash: 378887068
+      m_Sprite: {fileID: -8952363846077396397, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -8952363846077396397, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_5
+      m_Hash: 563243786
+      m_Sprite: {fileID: -7739600931751078116, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -7739600931751078116, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_6
+      m_Hash: 949697200
+      m_Sprite: {fileID: 4368680482378278534, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4368680482378278534, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_7
+      m_Hash: 261884454
+      m_Sprite: {fileID: -4058277867831637685, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4058277867831637685, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_8
+      m_Hash: 522393527
+      m_Sprite: {fileID: -4468097770677398918, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -4468097770677398918, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_9
+      m_Hash: 673457953
+      m_Sprite: {fileID: -788217511751286259, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -788217511751286259, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_10
+      m_Hash: 813916496
+      m_Sprite: {fileID: 3672975263363608579, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3672975263363608579, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_11
+      m_Hash: 126112198
+      m_Sprite: {fileID: 402396150953433575, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 402396150953433575, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_12
+      m_Hash: 512557180
+      m_Sprite: {fileID: 499828417, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 499828417, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_13
+      m_Hash: 696922346
+      m_Sprite: {fileID: 1368845570, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1368845570, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_14
+      m_Hash: 938386761
+      m_Sprite: {fileID: 94188722, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 94188722, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_15
+      m_Hash: 15308255
+      m_Sprite: {fileID: -1895674066, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1895674066, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 16
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Lizard2_0
+      m_Hash: 301506437
+      m_Sprite: {fileID: 6928454045558523735, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 6928454045558523735, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_1
+      m_Hash: 654290707
+      m_Sprite: {fileID: -6943177694916410561, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -6943177694916410561, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_2
+      m_Hash: 1073151657
+      m_Sprite: {fileID: 1945447363031964183, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1945447363031964183, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    - m_Name: Lizard2_3
+      m_Hash: 150064703
+      m_Sprite: {fileID: 1556192907965301803, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1556192907965301803, guid: f4e5adb59c1db5e43946974dad287d74, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638954550610366395
+  m_Version: 1

@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Snake3_0
+      m_Hash: 963095448
+      m_Sprite: {fileID: 9133702880212932974, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9133702880212932974, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_1
+      m_Hash: 241212174
+      m_Sprite: {fileID: 7451248450715937420, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7451248450715937420, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_2
+      m_Hash: 392809140
+      m_Sprite: {fileID: -3000672723154086340, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3000672723154086340, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_3
+      m_Hash: 544143906
+      m_Sprite: {fileID: -3510653127152153869, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3510653127152153869, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Snake3_0
+      m_Hash: 963095448
+      m_Sprite: {fileID: 9133702880212932974, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9133702880212932974, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_1
+      m_Hash: 241212174
+      m_Sprite: {fileID: 7451248450715937420, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7451248450715937420, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_2
+      m_Hash: 392809140
+      m_Sprite: {fileID: -3000672723154086340, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3000672723154086340, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_3
+      m_Hash: 544143906
+      m_Sprite: {fileID: -3510653127152153869, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3510653127152153869, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_4
+      m_Hash: 1040871297
+      m_Sprite: {fileID: -1958207286576611594, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1958207286576611594, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_5
+      m_Hash: 151871255
+      m_Sprite: {fileID: 8145358183086400966, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 8145358183086400966, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_6
+      m_Hash: 268701357
+      m_Sprite: {fileID: 310549675400070201, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 310549675400070201, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_7
+      m_Hash: 654523963
+      m_Sprite: {fileID: 7170735134902038452, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7170735134902038452, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_8
+      m_Hash: 935076778
+      m_Sprite: {fileID: 1049102434392847860, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1049102434392847860, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_9
+      m_Hash: 12260156
+      m_Sprite: {fileID: 2821106497049786551, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2821106497049786551, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_10
+      m_Hash: 325948093
+      m_Sprite: {fileID: 4347716249513980332, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4347716249513980332, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_11
+      m_Hash: 610968107
+      m_Sprite: {fileID: 7879070062167690219, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7879070062167690219, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_12
+      m_Hash: 1029960593
+      m_Sprite: {fileID: 903746939, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 903746939, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_13
+      m_Hash: 174375687
+      m_Sprite: {fileID: -364882568, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -364882568, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_14
+      m_Hash: 335566500
+      m_Sprite: {fileID: -903434915, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -903434915, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_15
+      m_Hash: 587687474
+      m_Sprite: {fileID: 1372412465, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1372412465, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 16
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Snake3_0
+      m_Hash: 963095448
+      m_Sprite: {fileID: 9133702880212932974, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 9133702880212932974, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_1
+      m_Hash: 241212174
+      m_Sprite: {fileID: 7451248450715937420, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 7451248450715937420, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_2
+      m_Hash: 392809140
+      m_Sprite: {fileID: -3000672723154086340, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3000672723154086340, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    - m_Name: Snake3_3
+      m_Hash: 544143906
+      m_Sprite: {fileID: -3510653127152153869, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -3510653127152153869, guid: b1217b0345baecf4291f7dedd7a3c6c9, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638954568884908374
+  m_Version: 1

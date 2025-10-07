@@ -1,0 +1,156 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5e6fedc2472449cead18ef23b5cb30d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library:
+  - m_Name: Idle
+    m_Hash: 1008081451
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Mollusc2_0
+      m_Hash: 811411263
+      m_Sprite: {fileID: 8846403027565184405, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 8846403027565184405, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_1
+      m_Hash: 123344809
+      m_Sprite: {fileID: 3469359917831137020, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3469359917831137020, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_2
+      m_Hash: 508773907
+      m_Sprite: {fileID: -1224887563515499425, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1224887563515499425, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_3
+      m_Hash: 693401221
+      m_Sprite: {fileID: 4655899401811852581, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4655899401811852581, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  - m_Name: Walk
+    m_Hash: 765711723
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Mollusc2_0
+      m_Hash: 811411263
+      m_Sprite: {fileID: 8846403027565184405, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 8846403027565184405, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_1
+      m_Hash: 123344809
+      m_Sprite: {fileID: 3469359917831137020, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3469359917831137020, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_2
+      m_Hash: 508773907
+      m_Sprite: {fileID: -1224887563515499425, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1224887563515499425, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_3
+      m_Hash: 693401221
+      m_Sprite: {fileID: 4655899401811852581, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4655899401811852581, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_4
+      m_Hash: 925950758
+      m_Sprite: {fileID: 1431865329, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1431865329, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_5
+      m_Hash: 3658672
+      m_Sprite: {fileID: 1116771414, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1116771414, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_6
+      m_Hash: 423526922
+      m_Sprite: {fileID: -580972616, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -580972616, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_7
+      m_Hash: 775533212
+      m_Sprite: {fileID: -745268371, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -745268371, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_8
+      m_Hash: 1049014029
+      m_Sprite: {fileID: 903601204, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 903601204, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_9
+      m_Hash: 159489947
+      m_Sprite: {fileID: 1146575889, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 1146575889, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_10
+      m_Hash: 462855802
+      m_Sprite: {fileID: -543196772, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -543196772, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_11
+      m_Hash: 747745004
+      m_Sprite: {fileID: -1697479511, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1697479511, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_12
+      m_Hash: 899219286
+      m_Sprite: {fileID: 2115208672, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 2115208672, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_13
+      m_Hash: 44027840
+      m_Sprite: {fileID: 94993208, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 94993208, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_14
+      m_Hash: 486234723
+      m_Sprite: {fileID: -202190042, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -202190042, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_15
+      m_Hash: 737962741
+      m_Sprite: {fileID: -1616980110, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1616980110, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 16
+  - m_Name: Attack
+    m_Hash: 7088141
+    m_CategoryList: []
+    m_OverrideEntries:
+    - m_Name: Mollusc2_0
+      m_Hash: 811411263
+      m_Sprite: {fileID: 8846403027565184405, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 8846403027565184405, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_1
+      m_Hash: 123344809
+      m_Sprite: {fileID: 3469359917831137020, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 3469359917831137020, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_2
+      m_Hash: 508773907
+      m_Sprite: {fileID: -1224887563515499425, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: -1224887563515499425, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    - m_Name: Mollusc2_3
+      m_Hash: 693401221
+      m_Sprite: {fileID: 4655899401811852581, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+      m_FromMain: 0
+      m_SpriteOverride: {fileID: 4655899401811852581, guid: 6cfacfee2e80f7b48b1eca6f235f61ae, type: 3}
+    m_FromMain: 0
+    m_EntryOverrideCount: 4
+  m_PrimaryLibraryGUID: 
+  m_ModificationHash: 638954554146955981
+  m_Version: 1
