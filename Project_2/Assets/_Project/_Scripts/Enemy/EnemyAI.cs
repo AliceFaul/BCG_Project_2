@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Pathfinding;
 using UnityEngine;
 
 namespace _Project._Scripts.Enemies
@@ -7,6 +8,7 @@ namespace _Project._Scripts.Enemies
     public class EnemyAI : MonoBehaviour, IKnockbacked
     {
         EnemyHealth health;
+        AIPath _path;
         [SerializeField] private EnemyState _state;
         private Animator _anim;
 
@@ -33,6 +35,7 @@ namespace _Project._Scripts.Enemies
             rb = GetComponent<Rigidbody2D>();
             health = GetComponent<EnemyHealth>();
             _anim = GetComponent<Animator>();
+            _path = GetComponent<AIPath>();
 
             if (health != null)
             {
@@ -59,7 +62,8 @@ namespace _Project._Scripts.Enemies
                 }
                 else if (_state == EnemyState.Attacking)
                 {
-                    rb.linearVelocity = Vector2.zero;
+                    //rb.linearVelocity = Vector2.zero;
+                    _path.destination = Vector3.zero;
                 }
             }
         }
@@ -76,8 +80,13 @@ namespace _Project._Scripts.Enemies
         //Hàm truy đuổi, lấy theo hướng của Player
         void Chase()
         {
-            Vector2 dir = (targetPlayer.position - transform.position).normalized;
-            rb.linearVelocity = dir * moveSpeed;
+
+            //Vector2 dir = (targetPlayer.position - transform.position).normalized;
+            //rb.linearVelocity = dir * moveSpeed;
+
+            _path.canMove = true;
+            _path.maxSpeed = moveSpeed;
+            _path.destination = targetPlayer.position;
         }
 
         //Hàm cốt lõi tìm kiếm player, tính toán khoảng cách để chuyển state
@@ -105,7 +114,9 @@ namespace _Project._Scripts.Enemies
             //Nếu không tìm thấy thì đứng yên
             else
             {
-                rb.linearVelocity = Vector2.zero;
+                //rb.linearVelocity = Vector2.zero;
+                _path.destination = Vector3.zero;
+                _path.canMove = false;
                 ChangeState(EnemyState.Idle);
             }
         }
@@ -131,14 +142,14 @@ namespace _Project._Scripts.Enemies
             if (_state == EnemyState.Idle)
             {
                 _anim.SetBool("isIdle", true);
-                _anim.SetFloat("LastHorizontal", rb.linearVelocity.x);
-                _anim.SetFloat("LastVertical", rb.linearVelocity.y);
+                _anim.SetFloat("LastHorizontal", _path.destination.x);
+                _anim.SetFloat("LastVertical", _path.destination.y);
             }
             else if (_state == EnemyState.Moving)
             {
                 _anim.SetBool("isWalk", true);
-                _anim.SetFloat("Horizontal", rb.linearVelocity.x);
-                _anim.SetFloat("Vertical", rb.linearVelocity.y);
+                _anim.SetFloat("Horizontal", _path.destination.x);
+                _anim.SetFloat("Vertical", _path.destination.y);
             }
             else if (_state == EnemyState.Attacking)
             {
@@ -160,14 +171,14 @@ namespace _Project._Scripts.Enemies
             ChangeState(EnemyState.Knockbacked);
             StartCoroutine(StunTime(stunTime));
             Vector2 dir = (transform.position - obj.position).normalized;
-            rb.linearVelocity = dir * knockbackForce;
+            _path.destination = dir * knockbackForce;
             Debug.Log("Enemy has knockbacked");
         }
 
         IEnumerator StunTime(float stunTime)
         {
             yield return new WaitForSeconds(.15f);
-            rb.linearVelocity = Vector2.zero;
+            _path.destination = Vector2.zero;
             yield return new WaitForSeconds(stunTime);
             ChangeState(EnemyState.Idle);
         }

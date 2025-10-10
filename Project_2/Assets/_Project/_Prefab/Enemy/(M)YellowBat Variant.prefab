@@ -14,15 +14,19 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: 18b742bfee58db544a67b59bc2592eb1, type: 3}
     - target: {fileID: 5426184540825022664, guid: 2844e72b8e9443f4db2ec3e144459c9b, type: 3}
       propertyPath: m_Name
-      value: (M)YellowBat
+      value: (M)YellowBat Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8828401611700576930, guid: 2844e72b8e9443f4db2ec3e144459c9b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: d6f445f0f7f0c3547867825b96490c39, type: 3}
     - target: {fileID: 9137087851117678320, guid: 2844e72b8e9443f4db2ec3e144459c9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.4649634
+      value: -1.3838124
       objectReference: {fileID: 0}
     - target: {fileID: 9137087851117678320, guid: 2844e72b8e9443f4db2ec3e144459c9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7599489
+      value: 15.045681
       objectReference: {fileID: 0}
     - target: {fileID: 9137087851117678320, guid: 2844e72b8e9443f4db2ec3e144459c9b, type: 3}
       propertyPath: m_LocalPosition.z
