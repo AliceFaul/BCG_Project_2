@@ -11,7 +11,12 @@ namespace _Project._Scripts.Gameplay
     {
         private Transform _ogTransform;
         private CanvasGroup _itemCG;
+
+        [Header("Property khi nắm kéo của item")]
         [SerializeField] private float _alphaAmount = .6f;
+        [Tooltip("Random ngẫu nhiên trong khoảng cách từ min đến max")]
+        private const float _minDropDistance = 2f;
+        private const float _maxDropDistance = 3f;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -45,7 +50,7 @@ namespace _Project._Scripts.Gameplay
             _itemCG.blocksRaycasts = true;
             _itemCG.alpha = 1f;
 
-            Slot dropSlot = eventData?.pointerEnter.GetComponent<Slot>(); //Slot mà muốn bỏ item vào, lấy theo chuột là eventData
+            Slot dropSlot = eventData?.pointerEnter?.GetComponent<Slot>(); //Slot mà muốn bỏ item vào, lấy theo chuột là eventData
             if(dropSlot == null)
             {
                 GameObject item = eventData.pointerEnter;
@@ -77,11 +82,51 @@ namespace _Project._Scripts.Gameplay
             }
             else
             {
-                transform.SetParent(_ogTransform); //Nếu không có slot bỏ vào thì sẽ quay về slot ban đầu
-                Debug.Log("Không có slot nào, quay về slot ban đầu");
+                if(!CheckMouseWithinInventory(eventData.position)) //Nếu chuột không nằm trong inventory page
+                {
+                    //Drop item khỏi inventory page
+                    DropItem(ogSlot);
+                }
+                else //Nếu chuột vẫn nằm trong inventory và không có slot để bỏ vào
+                {
+                    transform.SetParent(_ogTransform); //Nếu không có slot bỏ vào thì sẽ quay về slot ban đầu
+                    Debug.Log("Không có slot nào, quay về slot ban đầu");
+                }
             }
 
             GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
+
+        //Hàm bool kiểm tra xem chuột có đang nằm trong Inventory Page không
+        bool CheckMouseWithinInventory(Vector2 mousePosition)
+        {
+            //Lấy Inventory Page thông qua cha của slot
+            RectTransform inventoryPanel = _ogTransform.parent.GetComponent<RectTransform>();
+            //Dùng RectTransformUtility để kiểm tra chuột có đang nằm trong Inventory Page không
+            return RectTransformUtility.RectangleContainsScreenPoint(inventoryPanel, mousePosition);
+        }
+
+        void DropItem(Slot ogSlot)
+        {
+            ogSlot._currentItem = null;
+
+            //Tìm người chơi
+            Transform player = GameObject.FindGameObjectWithTag("Player")?.transform;
+            if(player == null)
+            {
+                Debug.LogWarning("Không tìm thấy người chơi");
+                return;
+            }
+            //Drop item ngẫu nhiên xung quanh người chơi
+            Vector2 dropOffset = Random.insideUnitCircle.normalized * Random.Range(_minDropDistance, _maxDropDistance);
+            Vector2 dropPosition = (Vector2)player.transform.position + dropOffset;
+
+            //Tạo item drop ngoài scene
+            GameObject item = Instantiate(gameObject, dropPosition, Quaternion.identity);
+            item.GetComponent<BounceEffect>().Bounce();
+
+            //Xóa item trong UI 
+            Destroy(gameObject);
         }
     }
 }

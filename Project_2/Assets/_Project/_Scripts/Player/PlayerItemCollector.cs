@@ -1,4 +1,4 @@
-using _Project._Scripts.UI;
+﻿using _Project._Scripts.UI;
 using UnityEngine;
 
 namespace _Project._Scripts.Player
@@ -13,6 +13,7 @@ namespace _Project._Scripts.Player
             _inventoryController = FindAnyObjectByType<InventoryController>();
         }
 
+        //Update trong tương lai
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision.CompareTag("Item"))
@@ -20,7 +21,15 @@ namespace _Project._Scripts.Player
                 Item item = collision.GetComponent<Item>();
                 if(item != null)
                 {
-                    //Add to Inventory
+                    //Kiểm tra inventory và thêm item vào
+                    bool itemAdded = _inventoryController.AddItem(collision.gameObject);
+
+                    //Nếu có thì sẽ nhặt item và xóa gameObject
+                    if(itemAdded)
+                    {
+                        item.Pickup();
+                        Destroy(collision.gameObject);
+                    }
                 }
             }
         }

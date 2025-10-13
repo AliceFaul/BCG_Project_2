@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace _Project._Scripts.UI
 {
@@ -25,6 +27,16 @@ namespace _Project._Scripts.UI
         [Header("Asset UI của game")]
         [Tooltip("Prefab để tạo Popup damage")]
         public Transform _pfDamagePopup; //Prefab tạo damage popup
+
+        [Space(10)]
+
+        [Header("Giao diện Item Popup")]
+        [SerializeField] private GameObject _itemPopupContainer;
+        [SerializeField] private GameObject _pfItemPopup;
+        [Tooltip("Số lượng tối đa popup hiện trên UI")]
+        [SerializeField] private int _maxPopup = 8;
+        [SerializeField] private float _popupDuration;
+        private readonly Queue<GameObject> _activePopups = new();
 
         private void Awake()
         {
@@ -85,6 +97,46 @@ namespace _Project._Scripts.UI
 
             _staminaImage.fillAmount = currentStamina / maxStamina;
             _staminaText.text = $"{currentStamina} / {maxStamina}";
+        }
+
+        #endregion
+
+        #region Item Pickup Popup UI
+
+        public void CreateItemPopup(string itemName, Sprite itemIcon)
+        {
+            GameObject newPopup = Instantiate(_pfItemPopup, _itemPopupContainer.transform);
+            newPopup.GetComponentInChildren<TMP_Text>().text = itemName;
+
+            Image imgIcon = newPopup.transform.Find("ItemIcon")?.GetComponent<Image>();
+            if(imgIcon != null)
+            {
+                imgIcon.sprite = itemIcon;
+            }
+
+            _activePopups.Enqueue(newPopup);
+            if(_activePopups.Count > _maxPopup)
+            {
+                Destroy(_activePopups.Dequeue());
+            }
+
+            StartCoroutine(ItemPopupFadeOut(newPopup));
+        }
+
+        IEnumerator ItemPopupFadeOut(GameObject popup)
+        {
+            yield return new WaitForSeconds(_popupDuration);
+            if (popup == null) yield break;
+            
+            CanvasGroup popupCG = popup.GetComponent<CanvasGroup>();
+            for(float t = 0f; t < 1f; t += Time.deltaTime)
+            {
+                if (popup == null) yield break;
+                popupCG.alpha = 1f - t;
+                yield return null;
+            }
+
+            Destroy(popup);
         }
 
         #endregion

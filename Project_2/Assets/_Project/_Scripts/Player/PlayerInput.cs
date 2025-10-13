@@ -10,6 +10,7 @@ namespace _Project._Scripts.Player
         public Vector2 _moveInput { get; private set; }
         public bool _attackInput { get; private set; }
         public bool _menuInput { get; private set; }
+        public bool _interactInput { get; private set; }
 
         private void Awake()
         {
@@ -37,6 +38,7 @@ namespace _Project._Scripts.Player
             _moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             _attackInput = Input.GetMouseButtonDown(0);
             _menuInput = Input.GetKeyDown(KeyCode.F);
+            _interactInput = Input.GetKeyDown(KeyCode.E);
         }
         #endregion
     }

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using _Project._Scripts.Gameplay;
 
 namespace _Project._Scripts.Player
 {
@@ -16,6 +18,7 @@ namespace _Project._Scripts.Player
         private Animator _anim;
         [SerializeField] private PlayerState _state;
         PlayerStamina _playerStamina;
+        InteractionDetector _interactable;
         private Vector2 _moveInput;
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
@@ -73,6 +76,7 @@ namespace _Project._Scripts.Player
             ChangeState(PlayerState.Idle);
             _currentSpeed = _moveSpeed;
             _playerStamina = GetComponent<PlayerStamina>();
+            _interactable = GetComponentInChildren<InteractionDetector>();
         }
 
         #region Input Movement
@@ -95,11 +99,21 @@ namespace _Project._Scripts.Player
                 _moveInput = Vector2.zero;
             }
 
+            //(Updated) Nếu chuột click vào hay rờ vào UI rồi click thì sẽ return không attack
+            if(EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+                return;
+
             //Input tấn công
             if (_canAttack && PlayerInput.Instance._attackInput && _attackTimer <= 0 &&
                 _playerStamina._currentStamina >= _attackStamina)
             {
                 ChangeState(PlayerState.Attack);
+            }
+
+            //Input tương tác
+            if(_canMove && PlayerInput.Instance._interactInput)
+            {
+                _interactable.OnInteract();
             }
         }
         #endregion
@@ -151,6 +165,7 @@ namespace _Project._Scripts.Player
             if (_inputBuffered) return;
 
             _anim.SetBool("isAttacking", false);
+            _inputBuffered = false;
             ChangeState(PlayerState.Idle);
             _attackTimer = _attackCD;
         }
