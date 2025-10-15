@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using _Project._Scripts.Gameplay;
+using _Project._Scripts.Core;
 
 namespace _Project._Scripts.Player
 {
@@ -60,6 +61,7 @@ namespace _Project._Scripts.Player
             if (_isKnockbacked) return;
 
             ProcessInput();
+            PlayerInPause();
         }
 
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
@@ -77,6 +79,22 @@ namespace _Project._Scripts.Player
             _currentSpeed = _moveSpeed;
             _playerStamina = GetComponent<PlayerStamina>();
             _interactable = GetComponentInChildren<InteractionDetector>();
+        }
+
+        //Hàm dừng chuyển động, sử dụng PauseController
+        void PlayerInPause()
+        {
+            if (PauseController.IsGamePaused)
+            {
+                _canMove = false;
+                _canAttack = false;
+                ChangeState(PlayerState.Idle);
+            }
+            else
+            {
+                _canMove = true;
+                _canAttack = true;
+            }
         }
 
         #region Input Movement

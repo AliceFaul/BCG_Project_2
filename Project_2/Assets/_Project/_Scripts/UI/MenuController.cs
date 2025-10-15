@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.Player;
+﻿using _Project._Scripts.Core;
+using _Project._Scripts.Player;
 using UnityEngine;
 
 namespace _Project._Scripts.UI
@@ -29,7 +30,12 @@ namespace _Project._Scripts.UI
 
             if(PlayerInput.Instance._menuInput)
             {
+                if(!_menuCanvas.activeSelf && PauseController.IsGamePaused)
+                {
+                    return;
+                }
                 _menuCanvas.SetActive(!_menuCanvas.activeSelf);
+                PauseController.SetPaused(_menuCanvas.activeSelf);
             }
         }
     }

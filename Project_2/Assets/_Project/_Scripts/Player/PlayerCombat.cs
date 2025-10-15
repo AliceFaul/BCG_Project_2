@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.UI;
+﻿using _Project._Scripts.Core;
+using _Project._Scripts.UI;
 using UnityEngine;
 
 namespace _Project._Scripts.Player
@@ -25,6 +26,9 @@ namespace _Project._Scripts.Player
         // Update is called once per frame
         void Update()
         {
+            if (PauseController.IsGamePaused)
+                return;
+
             MoveAttackPoint();
         }
 
