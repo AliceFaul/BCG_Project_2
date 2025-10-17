@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.Core;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Project._Scripts.UI
@@ -27,6 +28,12 @@ namespace _Project._Scripts.UI
 
             _pages[tabSelected].SetActive(true);
             _tabImages[tabSelected].color = Color.white;
+        }
+
+        //Hàm này dùng để tạo âm thanh khi nhấn chuyển các tab và gọi trong event trigger của các tab
+        public void PlaySfx()
+        {
+            SoundEffectManager.Play("SwitchTab");
         }
     }
 }

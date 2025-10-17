@@ -34,6 +34,8 @@ namespace _Project._Scripts.UI
                 {
                     return;
                 }
+
+                SoundEffectManager.Play("Menu");
                 _menuCanvas.SetActive(!_menuCanvas.activeSelf);
                 PauseController.SetPaused(_menuCanvas.activeSelf);
             }

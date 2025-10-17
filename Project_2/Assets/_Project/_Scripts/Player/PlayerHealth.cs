@@ -45,6 +45,7 @@ namespace _Project._Scripts.Player
         {
             _currentHealth += damage;
             DamageParticle();
+            SoundEffectManager.Play("Hit");
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
 
             if (_currentHealth <= 0)

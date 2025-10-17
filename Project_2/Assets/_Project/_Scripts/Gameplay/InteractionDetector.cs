@@ -16,6 +16,8 @@ namespace _Project._Scripts.Gameplay
         //Hàm này gọi trong PlayerMovement để sử dụng input 
         public void OnInteract()
         {
+            if (_interactable == null) return;
+
             _interactable.Interact();
             if(!_interactable.CanInteract())
             {

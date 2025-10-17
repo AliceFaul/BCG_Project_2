@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using _Project._Scripts.Gameplay;
 using _Project._Scripts.Core;
+using System.Diagnostics;
 
 namespace _Project._Scripts.Player
 {
@@ -24,6 +25,7 @@ namespace _Project._Scripts.Player
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
+        private float _footstepSpeed = 1.5f;
         [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
@@ -35,6 +37,7 @@ namespace _Project._Scripts.Player
         [HideInInspector] public bool _canAttack = false;
         private bool _inputBuffered = false;
         private bool _isKnockbacked = false;
+        private bool _isPlayingFootstep = false;
 
         private void Awake()
         {
@@ -126,6 +129,7 @@ namespace _Project._Scripts.Player
                 _playerStamina._currentStamina >= _attackStamina)
             {
                 ChangeState(PlayerState.Attack);
+                SoundEffectManager.Play("Whoosh");
             }
 
             //Input tương tác
@@ -149,6 +153,7 @@ namespace _Project._Scripts.Player
             if (_moveInput == Vector2.zero)
             {
                 ChangeState(PlayerState.Idle);
+                StopFootstep();
             }
             else
             {
@@ -158,6 +163,15 @@ namespace _Project._Scripts.Player
             _moveInput.Normalize();
 
             _rb.linearVelocity = _moveInput * _currentSpeed;
+
+            if(_rb.linearVelocity.magnitude > 0 && !_isPlayingFootstep)
+            {
+                StartFootstep();
+            }
+            else
+            {
+                StopFootstep();
+            }
         }
 
         //Hàm gọi trong Animation Event
@@ -268,6 +282,29 @@ namespace _Project._Scripts.Player
             _rb.linearVelocity = dir * knockbackForce;
             StartCoroutine(KnockbackCounter(stunTime));
             //Debug.Log("Player has knockbacked");
+        }
+
+        #endregion
+
+        #region Footstep Setting
+
+        //Hàm dừng âm thanh lại khi đứng yên
+        void StopFootstep()
+        {
+            _isPlayingFootstep = false;
+            CancelInvoke(nameof(PlayFootstep));
+        }
+
+        //Hàm chạy âm thanh lặp đi lặp lại bằng InvokeRepeating để tạo khoảng nghỉ tăng độ chân thật
+        void StartFootstep()
+        {
+            _isPlayingFootstep = true;
+            InvokeRepeating(nameof(PlayFootstep), 0f, _footstepSpeed);
+        }
+
+        void PlayFootstep()
+        {
+            SoundEffectManager.Play("Footstep", true);
         }
 
         #endregion

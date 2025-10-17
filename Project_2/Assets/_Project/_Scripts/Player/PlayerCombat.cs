@@ -102,6 +102,7 @@ namespace _Project._Scripts.Player
                 if(damageable != null)
                 {
                     damageable.TakeDamage(-_damage);
+                    SoundEffectManager.Play("Slash");
                     Debug.Log("Enemy take damage");
                     DamagePopup.CreatePopup(hit.transform.position, _damage, false);
                     IKnockbacked knockbacked = hit.GetComponent<IKnockbacked>();

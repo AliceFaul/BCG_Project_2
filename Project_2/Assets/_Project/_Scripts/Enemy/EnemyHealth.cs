@@ -50,6 +50,7 @@ namespace _Project._Scripts.Enemies
 
             _currentHealth += damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
+            SoundEffectManager.Play("Hit");
             DamageParticle();
             UpdateHealthBar();
             if(_currentHealth <= 0)

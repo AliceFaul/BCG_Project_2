@@ -160,10 +160,10 @@ TextureImporter:
       name: BarOrange_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 63
-        height: 14
+        x: 0
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,10 +182,10 @@ TextureImporter:
       name: BarOrange_1
       rect:
         serializedVersion: 2
-        x: 65
-        y: 1
-        width: 63
-        height: 14
+        x: 64
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: BarOrange_2
       rect:
         serializedVersion: 2
-        x: 129
-        y: 1
-        width: 63
-        height: 14
+        x: 128
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +226,10 @@ TextureImporter:
       name: BarOrange_3
       rect:
         serializedVersion: 2
-        x: 193
-        y: 1
-        width: 63
-        height: 14
+        x: 192
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,10 +248,10 @@ TextureImporter:
       name: BarOrange_4
       rect:
         serializedVersion: 2
-        x: 257
-        y: 1
-        width: 63
-        height: 14
+        x: 256
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,10 +270,10 @@ TextureImporter:
       name: BarOrange_5
       rect:
         serializedVersion: 2
-        x: 321
-        y: 1
-        width: 63
-        height: 14
+        x: 320
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,10 +292,10 @@ TextureImporter:
       name: BarOrange_6
       rect:
         serializedVersion: 2
-        x: 385
-        y: 1
-        width: 63
-        height: 14
+        x: 384
+        y: 0
+        width: 64
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -314,7 +314,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7f7fa878b1371f6449eeaa652d798020
     internalID: 0
     vertices: []
     indices: 
@@ -322,7 +322,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       BarOrange_0: -8324648470814326097
       BarOrange_1: 1543485936410743982

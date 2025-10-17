@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.Core;
+using UnityEngine;
 
 namespace _Project._Scripts.Gameplay
 {
@@ -36,6 +37,7 @@ namespace _Project._Scripts.Gameplay
         {
             //Chuyển Sprite
             SetOpened(true);
+            SoundEffectManager.Play("Success");
 
             //Drop item từ rương, update trong tương lai
             if(_itemPrefab != null)
