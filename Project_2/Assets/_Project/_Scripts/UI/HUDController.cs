@@ -9,6 +9,7 @@ namespace _Project._Scripts.UI
     public class HUDController : MonoBehaviour
     {
         public static HUDController Instance { get; private set; }
+        CanvasGroup _uiCG;
 
         [Header("Giao diện HUD của player")]
         [SerializeField] private TMP_Text _healthText; //Text máu
@@ -44,6 +45,8 @@ namespace _Project._Scripts.UI
             if(Instance != null) Destroy(gameObject);
             else Instance = this;
             //HUDController này chỉ có trong Game Scene nên không cần DontDestroyOnLoad
+
+            _uiCG = GetComponent<CanvasGroup>();
         }
 
         #region Health, Energy, Stamina của Player
@@ -140,5 +143,14 @@ namespace _Project._Scripts.UI
         }
 
         #endregion
+
+        public void HidePlayerHUD(bool isActive)
+        {
+            if (_uiCG == null) return;
+
+            _uiCG.alpha = isActive ? 0f : 1f;
+            _uiCG.interactable = !isActive;
+            _uiCG.blocksRaycasts = !isActive;
+        }
     }
 }

@@ -31,6 +31,27 @@ namespace _Project._Scripts.UI
         //Hàm này giúp kiểm tra inventory và thêm prefab item vào inventory khi người chơi nhặt item, gọi ở PlayerItemCollector
         public bool AddItem(GameObject itemPrefab)
         {
+            //Lúc này sẽ bắt đầu xem để tăng số lượng của item
+            Item itemToAdd = itemPrefab.GetComponent<Item>();
+            if (itemToAdd == null) return false;
+
+            //Duyệt qua inventory page và kiểm tra từng slot
+            foreach(Transform slotTransform in _inventoryPanel.transform)
+            {
+                Slot slot = slotTransform.GetComponent<Slot>();
+                if (slot != null && slot._currentItem != null) //nếu như slot đó đã có item
+                {
+                    Item slotItem = slot._currentItem.GetComponent<Item>();
+                    if(slotItem != null && slotItem._itemID == itemToAdd._itemID) //Kiểm tra xem item trong slot đó có trùng ID với item vừa nhặt không
+                    {
+                        //Nếu trùng thì sẽ tăng số lượng lên
+                        slotItem.AddToStack();
+                        return true;
+                    }
+                }
+            }
+
+            //Lúc này nếu không tìm thấy item giống với item vừa nhặt thì sẽ tạo mới trong slot mới
             //Dùng foreach để tìm kiếm slot trống
             foreach(Transform slotTransform in _inventoryPanel.transform)
             {
@@ -63,7 +84,11 @@ namespace _Project._Scripts.UI
                 if(slot._currentItem != null)
                 {
                     Item item = slot._currentItem.GetComponent<Item>();
-                    invData.Add(new InventorySaveData { _itemID = item._itemID, _slotIndex = slotTransform.GetSiblingIndex() });
+                    invData.Add(new InventorySaveData { 
+                        _itemID = item._itemID, 
+                        _slotIndex = slotTransform.GetSiblingIndex(),
+                        _quantity = item._quantity
+                    });
                 }
             }
 
@@ -98,6 +123,15 @@ namespace _Project._Scripts.UI
                         GameObject item = Instantiate(itemPrefab, slot.transform); //Instantiate prefab trong slot
                         //Setup vị trí nằm giữa slot và lưu currentItem
                         item.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+                        //Tạo một biến item dùng để load lại số lượng
+                        Item itemComponent = item.GetComponent<Item>();
+                        if(itemComponent != null && data._quantity > 1)
+                        {
+                            itemComponent._quantity = data._quantity;
+                            itemComponent.UpdateQuantityDisplay();
+                        }
+
                         slot._currentItem = item;
                     }
                 }

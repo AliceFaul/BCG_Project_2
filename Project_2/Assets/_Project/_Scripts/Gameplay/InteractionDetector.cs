@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.UI;
+using UnityEngine;
 
 namespace _Project._Scripts.Gameplay
 {
@@ -19,6 +20,7 @@ namespace _Project._Scripts.Gameplay
             if (_interactable == null) return;
 
             _interactable.Interact();
+
             if(!_interactable.CanInteract())
             {
                 _interactIcon.SetActive(false);

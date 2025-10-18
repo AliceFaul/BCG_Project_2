@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using _Project._Scripts.Core;
+using _Project._Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,6 +60,7 @@ namespace _Project._Scripts.Gameplay
             //Bật UI dialogue và bật pause
             _dialoguePanel.SetActive(true);
             PauseController.SetPaused(true);
+            HUDController.Instance.HidePlayerHUD(true);
 
             //Bắt đầu hiện ra nội dung hội thoại
             StartCoroutine(TypeLine());
@@ -116,6 +118,7 @@ namespace _Project._Scripts.Gameplay
             _dialogueText.SetText("");
             _dialoguePanel.SetActive(false);
             PauseController.SetPaused(false);
+            HUDController.Instance.HidePlayerHUD(false);
         }
 
         #endregion

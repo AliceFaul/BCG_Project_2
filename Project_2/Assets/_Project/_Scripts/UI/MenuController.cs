@@ -38,6 +38,7 @@ namespace _Project._Scripts.UI
                 SoundEffectManager.Play("Menu");
                 _menuCanvas.SetActive(!_menuCanvas.activeSelf);
                 PauseController.SetPaused(_menuCanvas.activeSelf);
+                HUDController.Instance.HidePlayerHUD(_menuCanvas.activeSelf);
             }
         }
     }
