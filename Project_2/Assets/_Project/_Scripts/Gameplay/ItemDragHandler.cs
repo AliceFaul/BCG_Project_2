@@ -7,7 +7,7 @@ namespace _Project._Scripts.Gameplay
     /// <summary>
     /// Script gán vào prefab item dùng để kéo thả trong UI
     /// </summary>
-    public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         private Transform _ogTransform;
         private CanvasGroup _itemCG;
@@ -23,6 +23,8 @@ namespace _Project._Scripts.Gameplay
         {
             _itemCG = GetComponent<CanvasGroup>();
         }
+
+        #region Drag, Drop System
 
         //Lúc bắt đầu kéo thả vật phẩm trong inventory page
         public void OnBeginDrag(PointerEventData eventData)
@@ -64,23 +66,44 @@ namespace _Project._Scripts.Gameplay
 
             if(dropSlot != null)
             {
-                if(dropSlot._currentItem != null) //Kiểm tra nếu slot đó có item khác thì đổi chỗ
+                if(dropSlot._currentItem != null)
                 {
-                    dropSlot._currentItem.transform.SetParent(ogSlot.transform);
-                    ogSlot._currentItem = dropSlot._currentItem;
-                    dropSlot._currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-                    Debug.Log("Slot có item, tráo đổi item");
+                    //Nếu bỏ vào slot có item cùng ID với item mình đang cầm thì tăng số lượng lên
+                    Item draggedItem = GetComponent<Item>();
+                    Item targetItem = dropSlot._currentItem.GetComponent<Item>();
+
+                    //Kiểm tra ID của item mình đang cầm với item trong slot
+                    if(draggedItem._itemID == targetItem._itemID)
+                    {
+                        targetItem.AddToStack(draggedItem._quantity);
+                        ogSlot._currentItem = null;
+                        Destroy(gameObject); //Xóa item đã kéo
+                    }
+                    else
+                    {
+                        //Kiểm tra nếu slot đó có item khác thì đổi chỗ
+                        dropSlot._currentItem.transform.SetParent(ogSlot.transform);
+                        ogSlot._currentItem = dropSlot._currentItem;
+                        dropSlot._currentItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+                        transform.SetParent(dropSlot.transform);
+                        dropSlot._currentItem = gameObject;
+
+                        GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+                        Debug.Log("Slot có item, tráo đổi item");
+                    }
                 }
                 else //Nếu không có item nào ở slot muốn bỏ vào
                 {
                     ogSlot._currentItem = null;
+                    transform.SetParent(dropSlot.transform);
+                    dropSlot._currentItem = gameObject;
+                    GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     Debug.Log("Đã bỏ item vào slot");
                 }
-
-                transform.SetParent(dropSlot.transform);
-                dropSlot._currentItem = gameObject;
             }
-            else
+            else //Kiểm tra nếu người chơi kéo item bên ngoài slot
             {
                 if(!CheckMouseWithinInventory(eventData.position)) //Nếu chuột không nằm trong inventory page
                 {
@@ -90,12 +113,20 @@ namespace _Project._Scripts.Gameplay
                 else //Nếu chuột vẫn nằm trong inventory và không có slot để bỏ vào
                 {
                     transform.SetParent(_ogTransform); //Nếu không có slot bỏ vào thì sẽ quay về slot ban đầu
+                    GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     Debug.Log("Không có slot nào, quay về slot ban đầu");
                 }
             }
-
-            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         }
+
+        //Đây là interface pointer event để khi người chơi click vào item trong UI
+        //Sẽ sử dụng để hiện thông tin của item bằng ScriptableObject của Item (Update trong tương lai)
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log("Click item");
+        }
+
+        #endregion
 
         //Hàm bool kiểm tra xem chuột có đang nằm trong Inventory Page không
         bool CheckMouseWithinInventory(Vector2 mousePosition)
@@ -108,7 +139,24 @@ namespace _Project._Scripts.Gameplay
 
         void DropItem(Slot ogSlot)
         {
-            ogSlot._currentItem = null;
+            //Lúc này sẽ kiểm tra số lượng item
+            //Nếu số lượng lớn hơn 1 thì sẽ trừ số lượng còn không sẽ xóa item khỏi inventory
+            Item item = GetComponent<Item>();
+            int quantity = item._quantity;
+            
+            if(quantity > 1)
+            {
+                item.RemoveFromStack();
+
+                transform.SetParent(_ogTransform);
+                GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+                quantity = 1;
+            }
+            else
+            {
+                ogSlot._currentItem = null;
+            }
 
             //Tìm người chơi
             Transform player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -122,11 +170,16 @@ namespace _Project._Scripts.Gameplay
             Vector2 dropPosition = (Vector2)player.transform.position + dropOffset;
 
             //Tạo item drop ngoài scene
-            GameObject item = Instantiate(gameObject, dropPosition, Quaternion.identity);
-            item.GetComponent<BounceEffect>().Bounce();
+            GameObject itemPrefab = Instantiate(gameObject, dropPosition, Quaternion.identity);
+            Item dropItem = itemPrefab.GetComponent<Item>();
+            dropItem._quantity = 1;
+            itemPrefab.GetComponent<BounceEffect>().Bounce();
 
             //Xóa item trong UI 
-            Destroy(gameObject);
+            if(quantity <= 1 && ogSlot._currentItem == null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

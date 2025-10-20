@@ -14,7 +14,7 @@ public class Item : MonoBehaviour
     public int _quantity = 1; //Số lượng của item
     [SerializeField] private TMP_Text _qtyText; //Text số lượng
 
-    private void Start()
+    private void Awake()
     {
         if(_qtyText == null)
         {
@@ -34,9 +34,11 @@ public class Item : MonoBehaviour
             Debug.LogWarning("Missing qty text");
             return;
         }
-
-        //Nếu số lượng là 1 thì sẽ text để null, nghĩa là nếu số lượng từ 2 trở lên thì sẽ hiện text
-        _qtyText.text = _quantity > 1 ? _quantity.ToString() : "";
+        else
+        {
+            //Nếu số lượng là 1 thì sẽ text để null, nghĩa là nếu số lượng từ 2 trở lên thì sẽ hiện text
+            _qtyText.text = _quantity > 1 ? _quantity.ToString() : "";
+        }
     }
 
     //Hàm này sẽ sử dụng trong InventoryController

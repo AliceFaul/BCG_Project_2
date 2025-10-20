@@ -213,6 +213,7 @@ MonoBehaviour:
   _itemID: 2
   _name: Meat
   _quantity: 1
+  _qtyText: {fileID: 0}
 --- !u!114 &-6175495326826025061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,7 +264,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -20, y: 13}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 70, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3889242995993270008
 CanvasRenderer:
@@ -293,9 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '1
-
-'
+  m_text: 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2c2050f429aa09c488a32be59395b5db, type: 2}
   m_sharedMaterial: {fileID: -7543008623660292608, guid: 2c2050f429aa09c488a32be59395b5db, type: 2}
