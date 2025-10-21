@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using _Project._Scripts.Core;
 using _Project._Scripts.UI;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Project._Scripts.Gameplay
 {
@@ -12,15 +10,18 @@ namespace _Project._Scripts.Gameplay
         [Header("Các Property của một NPC")]
         [Tooltip("Là ScriptableObject NPCDialogue được cài đặt trong Unity")]
         [SerializeField] private NPCDialogue _dialogueData;
-        [SerializeField] private GameObject _dialoguePanel; //Là UI Dialogue 
-        [SerializeField] private TMP_Text _dialogueText, _nameText; //Hội thoại và tên NPC trong UI và được chỉnh sửa nội dung bằng NPCDialogue
-        [SerializeField] private Image _npcPortrait; //Là ảnh chân dung của NPC và cũng được chỉnh sửa theo NPCDialogue
+        DialogueController _dialogueUI;
 
         //Các biến nội bộ của NPC
         private int _dialogueIndex; //Index của đoạn hội thoại, biến này sẽ cho biết đoạn hội thoại hiện tại đang hiện ra
         private bool _isTyping, _isDialogueActive;
 
         #region NPC Interact Life Cycle
+
+        private void Start()
+        {
+            _dialogueUI = DialogueController.Instance;
+        }
 
         public bool CanInteract()
         {
@@ -54,11 +55,10 @@ namespace _Project._Scripts.Gameplay
             _dialogueIndex = 0; //Index set bằng 0 để bắt đầu với line đầu tiên
 
             //Set name và portrait theo dialogueData
-            _nameText.SetText(_dialogueData._npcName);
-            _npcPortrait.sprite = _dialogueData._npcPortrait;
+            _dialogueUI.SetupInfo(_dialogueData._npcName, _dialogueData._npcPortrait);
 
             //Bật UI dialogue và bật pause
-            _dialoguePanel.SetActive(true);
+            _dialogueUI.ShowDialogueUI(true);
             PauseController.SetPaused(true);
             HUDController.Instance.HidePlayerHUD(true);
 
@@ -72,7 +72,7 @@ namespace _Project._Scripts.Gameplay
             if(_isTyping)
             {
                 StopAllCoroutines();
-                _dialogueText.SetText(_dialogueData._dialogueLines[_dialogueIndex]);
+                _dialogueUI.SetupDialogueText(_dialogueData._dialogueLines[_dialogueIndex]);
                 _isTyping = false;
             }
             else if(++_dialogueIndex < _dialogueData._dialogueLines.Length)
@@ -90,12 +90,12 @@ namespace _Project._Scripts.Gameplay
         {
             //isTyping = true cho biết nội dung đang được nhập và clean text trong UI 
             _isTyping = true;
-            _dialogueText.SetText("");
+            _dialogueUI.SetupDialogueText("");
 
             //Dựa vào index để hiện ra text trong dialogueData
             foreach(char letter in _dialogueData._dialogueLines[_dialogueIndex])
             {
-                _dialogueText.text += letter;
+                _dialogueUI.SetupDialogueText(_dialogueUI._dialogueText.text += letter);
                 yield return new WaitForSeconds(_dialogueData._typingSpeed); //Nhập với tốc độ của dialogueData
             }
 
@@ -115,8 +115,8 @@ namespace _Project._Scripts.Gameplay
         {
             StopAllCoroutines();
             _isDialogueActive = false;
-            _dialogueText.SetText("");
-            _dialoguePanel.SetActive(false);
+            _dialogueUI.SetupDialogueText("");
+            _dialogueUI.ShowDialogueUI(false);
             PauseController.SetPaused(false);
             HUDController.Instance.HidePlayerHUD(false);
         }

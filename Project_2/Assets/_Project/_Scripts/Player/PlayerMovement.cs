@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using _Project._Scripts.Gameplay;
 using _Project._Scripts.Core;
-using System.Diagnostics;
 
 namespace _Project._Scripts.Player
 {
