@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e3411dd4f329b4eba6d7f55fb34385, type: 3}
+  m_Name: FindMeats
+  m_EditorClassIdentifier: 
+  _questID: C4067937a-f2de-4560-9ec3-fbfc4741b98c
+  _questName: Collect Meats
+  _description: We need to collect meat to deliver
+  _objectives:
+  - _objectiveID: 2
+    _description: Collect 5 meats
+    _type: 0
+    _requireAmount: 5
+    _currentAmount: 0

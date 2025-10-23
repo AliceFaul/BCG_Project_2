@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Project._Scripts.Core;
 using _Project._Scripts.UI;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace _Project._Scripts.Player
     [RequireComponent(typeof(PlayerMovement), typeof(Material))]
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        PlayerMovement _movement;
+        public event Action OnDead;
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
         [Header("Các thông số máu")]
@@ -36,7 +37,6 @@ namespace _Project._Scripts.Player
         void Start()
         {
             _currentHealth = _maxHealth;
-            _movement = GetComponent<PlayerMovement>();
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
         }
 
@@ -51,9 +51,10 @@ namespace _Project._Scripts.Player
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
+                OnDead.Invoke();
+                Debug.LogWarning("Player has dead and OnDead has Invoke");
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
                 StartCoroutine(Dissolve(gameObject, _fade));
-                _movement._canMove = false;
             }
 
             StartCoroutine(DamageFlasher());

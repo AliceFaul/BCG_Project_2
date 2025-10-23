@@ -18,6 +18,7 @@ namespace _Project._Scripts.Player
         private Rigidbody2D _rb;
         private Animator _anim;
         [SerializeField] private PlayerState _state;
+        PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
         InteractionDetector _interactable;
         private Vector2 _moveInput;
@@ -43,6 +44,13 @@ namespace _Project._Scripts.Player
             //Tham chiếu các component của player 
             _rb = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
+            _playerHealth = GetComponent<PlayerHealth>();
+
+            if(_playerHealth != null)
+            {
+                _playerHealth.OnDead += () => SetPlayerControl(false);
+                Debug.Log("Subcribe Player OnDead!");
+            }
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -63,7 +71,6 @@ namespace _Project._Scripts.Player
             if (_isKnockbacked) return;
 
             ProcessInput();
-            PlayerInPause();
         }
 
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
@@ -84,25 +91,18 @@ namespace _Project._Scripts.Player
         }
 
         //Hàm dừng chuyển động, sử dụng PauseController
-        void PlayerInPause()
+        bool PlayerInPause()
         {
-            if (PauseController.IsGamePaused)
-            {
-                _canMove = false;
-                _canAttack = false;
-                ChangeState(PlayerState.Idle);
-            }
-            else
-            {
-                _canMove = true;
-                _canAttack = true;
-            }
+            if (PauseController.IsGamePaused) return true;
+            else return false;
         }
 
         #region Input Movement
         //Hàm xử lý tất cả các Input liên quan đến di chuyển
         void ProcessInput()
         {
+            if (PlayerInPause()) return;
+
             if (PlayerInput.Instance == null) return;
 
             //Input Di chuyển
@@ -143,7 +143,7 @@ namespace _Project._Scripts.Player
         //Hàm di chuyển
         void Movement()
         {
-            if (!_canMove || _state == PlayerState.Attack)
+            if (!_canMove || _state == PlayerState.Attack || PlayerInPause())
             {
                 _rb.linearVelocity = Vector2.zero;
                 return;
@@ -209,6 +209,7 @@ namespace _Project._Scripts.Player
         {
             _canMove = _isEnabled;
             _canAttack = _isEnabled;
+            Debug.Log($"Player Control State: {_isEnabled}");
         }
 
         void ChangeState(PlayerState _newState)

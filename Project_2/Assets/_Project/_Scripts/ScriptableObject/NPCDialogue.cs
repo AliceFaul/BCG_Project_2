@@ -21,6 +21,10 @@ public class NPCDialogue : ScriptableObject
     public float _autoProgressDelay = 2f; //Là thời gian sẽ tự động chuyển sang đoạn hội thoại tiếp theo
 
     public DialogueChoice[] _choices; //Đây là những lựa chọn của người chơi
+
+    public int _questInProgressIndex; //Index của đoạn hội thoại quest đã nhận nhưng chưa hoàn thành (In Progress)
+    public int _questCompletedIndex; //Index của đoạn hội thoại quest đã hoàn thành
+    public Quest _quest; //Là ScriptableObject dữ liệu quest của NPC, có nghĩa là quest mà NPC sẽ giao cho mình
 }
 
 [System.Serializable]
@@ -32,4 +36,5 @@ public class DialogueChoice
     public string[] _choices; //Mảng string này sẽ lưu câu trả lời của người chơi
     [Tooltip("Index của đoạn sẽ từ lựa chọn tương đương với thứ tự trong mảng choices ở trên")]
     public int[] _nextDialogueIndexes; //Index sẽ từ lựa chọn của người chơi mà sẽ chỉ tới đoạn hội thoại của câu trả lời đó
+    public bool[] _giveQuests; //Tick true có nghĩa là lựa chọn đó sẽ cho quest (Thứ tự tương đương với _choices) 
 }
