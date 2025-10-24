@@ -21,3 +21,7 @@ MonoBehaviour:
     _type: 0
     _requireAmount: 5
     _currentAmount: 0
+  _rewards:
+  - _type: 0
+    _rewardID: 1
+    _amount: 3

@@ -41,7 +41,9 @@ namespace _Project._Scripts.Core
                 _mapBoundary = FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D.name,
                 _inventorySaveData = _invenController.GetInventoryItems(),
                 _hotbarSaveData = _hotbarController.GetHotBarItems(),
-                _chestSaveData = GetChestState()
+                _chestSaveData = GetChestState(),
+                _questSaveData = QuestController.Instance._activeQuests,
+                _handinQuestSaveData = QuestController.Instance._handinQuestIDs
             };
 
             File.WriteAllText(_saveLocation, JsonUtility.ToJson(saveData));
@@ -99,6 +101,8 @@ namespace _Project._Scripts.Core
                 _invenController.SetInventoryItems(saveData._inventorySaveData);
                 _hotbarController.SetHotBarItems(saveData._hotbarSaveData);
                 LoadChestState(saveData._chestSaveData);
+                QuestController.Instance.LoadQuestProgress(saveData._questSaveData);
+                QuestController.Instance._handinQuestIDs = saveData._handinQuestSaveData;
             }
             //Nếu không tìm thấy file Json trong game thì sẽ tự động Save Game
             else

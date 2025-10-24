@@ -213,7 +213,7 @@ MonoBehaviour:
   _itemID: 2
   _name: Meat
   _quantity: 1
-  _qtyText: {fileID: 0}
+  _qtyText: {fileID: 6650224691322225147}
 --- !u!114 &-6175495326826025061
 MonoBehaviour:
   m_ObjectHideFlags: 0

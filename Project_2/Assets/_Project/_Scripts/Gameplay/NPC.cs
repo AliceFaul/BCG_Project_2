@@ -83,12 +83,22 @@ namespace _Project._Scripts.Gameplay
             DisplayCurrentLine();
         }
 
+        /// <summary>
+        /// Hàm này giúp đồng bộ state của quest trong NPC này
+        /// </summary>
         void SyncQuestState()
         {
-            if (_dialogueData._quest == null) return;
+            if (_dialogueData._quest == null) return; //Nếu không có quest trong NPC thì return
 
-            string questID = _dialogueData._quest._questID;
-            if(QuestController.Instance.IsQuestActive(questID))
+            string questID = _dialogueData._quest._questID; //Lấy questID của quest
+
+            //Kiểm tra bằng questID và các hàm kiểm tra trong QuestController để thay đổi state
+            if(QuestController.Instance.IsQuestCompleted(questID) || 
+                QuestController.Instance.IsQuestHandedIn(questID))
+            {
+                _questState = QuestState.Completed;
+            }
+            else if(QuestController.Instance.IsQuestActive(questID))
             {
                 _questState = QuestState.InProgress;
             }
@@ -207,15 +217,30 @@ namespace _Project._Scripts.Gameplay
             }
         }
 
-        //Hàm kết thúc dialogue event
+        /// <summary>
+        /// Hàm kết thúc dialogue event
+        /// </summary>
         void EndDialogue()
         {
+            if(_questState == QuestState.Completed && 
+                !QuestController.Instance.IsQuestHandedIn(_dialogueData._quest._questID))
+            {
+                HandinNPCQuest(_dialogueData._quest);
+            }
+
             StopAllCoroutines();
             _isDialogueActive = false;
             _dialogueUI.SetupDialogueText("");
             _dialogueUI.ShowDialogueUI(false);
             PauseController.SetPaused(false);
             HUDController.Instance.HidePlayerHUD(false);
+        }
+
+        //Hàm này giúp trả quest về cho NPC (xóa quest khỏi Quest Log)
+        void HandinNPCQuest(Quest quest)
+        {
+            RewardController.Instance.GiveQuestReward(quest);
+            QuestController.Instance.HandinQuest(quest._questID);
         }
 
         #endregion
