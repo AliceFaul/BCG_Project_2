@@ -12,6 +12,13 @@ namespace _Project._Scripts.UI
         CanvasGroup _uiCG;
 
         [Header("Giao diện HUD của player")]
+        [SerializeField] private TMP_Text _levelText;
+        [SerializeField] private Image _experienceImage;
+        [SerializeField] private GameObject _addExpButton;
+        private LevelData _levelData;
+
+        [Space(10)]
+
         [SerializeField] private TMP_Text _healthText; //Text máu
         [SerializeField] private Image _healthImage; //Image máu
 
@@ -47,7 +54,48 @@ namespace _Project._Scripts.UI
             //HUDController này chỉ có trong Game Scene nên không cần DontDestroyOnLoad
 
             _uiCG = GetComponent<CanvasGroup>();
+
+            _levelData = new LevelData();
+            SetLevelData(_levelData);
+
+            if(_addExpButton != null)
+                _addExpButton.GetComponent<Button>().onClick.AddListener(() => _levelData.AddExperience(20));
         }
+
+        #region Level UI Controller
+
+        void UpdateExperienceBar(float amount)
+        {
+            _experienceImage.fillAmount = amount;
+        }
+
+        void UpdateLevelText(int level)
+        {
+            _levelText.text = $"{level + 1}";
+        }
+
+        public void SetLevelData(LevelData levelData)
+        {
+            this._levelData = levelData;
+
+            UpdateLevelText(_levelData.GetLevel());
+            UpdateExperienceBar(_levelData.GetExperience());
+
+            _levelData.OnLevelChanged += CheckLevelChanged;
+            _levelData.OnExperienceChanged += CheckExperienceChanged;
+        }
+
+        void CheckLevelChanged(object sender, System.EventArgs e)
+        {
+            UpdateLevelText(_levelData.GetLevel());
+        }
+
+        void CheckExperienceChanged(object sender, System.EventArgs e)
+        {
+            UpdateExperienceBar(_levelData.GetExperience());
+        }
+
+        #endregion
 
         #region Health, Energy, Stamina của Player
 

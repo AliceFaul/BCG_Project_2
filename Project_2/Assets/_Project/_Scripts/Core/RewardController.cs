@@ -1,55 +1,57 @@
-using _Project._Scripts.Core;
 using _Project._Scripts.Gameplay;
 using _Project._Scripts.UI;
 using UnityEngine;
 
-public class RewardController : MonoBehaviour
+namespace _Project._Scripts.Core
 {
-    public static RewardController Instance { get; private set; }
-
-    private void Awake()
+    public class RewardController : MonoBehaviour
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
+        public static RewardController Instance { get; private set; }
 
-    public void GiveQuestReward(Quest quest)
-    {
-        if(quest?._rewards == null) return;
-
-        foreach(var reward in quest._rewards)
+        private void Awake()
         {
-            switch(reward._type)
+            if (Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
+
+        public void GiveQuestReward(Quest quest)
+        {
+            if(quest?._rewards == null) return;
+
+            foreach(var reward in quest._rewards)
             {
-                case RewardType.Item:
-                    GiveItemReward(reward._rewardID, reward._amount);
-                    break;
-                case RewardType.Exp:
-                    break;
-                case RewardType.Gold:
-                    break;
-                case RewardType.Custom:
-                    break;
+                switch(reward._type)
+                {
+                    case RewardType.Item:
+                        GiveItemReward(reward._rewardID, reward._amount);
+                        break;
+                    case RewardType.Exp:
+                        break;
+                    case RewardType.Gold:
+                        break;
+                    case RewardType.Custom:
+                        break;
+                }
             }
         }
-    }
 
-    void GiveItemReward(int itemID, int amount)
-    {
-        var itemPrefab = FindAnyObjectByType<ItemDictionary>()?.GetItemPrefab(itemID);
-
-        if(itemPrefab == null) return;
-
-        for(int i = 0; i < amount; i++)
+        void GiveItemReward(int itemID, int amount)
         {
-            if(!InventoryController.Instance.AddItem(itemPrefab))
+            var itemPrefab = FindAnyObjectByType<ItemDictionary>()?.GetItemPrefab(itemID);
+
+            if(itemPrefab == null) return;
+
+            for(int i = 0; i < amount; i++)
             {
-                GameObject dropItem = Instantiate(itemPrefab, transform.position + Vector3.down, Quaternion.identity);
-                dropItem.GetComponent<BounceEffect>()?.Bounce();
-            }
-            else
-            {
-                itemPrefab.GetComponent<Item>()?.Pickup();
+                if(!InventoryController.Instance.AddItem(itemPrefab))
+                {
+                    GameObject dropItem = Instantiate(itemPrefab, transform.position + Vector3.down, Quaternion.identity);
+                    dropItem.GetComponent<BounceEffect>()?.Bounce();
+                }
+                else
+                {
+                    itemPrefab.GetComponent<Item>()?.Pickup();
+                }
             }
         }
     }
