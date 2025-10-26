@@ -43,7 +43,8 @@ namespace _Project._Scripts.Core
                 _hotbarSaveData = _hotbarController.GetHotBarItems(),
                 _chestSaveData = GetChestState(),
                 _questSaveData = QuestController.Instance._activeQuests,
-                _handinQuestSaveData = QuestController.Instance._handinQuestIDs
+                _handinQuestSaveData = QuestController.Instance._handinQuestIDs,
+                _levelData = HUDController.Instance.GetLevelData()
             };
 
             File.WriteAllText(_saveLocation, JsonUtility.ToJson(saveData));
@@ -103,6 +104,7 @@ namespace _Project._Scripts.Core
                 LoadChestState(saveData._chestSaveData);
                 QuestController.Instance.LoadQuestProgress(saveData._questSaveData);
                 QuestController.Instance._handinQuestIDs = saveData._handinQuestSaveData;
+                HUDController.Instance.SetPlayerLevelData(saveData._levelData);
             }
             //Nếu không tìm thấy file Json trong game thì sẽ tự động Save Game
             else

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using _Project._Scripts.Gameplay;
 using _Project._Scripts.Core;
+using _Project._Scripts.UI;
 
 namespace _Project._Scripts.Player
 {
@@ -21,11 +22,12 @@ namespace _Project._Scripts.Player
         PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
         InteractionDetector _interactable;
+        HUDController _hudController;
         private Vector2 _moveInput;
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
-        private float _footstepSpeed = 1.5f;
+        [SerializeField] private float _footstepSpeed = 1.5f;
         [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
@@ -45,6 +47,7 @@ namespace _Project._Scripts.Player
             _rb = GetComponent<Rigidbody2D>();
             _anim = GetComponent<Animator>();
             _playerHealth = GetComponent<PlayerHealth>();
+            _hudController = FindAnyObjectByType<HUDController>();
 
             if(_playerHealth != null)
             {
@@ -88,6 +91,12 @@ namespace _Project._Scripts.Player
             _currentSpeed = _moveSpeed;
             _playerStamina = GetComponent<PlayerStamina>();
             _interactable = GetComponentInChildren<InteractionDetector>();
+            
+            if(_hudController != null)
+            {
+                _hudController.OnLevelUp += PlayerSpecialDance;
+                Debug.LogWarning("Subscribe OnLevelUp");
+            }
         }
 
         //Hàm dừng chuyển động, sử dụng PauseController
@@ -95,6 +104,14 @@ namespace _Project._Scripts.Player
         {
             if (PauseController.IsGamePaused) return true;
             else return false;
+        }
+
+        void PlayerSpecialDance()
+        {
+            ChangeState(PlayerState.Special);
+            _rb.linearVelocity = Vector2.zero;
+
+            Debug.LogWarning("Player in special dance");
         }
 
         #region Input Movement
@@ -143,7 +160,7 @@ namespace _Project._Scripts.Player
         //Hàm di chuyển
         void Movement()
         {
-            if (!_canMove || _state == PlayerState.Attack || PlayerInPause())
+            if(!_canMove || _state == PlayerState.Attack || PlayerInPause() || _state == PlayerState.Special)
             {
                 _rb.linearVelocity = Vector2.zero;
                 return;
@@ -212,6 +229,11 @@ namespace _Project._Scripts.Player
             Debug.Log($"Player Control State: {_isEnabled}");
         }
 
+        public void EndSpecialEvent()
+        {
+            _anim.SetBool("isSpecial", false);
+        }
+
         void ChangeState(PlayerState _newState)
         {
             if (_anim == null) return;
@@ -231,6 +253,14 @@ namespace _Project._Scripts.Player
                     _anim.SetBool("isMoving", true);
                     _anim.SetFloat("InputX", _moveInput.x);
                     _anim.SetFloat("InputY", _moveInput.y);
+                    break;
+                case PlayerState.Special:
+                    if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+                    {
+                        _anim.SetBool("isSpecial", true);
+                    }
                     break;
                 case PlayerState.Attack:
                     //Nếu chuột ở ngoài màn hình game sẽ return
@@ -310,5 +340,5 @@ namespace _Project._Scripts.Player
         #endregion
     }
 
-    public enum PlayerState { Idle, Walk, Attack }
+    public enum PlayerState { Idle, Walk, Attack, Special }
 }

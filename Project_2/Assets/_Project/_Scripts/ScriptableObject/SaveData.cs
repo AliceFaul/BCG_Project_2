@@ -11,6 +11,7 @@ public class SaveData
     public List<ChestSaveData> _chestSaveData; //Data của chest trong rương để lưu lại state của nó
     public List<QuestProgress> _questSaveData; //Dữ liệu của quest (là activeQuests trong QuestController)
     public List<string> _handinQuestSaveData; //Dữ liệu của quest đã hoàn thành (là handinQuestIDs trong QuestController)
+    public PlayerLevelData _levelData;
 }
 
 [System.Serializable]
@@ -18,4 +19,11 @@ public class ChestSaveData
 {
     public string _chestID;
     public bool _isOpened;
+}
+
+[System.Serializable]
+public class PlayerLevelData
+{
+    public int _currentLevel;
+    public int _totalExperience;
 }

@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using System;
 
 namespace _Project._Scripts.UI
 {
@@ -12,10 +13,11 @@ namespace _Project._Scripts.UI
         CanvasGroup _uiCG;
 
         [Header("Giao diện HUD của player")]
+        [SerializeField] private int _maxLevel;
         [SerializeField] private TMP_Text _levelText;
         [SerializeField] private Image _experienceImage;
+        [SerializeField] private TMP_Text _experienceText;
         [SerializeField] private GameObject _addExpButton;
-        private LevelData _levelData;
 
         [Space(10)]
 
@@ -46,6 +48,12 @@ namespace _Project._Scripts.UI
         [SerializeField] private float _popupDuration;
         private readonly Queue<GameObject> _activePopups = new();
 
+        [Header("Các property cần thiết cho Level System")]
+        [SerializeField] private AnimationCurve _experienceCurve;
+        private int _currentLevel, _totalExperience;
+        private int _previousLevelsExperience, _nextLevelsExperience;
+        public event Action OnLevelUp;
+
         private void Awake()
         {
             //Tạo Singleton
@@ -54,45 +62,78 @@ namespace _Project._Scripts.UI
             //HUDController này chỉ có trong Game Scene nên không cần DontDestroyOnLoad
 
             _uiCG = GetComponent<CanvasGroup>();
+            _currentLevel++;
+            UpdateLevel();
 
-            _levelData = new LevelData();
-            SetLevelData(_levelData);
-
-            if(_addExpButton != null)
-                _addExpButton.GetComponent<Button>().onClick.AddListener(() => _levelData.AddExperience(20));
+            _addExpButton.GetComponent<Button>().onClick.AddListener(() => AddExperience(20));
         }
 
         #region Level UI Controller
 
-        void UpdateExperienceBar(float amount)
+        public void AddExperience(int amount)
         {
-            _experienceImage.fillAmount = amount;
+            if (_currentLevel >= _maxLevel) return;
+
+            _totalExperience += amount;
+            CheckForLevelUp();
+            UpdateLevelInterface();
+            Debug.LogWarning($"Add Experience to Player: {amount}");
         }
 
-        void UpdateLevelText(int level)
+        void CheckForLevelUp()
         {
-            _levelText.text = $"{level + 1}";
+            bool isLevelUp = false;
+
+            while(_totalExperience >= _nextLevelsExperience)
+            {
+                _currentLevel++;
+                UpdateLevel();
+                isLevelUp = true;
+            }
+
+            if(isLevelUp)
+            {
+                OnLevelUp?.Invoke();
+                Debug.LogWarning("OnLevelUp Invoke");
+            }
         }
 
-        public void SetLevelData(LevelData levelData)
+        void UpdateLevel()
         {
-            this._levelData = levelData;
-
-            UpdateLevelText(_levelData.GetLevel());
-            UpdateExperienceBar(_levelData.GetExperience());
-
-            _levelData.OnLevelChanged += CheckLevelChanged;
-            _levelData.OnExperienceChanged += CheckExperienceChanged;
+            _previousLevelsExperience = (int)_experienceCurve.Evaluate(_currentLevel);
+            _nextLevelsExperience = (int)_experienceCurve.Evaluate(_currentLevel + 1);
+            UpdateLevelInterface();
         }
 
-        void CheckLevelChanged(object sender, System.EventArgs e)
+        void UpdateLevelInterface()
         {
-            UpdateLevelText(_levelData.GetLevel());
+            int start = _totalExperience - _previousLevelsExperience;
+            int end = _nextLevelsExperience - _previousLevelsExperience;
+
+            if(start < 0) start = 0;
+
+            _levelText.text = _currentLevel.ToString();
+            _experienceText.text = $"{start} / {end} exp";
+            _experienceImage.fillAmount = (float)start / (float)end;
         }
 
-        void CheckExperienceChanged(object sender, System.EventArgs e)
+        public PlayerLevelData GetLevelData()
         {
-            UpdateExperienceBar(_levelData.GetExperience());
+            PlayerLevelData levelData = new PlayerLevelData();
+
+            levelData._currentLevel = _currentLevel;
+            levelData._totalExperience = _totalExperience;
+
+            return levelData;
+        }
+
+        public void SetPlayerLevelData(PlayerLevelData data)
+        {
+            _currentLevel = data._currentLevel;
+            _totalExperience = data._totalExperience;
+
+            UpdateLevel();
+            UpdateLevelInterface();
         }
 
         #endregion
