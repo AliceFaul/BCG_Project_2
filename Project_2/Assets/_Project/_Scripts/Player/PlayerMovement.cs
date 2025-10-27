@@ -21,6 +21,7 @@ namespace _Project._Scripts.Player
         [SerializeField] private PlayerState _state;
         PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
+        PlayerStats _stats;
         InteractionDetector _interactable;
         HUDController _hudController;
         private Vector2 _moveInput;
@@ -48,6 +49,7 @@ namespace _Project._Scripts.Player
             _anim = GetComponent<Animator>();
             _playerHealth = GetComponent<PlayerHealth>();
             _hudController = FindAnyObjectByType<HUDController>();
+            _stats = GetComponent<PlayerStats>();
 
             if(_playerHealth != null)
             {
@@ -95,6 +97,7 @@ namespace _Project._Scripts.Player
             if(_hudController != null)
             {
                 _hudController.OnLevelUp += PlayerSpecialDance;
+                _hudController.OnLevelUp += HandleLevelUp;
                 Debug.LogWarning("Subscribe OnLevelUp");
             }
         }
@@ -112,6 +115,13 @@ namespace _Project._Scripts.Player
             _rb.linearVelocity = Vector2.zero;
 
             Debug.LogWarning("Player in special dance");
+        }
+
+        void HandleLevelUp()
+        {
+            if (_stats == null) return;
+
+            _stats.OnLevelUp();
         }
 
         #region Input Movement
