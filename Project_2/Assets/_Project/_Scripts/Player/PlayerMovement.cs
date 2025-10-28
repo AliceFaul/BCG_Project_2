@@ -204,7 +204,7 @@ namespace _Project._Scripts.Player
             {
                 StartFootstep();
             }
-            else
+            else if(_rb.linearVelocity.magnitude == 0)
             {
                 StopFootstep();
             }

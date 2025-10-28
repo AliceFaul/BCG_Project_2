@@ -346,7 +346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 4
   _state: 0
-  _footstepSpeed: 1.5
+  _footstepSpeed: 0.6
   _attackCD: 1.2
   _dashDistance: 0.7
   _attackStamina: 5
