@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.Player;
+﻿using _Project._Scripts.Core;
+using _Project._Scripts.Player;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,6 +50,7 @@ namespace _Project._Scripts.UI
         {
             _stats.IncreaseStats(name);
             UpdateStatsUI();
+            SoundEffectManager.Play("PowerUp");
         }
 
         void UpdateStatsUI()

@@ -4,6 +4,7 @@ using TMPro;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using _Project._Scripts.Core;
 
 namespace _Project._Scripts.UI
 {
@@ -87,6 +88,7 @@ namespace _Project._Scripts.UI
             while(_totalExperience >= _nextLevelsExperience)
             {
                 _currentLevel++;
+                SoundEffectManager.Play("LevelUp");
                 UpdateLevel();
                 isLevelUp = true;
             }
