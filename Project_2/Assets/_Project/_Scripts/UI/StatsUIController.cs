@@ -47,23 +47,23 @@ namespace _Project._Scripts.UI
 
         void AddPoint(string name)
         {
-            _stats.SpendStatPoint(name);
+            _stats.IncreaseStats(name);
             UpdateStatsUI();
         }
 
         void UpdateStatsUI()
         {
-            _healthText.text = $"Health: \t {_stats._Health.Value}";
-            _energyText.text = $"Energy: \t {_stats._Energy.Value}";
-            _staminaText.text = $"Stamina: \t {_stats._Stamina.Value}";
-            _attackText.text = $"Attack: \t {_stats._Attack.Value}";
-            _defenseText.text = $"Defense: \t {_stats._Defense.Value}";
-            _skillDamageText.text = $"Skill DMG: \t {_stats._SkillDamage.Value}";
+            _healthText.text = $"Health: \t {_stats._healthPoint}";
+            _energyText.text = $"Energy: \t {_stats._energyPoint}";
+            _staminaText.text = $"Stamina: \t {_stats._staminaPoint}";
+            _attackText.text = $"Attack: \t {_stats._attackPoint}";
+            _defenseText.text = $"Defense: \t {_stats._defensePoint}";
+            _skillDamageText.text = $"Skill DMG: \t {_stats._skillDamagePoint}";
         }
 
         void UpdatePointText()
         {
-            _pointsText.text = $"Stat Points: {_stats.GetAvailablePoint()}";
+            _pointsText.text = $"Stat Points: {_stats.GetAvailablePoint}";
         }
     }
 }

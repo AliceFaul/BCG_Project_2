@@ -34,6 +34,7 @@ namespace _Project._Scripts.Player
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
         [SerializeField] private float _dashDistance = 0.5f; //Khoảng cách lướt nhẹ về phía hướng đánh
         [SerializeField] private float _attackStamina = 15f; //Lượng stamina cần để thực hiện tấn công
+        [SerializeField] private ParticleSystem _onLevelUpParticle;
 
         //Các biến bool kiểm soát trạng thái di chuyển của Player
         [HideInInspector] public bool _canMove = false;
@@ -112,6 +113,7 @@ namespace _Project._Scripts.Player
         void PlayerSpecialDance()
         {
             ChangeState(PlayerState.Special);
+            PlayerLevelUpParticle();
             _rb.linearVelocity = Vector2.zero;
 
             Debug.LogWarning("Player in special dance");
@@ -122,6 +124,14 @@ namespace _Project._Scripts.Player
             if (_stats == null) return;
 
             _stats.OnLevelUp();
+        }
+
+        void PlayerLevelUpParticle()
+        {
+            if (_onLevelUpParticle == null) return;
+
+            ParticleSystem levelUpParticle = Instantiate(_onLevelUpParticle, transform.position, Quaternion.identity);
+            levelUpParticle.transform.SetParent(transform);
         }
 
         #region Input Movement

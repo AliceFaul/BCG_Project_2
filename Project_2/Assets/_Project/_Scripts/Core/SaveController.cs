@@ -5,6 +5,7 @@ using _Project._Scripts.UI;
 using _Project._Scripts.Gameplay;
 using System.Collections.Generic;
 using System.Linq;
+using _Project._Scripts.Player;
 
 namespace _Project._Scripts.Core
 {
@@ -14,6 +15,7 @@ namespace _Project._Scripts.Core
         private InventoryController _invenController;
         private HotbarController _hotbarController;
         private Chest[] _chests;
+        private PlayerStats _playerStats;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -30,6 +32,7 @@ namespace _Project._Scripts.Core
             _invenController = FindAnyObjectByType<InventoryController>();
             _hotbarController = FindAnyObjectByType<HotbarController>();
             _chests = FindObjectsByType<Chest>(FindObjectsSortMode.None);
+            _playerStats = FindAnyObjectByType<PlayerStats>();
         }
 
         //Hàm dùng để save lại qua saveData và ghi vào Json
@@ -44,7 +47,8 @@ namespace _Project._Scripts.Core
                 _chestSaveData = GetChestState(),
                 _questSaveData = QuestController.Instance._activeQuests,
                 _handinQuestSaveData = QuestController.Instance._handinQuestIDs,
-                _levelData = HUDController.Instance.GetLevelData()
+                _levelData = HUDController.Instance.GetLevelData(),
+                _statsData = _playerStats.GetStatsData()
             };
 
             File.WriteAllText(_saveLocation, JsonUtility.ToJson(saveData));
@@ -105,6 +109,7 @@ namespace _Project._Scripts.Core
                 QuestController.Instance.LoadQuestProgress(saveData._questSaveData);
                 QuestController.Instance._handinQuestIDs = saveData._handinQuestSaveData;
                 HUDController.Instance.SetPlayerLevelData(saveData._levelData);
+                _playerStats.SetPlayerData(saveData._statsData);
             }
             //Nếu không tìm thấy file Json trong game thì sẽ tự động Save Game
             else

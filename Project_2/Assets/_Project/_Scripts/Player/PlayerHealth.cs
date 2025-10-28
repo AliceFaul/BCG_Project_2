@@ -9,6 +9,7 @@ namespace _Project._Scripts.Player
     [RequireComponent(typeof(PlayerMovement), typeof(Material))]
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
+        PlayerStats _stats;
         public event Action OnDead;
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
@@ -36,14 +37,30 @@ namespace _Project._Scripts.Player
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _stats = GetComponent<PlayerStats>();
+            _maxHealth = _stats.Health;
             _currentHealth = _maxHealth;
+            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
+
+            _stats.OnStatChanged += UpdateMaxHealth;
+            _stats.OnStatsInitialize += UpdateMaxHealth;
+        }
+
+        void UpdateMaxHealth()
+        {
+            float percent = _currentHealth / _maxHealth;
+            _maxHealth = _stats.Health;
+
+            _currentHealth = _maxHealth * (int)percent;
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
         }
 
         //Hàm trừ máu, nếu damage là âm sẽ mất máu còn dương sẽ hồi máu
         public void TakeDamage(float damage)
         {
-            _currentHealth += damage;
+            float damageTaken = damage * (damage / (damage + _stats.Defense));
+            
+            _currentHealth -= damageTaken;
             DamageParticle();
             SoundEffectManager.Play("Hit");
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
@@ -51,7 +68,7 @@ namespace _Project._Scripts.Player
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
-                OnDead.Invoke();
+                OnDead?.Invoke();
                 Debug.LogWarning("Player has dead and OnDead has Invoke");
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
                 StartCoroutine(Dissolve(gameObject, _fade));

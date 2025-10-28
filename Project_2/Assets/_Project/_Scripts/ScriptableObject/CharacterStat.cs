@@ -26,7 +26,7 @@ namespace _Project._Scripts.Gameplay
             }
         }
 
-        protected bool _isDirty = true;
+        public bool _isDirty = true;
         protected float _value;
         protected float _lastBaseValue = float.MinValue;
 

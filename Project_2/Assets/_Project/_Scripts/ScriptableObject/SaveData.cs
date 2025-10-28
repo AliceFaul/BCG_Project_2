@@ -12,6 +12,7 @@ public class SaveData
     public List<QuestProgress> _questSaveData; //Dữ liệu của quest (là activeQuests trong QuestController)
     public List<string> _handinQuestSaveData; //Dữ liệu của quest đã hoàn thành (là handinQuestIDs trong QuestController)
     public PlayerLevelData _levelData;
+    public PlayerStatsData _statsData;
 }
 
 [System.Serializable]
@@ -26,4 +27,17 @@ public class PlayerLevelData
 {
     public int _currentLevel;
     public int _totalExperience;
+}
+
+[System.Serializable]
+public class PlayerStatsData
+{
+    public int _availablePts;
+
+    public int _healthPts = 1;
+    public int _energyPts = 1;
+    public int _staminaPts = 1;
+    public int _attackPts = 1;
+    public int _defensePts = 1;
+    public int _skillDamagePts = 1;
 }

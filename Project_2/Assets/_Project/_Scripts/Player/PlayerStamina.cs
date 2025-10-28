@@ -5,6 +5,8 @@ namespace _Project._Scripts.Player
 {
     public class PlayerStamina : MonoBehaviour
     {
+        PlayerStats _stats;
+
         [Header("Các thông số Stamina")]
         [SerializeField] private float _maxStamina = 100f; //Thể lực tối đa
         [SerializeField] public float _currentStamina; //Thể lực hiện tại
@@ -18,14 +20,28 @@ namespace _Project._Scripts.Player
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _stats = GetComponent<PlayerStats>();
+            _maxStamina = _stats.Stamina;
             _currentStamina = _maxStamina;
             HUDController.Instance.UpdateStaminaUI(_currentStamina, _maxStamina);
+
+            _stats.OnStatChanged += UpdateMaxStamina;
+            _stats.OnStatsInitialize += UpdateMaxStamina;
         }
 
         // Update is called once per frame
         void Update()
         {
             RecoveryStamina(_recoveryAmount);
+        }
+
+        void UpdateMaxStamina()
+        {
+            float percent = _currentStamina / _maxStamina;
+            _maxStamina = _stats.Stamina;
+
+            _currentStamina = _maxStamina * (int)percent;
+            HUDController.Instance.UpdateStaminaUI(_currentStamina, _maxStamina);
         }
 
         #region Stamina System
