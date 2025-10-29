@@ -344,7 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2d7e27262347648a99858d6ea4b070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 4
+  _walkSpeed: 3
+  _runSpeed: 6
   _state: 0
   _footstepSpeed: 0.6
   _attackCD: 1.2
@@ -480,7 +481,7 @@ MonoBehaviour:
     _BaseValue: 50
     _isDirty: 1
   _Stamina:
-    _BaseValue: 100
+    _BaseValue: 50
     _isDirty: 1
   _Attack:
     _BaseValue: 10

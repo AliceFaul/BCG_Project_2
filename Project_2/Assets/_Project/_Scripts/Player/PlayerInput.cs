@@ -12,6 +12,8 @@ namespace _Project._Scripts.Player
         public bool _menuInput { get; private set; }
         public bool _interactInput { get; private set; }
 
+        public bool _runningInput { get; private set; }
+
         private void Awake()
         {
             //Tạo Singleton
@@ -39,6 +41,7 @@ namespace _Project._Scripts.Player
             _attackInput = Input.GetMouseButtonDown(0);
             _menuInput = Input.GetKeyDown(KeyCode.F);
             _interactInput = Input.GetKeyDown(KeyCode.E);
+            _runningInput = Input.GetKey(KeyCode.LeftShift);
         }
         #endregion
     }

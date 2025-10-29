@@ -1,6 +1,5 @@
 ﻿using System;
 using _Project._Scripts.Gameplay;
-using _Project._Scripts.UI;
 using UnityEngine;
 
 namespace _Project._Scripts.Player
@@ -34,12 +33,16 @@ namespace _Project._Scripts.Player
         public event Action OnPointChanged;
         public event Action OnStatsInitialize;
 
+        #region Get all Stats Value
+
         public int Health => (int)_Health.Value;
         public int Energy => (int)_Energy.Value;
         public int Stamina => (int)_Stamina.Value;
         public int Defense => (int)_Defense.Value;
         public float Attack => (float)Math.Round(_Attack.Value, 4);
         public float SkillDamage => (float)Math.Round(_SkillDamage.Value);
+
+        #endregion
 
         public int GetAvailablePoint => _availablePoints;
 
@@ -53,6 +56,8 @@ namespace _Project._Scripts.Player
             _availablePoints += _pointPerLevel;
             OnPointChanged?.Invoke();
         }
+
+        #region Increase and Calculate Stats
 
         public void IncreaseStats(string name)
         {
@@ -110,6 +115,10 @@ namespace _Project._Scripts.Player
             _SkillDamage._isDirty = true;
         }
 
+        #endregion
+
+        #region Stats Saving System
+
         public PlayerStatsData GetStatsData()
         {
             PlayerStatsData data = new PlayerStatsData();
@@ -145,5 +154,7 @@ namespace _Project._Scripts.Player
             OnPointChanged?.Invoke();
             OnStatsInitialize?.Invoke();
         }
+
+        #endregion
     }
 }

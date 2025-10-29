@@ -12,7 +12,12 @@ namespace _Project._Scripts.Player
     public class PlayerMovement : MonoBehaviour, IKnockbacked
     {
         [Header("Các biến movement")]
-        [SerializeField] private float _moveSpeed = 3f;
+        [SerializeField] private float _walkSpeed = 3f;
+        [SerializeField] private float _runSpeed = 6f;
+
+        //Các biến đếm thời gian cho việc tiêu hao stamina khi player ở state Running
+        private float _staminaTimer;
+        private float _staminaDrainRate = .2f;
 
         [Header("Các biến trạng thái")]
         [Tooltip("Thông số dùng cho việc di chuyển")]
@@ -42,6 +47,7 @@ namespace _Project._Scripts.Player
         private bool _inputBuffered = false;
         private bool _isKnockbacked = false;
         private bool _isPlayingFootstep = false;
+        private bool _isRunning = false;
 
         private void Awake()
         {
@@ -91,7 +97,7 @@ namespace _Project._Scripts.Player
         {
             SetPlayerControl(true);
             ChangeState(PlayerState.Idle);
-            _currentSpeed = _moveSpeed;
+            _currentSpeed = _walkSpeed;
             _playerStamina = GetComponent<PlayerStamina>();
             _interactable = GetComponentInChildren<InteractionDetector>();
             
@@ -146,6 +152,7 @@ namespace _Project._Scripts.Player
             if (_canMove)
             {
                 _moveInput = PlayerInput.Instance._moveInput;
+                _isRunning = PlayerInput.Instance._runningInput;
                 if (_moveInput != Vector2.zero)
                 {
                     _lastInput = _moveInput;
@@ -190,14 +197,32 @@ namespace _Project._Scripts.Player
             {
                 ChangeState(PlayerState.Idle);
                 StopFootstep();
+                if (_staminaTimer < _staminaDrainRate)
+                    _staminaTimer = _staminaDrainRate;
             }
             else
             {
-                ChangeState(PlayerState.Walk);
+                if (_isRunning)
+                {
+                    ChangeState(PlayerState.Running);
+                    _staminaTimer -= Time.deltaTime;
+                    if(_staminaTimer <= 0f)
+                    {
+                        _playerStamina.ChangeStamina(-1f);
+                        _staminaTimer = _staminaDrainRate;
+                    }
+                }
+                else
+                {
+                    ChangeState(PlayerState.Walk);
+                    if(_staminaTimer < _staminaDrainRate)
+                        _staminaTimer = _staminaDrainRate;
+                }
             }
 
             _moveInput.Normalize();
 
+            _currentSpeed = _isRunning ? _runSpeed : _walkSpeed;
             _rb.linearVelocity = _moveInput * _currentSpeed;
 
             if(_rb.linearVelocity.magnitude > 0 && !_isPlayingFootstep)
@@ -265,12 +290,19 @@ namespace _Project._Scripts.Player
                 case PlayerState.Idle:
                     //Chạy animation idle của Player
                     _anim.SetBool("isMoving", false);
+                    _anim.SetBool("isRunning", false);
                     _anim.SetFloat("LastInputX", _lastInput.x);
                     _anim.SetFloat("LastInputY", _lastInput.y);
                     break;
                 case PlayerState.Walk:
                     //Chạy animation walk của Player
                     _anim.SetBool("isMoving", true);
+                    _anim.SetBool("isRunning", false);
+                    _anim.SetFloat("InputX", _moveInput.x);
+                    _anim.SetFloat("InputY", _moveInput.y);
+                    break;
+                case PlayerState.Running:
+                    _anim.SetBool("isRunning", true);
                     _anim.SetFloat("InputX", _moveInput.x);
                     _anim.SetFloat("InputY", _moveInput.y);
                     break;
@@ -360,5 +392,5 @@ namespace _Project._Scripts.Player
         #endregion
     }
 
-    public enum PlayerState { Idle, Walk, Attack, Special }
+    public enum PlayerState { Idle, Walk, Attack, Special, Running }
 }
