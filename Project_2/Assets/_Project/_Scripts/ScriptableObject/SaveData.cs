@@ -13,6 +13,7 @@ public class SaveData
     public List<string> _handinQuestSaveData; //Dữ liệu của quest đã hoàn thành (là handinQuestIDs trong QuestController)
     public PlayerLevelData _levelData;
     public PlayerStatsData _statsData;
+    public List<CheckpointSaveData> _checkpointSaveData;
 }
 
 [System.Serializable]
@@ -40,4 +41,11 @@ public class PlayerStatsData
     public int _attackPts = 1;
     public int _defensePts = 1;
     public int _skillDamagePts = 1;
+}
+
+[System.Serializable]
+public class CheckpointSaveData
+{
+    public string _checkpointID;
+    public bool _isActivated;
 }
