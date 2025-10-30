@@ -11,6 +11,7 @@ namespace _Project._Scripts.Player
     {
         PlayerStats _stats;
         public event Action OnDead;
+        public event Action OnRevive;
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
         [Header("Các thông số máu")]
@@ -51,7 +52,7 @@ namespace _Project._Scripts.Player
             float percent = _currentHealth / _maxHealth;
             _maxHealth = _stats.Health;
 
-            _currentHealth = _maxHealth * (int)percent;
+            _currentHealth = _maxHealth;
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
         }
 
@@ -63,13 +64,12 @@ namespace _Project._Scripts.Player
             _currentHealth -= damageTaken;
             DamageParticle();
             SoundEffectManager.Play("Hit");
-            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
+            HUDController.Instance.UpdateHealthUI(Mathf.Round(_currentHealth), _maxHealth);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
                 OnDead?.Invoke();
-                Debug.LogWarning("Player has dead and OnDead has Invoke");
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
                 StartCoroutine(Dissolve(gameObject, _fade));
             }
@@ -82,6 +82,16 @@ namespace _Project._Scripts.Player
             if (_damageParticle == null) return;
 
             ParticleSystem damageParti = Instantiate(_damageParticle, transform.position, Quaternion.identity);
+        }
+
+        public void Revive()
+        {
+            _currentHealth = _maxHealth;
+            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
+
+            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().material = _damageFlash;
+            OnRevive?.Invoke();
         }
 
         #endregion
@@ -106,6 +116,7 @@ namespace _Project._Scripts.Player
             }
 
             player.SetActive(false);
+            yield return new WaitForSeconds(1f);
         }
         #endregion
 

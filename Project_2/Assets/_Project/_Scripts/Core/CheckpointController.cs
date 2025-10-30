@@ -26,5 +26,7 @@ namespace _Project._Scripts.Core
         }
 
         public Vector3 GetCheckpointPosition() => _currentCheckpoint != null ? _currentCheckpoint.transform.position : Vector3.zero;
+
+        public PolygonCollider2D GetMapBoundary() => _currentCheckpoint != null ? _currentCheckpoint._mapBoundary : null;
     }
 }

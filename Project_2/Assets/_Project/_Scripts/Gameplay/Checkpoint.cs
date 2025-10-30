@@ -11,6 +11,7 @@ namespace _Project._Scripts.Gameplay
         [Header("Property của một checkpoint")]
         [SerializeField] private ParticleSystem _smokeFX;
         [SerializeField] private GameObject _flame;
+        public PolygonCollider2D _mapBoundary = null;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()

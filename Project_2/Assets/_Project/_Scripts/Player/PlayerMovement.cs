@@ -61,7 +61,8 @@ namespace _Project._Scripts.Player
             if(_playerHealth != null)
             {
                 _playerHealth.OnDead += () => SetPlayerControl(false);
-                Debug.Log("Subcribe Player OnDead!");
+                _playerHealth.OnRevive += () => SetPlayerControl(true);
+                Debug.Log("Subcribe PlayerHealth!");
             }
         }
 
