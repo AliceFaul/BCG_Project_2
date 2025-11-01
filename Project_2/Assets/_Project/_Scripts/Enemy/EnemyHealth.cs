@@ -9,6 +9,8 @@ namespace _Project._Scripts.Enemies
 {
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
+        private EnemyPool _pool; // Tham chiếu pool sinh ra enemy này
+
         //Biến event gửi tín hiệu qua movement để ngừng di chuyển
         public event Action OnDead;
 
@@ -108,7 +110,11 @@ namespace _Project._Scripts.Enemies
             }
 
             yield return new WaitForSeconds(0.2f);
-            obj.SetActive(false);
+            //áo sự kiện chết (cho spawner xử lý)
+            OnDead?.Invoke();
+
+            //  Trả lại pool
+            _pool.ReturnToPool(obj);
         }
 
         //Hàm Coroutine để sử dụng hiệu ứng Damage Flash
@@ -132,5 +138,14 @@ namespace _Project._Scripts.Enemies
         }
 
         #endregion
+        public void Initialize(EnemyPool pool)
+        {
+            _pool = pool;                  // Gán pool
+            _isDead = false;               // Reset trạng thái chết
+            _currentHealth = _maxHealth;   // Reset lại máu
+            UpdateHealthBar();             // Cập nhật thanh máu
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white; // Reset lại màu enemy
+        }
+
     }
 }
