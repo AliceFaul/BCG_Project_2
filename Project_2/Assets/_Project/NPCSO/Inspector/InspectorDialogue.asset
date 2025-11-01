@@ -17,8 +17,30 @@ MonoBehaviour:
   _dialogueLines:
   - HI, this is test dialogue system
   - And this is working
+  - Can you help me find some meats??
+  - Oh...Ok... I just want to test branch option
+  - Sorry for interrupting you
+  - Thanks!!
+  - Good luck for finding those meats
+  - Thanks for help me find all this
   _typingSpeed: 0.05
   _voiceSound: {fileID: 8300000, guid: 8548c7132559e4640a291ff63ca5d81f, type: 3}
   _voicePitch: 1
-  _autoProgressLines: 0101
+  _autoProgressLines: 0101010101010101
+  _endProgressLines: 0000000000010101
   _autoProgressDelay: 2
+  _choices:
+  - _dialogueIndex: 2
+    _choices:
+    - Yes
+    - No
+    _nextDialogueIndexes: 0600000003000000
+    _giveQuests: 0100
+  - _dialogueIndex: 4
+    _choices:
+    - Don't worry!
+    _nextDialogueIndexes: 05000000
+    _giveQuests: 00
+  _questInProgressIndex: 6
+  _questCompletedIndex: 7
+  _quest: {fileID: 11400000, guid: 42fdf62703190d54f9351d7f880b97de, type: 2}

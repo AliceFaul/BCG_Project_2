@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Collections;
+using System;
+using _Project._Scripts.Core;
 
 namespace _Project._Scripts.UI
 {
@@ -12,6 +14,14 @@ namespace _Project._Scripts.UI
         CanvasGroup _uiCG;
 
         [Header("Giao diện HUD của player")]
+        [SerializeField] private int _maxLevel;
+        [SerializeField] private TMP_Text _levelText;
+        [SerializeField] private Image _experienceImage;
+        [SerializeField] private TMP_Text _experienceText;
+        [SerializeField] private GameObject _addExpButton;
+
+        [Space(10)]
+
         [SerializeField] private TMP_Text _healthText; //Text máu
         [SerializeField] private Image _healthImage; //Image máu
 
@@ -39,6 +49,12 @@ namespace _Project._Scripts.UI
         [SerializeField] private float _popupDuration;
         private readonly Queue<GameObject> _activePopups = new();
 
+        [Header("Các property cần thiết cho Level System")]
+        [SerializeField] private AnimationCurve _experienceCurve;
+        private int _currentLevel, _totalExperience;
+        private int _previousLevelsExperience, _nextLevelsExperience;
+        public event Action OnLevelUp;
+
         private void Awake()
         {
             //Tạo Singleton
@@ -47,7 +63,82 @@ namespace _Project._Scripts.UI
             //HUDController này chỉ có trong Game Scene nên không cần DontDestroyOnLoad
 
             _uiCG = GetComponent<CanvasGroup>();
+            _currentLevel++;
+            UpdateLevel();
+
+            _addExpButton.GetComponent<Button>().onClick.AddListener(() => AddExperience(20));
         }
+
+        #region Level UI Controller
+
+        public void AddExperience(int amount)
+        {
+            if (_currentLevel >= _maxLevel) return;
+
+            _totalExperience += amount;
+            CheckForLevelUp();
+            UpdateLevelInterface();
+            Debug.LogWarning($"Add Experience to Player: {amount}");
+        }
+
+        void CheckForLevelUp()
+        {
+            bool isLevelUp = false;
+
+            while(_totalExperience >= _nextLevelsExperience)
+            {
+                _currentLevel++;
+                SoundEffectManager.Play("LevelUp");
+                UpdateLevel();
+                isLevelUp = true;
+            }
+
+            if(isLevelUp)
+            {
+                OnLevelUp?.Invoke();
+                Debug.LogWarning("OnLevelUp Invoke");
+            }
+        }
+
+        void UpdateLevel()
+        {
+            _previousLevelsExperience = (int)_experienceCurve.Evaluate(_currentLevel);
+            _nextLevelsExperience = (int)_experienceCurve.Evaluate(_currentLevel + 1);
+            UpdateLevelInterface();
+        }
+
+        void UpdateLevelInterface()
+        {
+            int start = _totalExperience - _previousLevelsExperience;
+            int end = _nextLevelsExperience - _previousLevelsExperience;
+
+            if(start < 0) start = 0;
+
+            _levelText.text = _currentLevel.ToString();
+            _experienceText.text = $"{start} / {end} exp";
+            _experienceImage.fillAmount = (float)start / (float)end;
+        }
+
+        public PlayerLevelData GetLevelData()
+        {
+            PlayerLevelData levelData = new PlayerLevelData();
+
+            levelData._currentLevel = _currentLevel;
+            levelData._totalExperience = _totalExperience;
+
+            return levelData;
+        }
+
+        public void SetPlayerLevelData(PlayerLevelData data)
+        {
+            _currentLevel = data._currentLevel;
+            _totalExperience = data._totalExperience;
+
+            UpdateLevel();
+            UpdateLevelInterface();
+        }
+
+        #endregion
 
         #region Health, Energy, Stamina của Player
 

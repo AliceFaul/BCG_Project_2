@@ -127,12 +127,13 @@ GameObject:
   - component: {fileID: 4374330875813525346}
   - component: {fileID: 3188487154825709572}
   - component: {fileID: 297884192612695280}
+  - component: {fileID: 2205421967523477299}
+  - component: {fileID: 3867353841579611734}
   - component: {fileID: 1410661574368989261}
   - component: {fileID: 2732292124938645096}
   - component: {fileID: 951875001355187789}
   - component: {fileID: 5657726437596941349}
-  - component: {fileID: 2205421967523477299}
-  - component: {fileID: 3867353841579611734}
+  - component: {fileID: 1155609388347363092}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -307,6 +308,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2205421967523477299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207468080898817216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7967de606bda85468217e6841d570e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3867353841579611734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207468080898817216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431ec4cca6f4e6d4ea8ad34aab1ba333, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1410661574368989261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,11 +344,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2d7e27262347648a99858d6ea4b070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 4
+  _walkSpeed: 3
+  _runSpeed: 6
   _state: 0
+  _footstepSpeed: 0.6
   _attackCD: 1.2
   _dashDistance: 0.7
   _attackStamina: 5
+  _onLevelUpParticle: {fileID: 6508484756882267648, guid: c5c1fa80c5d479849a971371f4bfe701, type: 3}
   _canMove: 0
   _canAttack: 0
 --- !u!114 &2732292124938645096
@@ -409,10 +437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dda6149343c1264ca6923972e20374a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxStamina: 100
+  _maxStamina: 200
   _currentStamina: 0
-  _recoverTime: 2
-  _recoveryAmount: 10
+  _recoverTime: 1.2
+  _recoveryAmount: 30
 --- !u!114 &5657726437596941349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,12 +458,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _attackDir: 0
-  _damage: 15
   _attackRange: 1.5
   _moveOffset: 0.2
   _knockbackForce: 8
   _stunTime: 1
---- !u!114 &2205421967523477299
+--- !u!114 &1155609388347363092
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -444,21 +471,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 1207468080898817216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7967de606bda85468217e6841d570e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 734b1244731ac4f419f18ba36a16acd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3867353841579611734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207468080898817216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 431ec4cca6f4e6d4ea8ad34aab1ba333, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _Health:
+    _BaseValue: 150
+    _isDirty: 1
+  _Energy:
+    _BaseValue: 50
+    _isDirty: 1
+  _Stamina:
+    _BaseValue: 50
+    _isDirty: 1
+  _Attack:
+    _BaseValue: 10
+    _isDirty: 1
+  _Defense:
+    _BaseValue: 5
+    _isDirty: 1
+  _SkillDamage:
+    _BaseValue: 20
+    _isDirty: 1
+  _healthPoint: 1
+  _energyPoint: 1
+  _staminaPoint: 1
+  _attackPoint: 1
+  _defensePoint: 1
+  _skillDamagePoint: 1
+  _pointPerLevel: 3
 --- !u!1 &5378598945434193472
 GameObject:
   m_ObjectHideFlags: 0

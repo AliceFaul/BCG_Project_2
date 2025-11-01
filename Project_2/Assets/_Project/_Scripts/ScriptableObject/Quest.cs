@@ -12,6 +12,7 @@ public class Quest : ScriptableObject
     public string _questName;
     public string _description;
     public List<QuestObjective> _objectives;
+    public List<QuestReward> _rewards;
 
     private void OnValidate()
     {
@@ -42,6 +43,12 @@ public class QuestProgress
     public Quest _quest;
     public List<QuestObjective> _objectives;
 
+    /// <summary>
+    /// Hàm khởi tạo của QuestProgress lấy dữ liệu của quest đã tham chiếu
+    /// và copy các objective trong quest ấy vào objective của QuestProgress này
+    /// tránh thay đổi dữ liệu trực tiếp trong quest
+    /// </summary>
+    /// <param name="quest"></param>
     public QuestProgress(Quest quest)
     {
         _quest = quest;
@@ -60,7 +67,24 @@ public class QuestProgress
         }
     }
 
+    /// <summary>
+    /// kiểm tra đã hoàn thành quest chưa
+    /// </summary>
     public bool IsCompleted => _objectives.TrueForAll(x => x.IsCompleted);
+
+    /// <summary>
+    /// Lấy questID
+    /// </summary>
     public string QuestID => _quest._questID;
 }
+
+[System.Serializable]
+public class QuestReward
+{
+    public RewardType _type;
+    public int _rewardID;
+    public int _amount = 1;
+}
+
+public enum RewardType { Item, Gold, Exp, Custom }
 

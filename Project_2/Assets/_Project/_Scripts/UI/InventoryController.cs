@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using _Project._Scripts.Core;
+using System;
 
 namespace _Project._Scripts.UI
 {
@@ -9,6 +10,9 @@ namespace _Project._Scripts.UI
     /// </summary>
     public class InventoryController : MonoBehaviour
     {
+        //Singleton của InventoryController
+        public static InventoryController Instance { get; private set; }
+
         private ItemDictionary _itemDictionary;
 
         [Header("Inventory Page")]
@@ -22,11 +26,28 @@ namespace _Project._Scripts.UI
         [Tooltip("Số lượng slot trong Inventory Panel")]
         [SerializeField] private int _slotCount; //Số lượng slot trong inventory panel
 
+        Dictionary<int, int> _itemCountCache = new();
+        public event Action OnInventoryChanged;
+
+        #region Unity Life Cycle
+
+        private void Awake()
+        {
+            //Thiết lập Singleton
+            if(Instance == null) Instance = this;
+            else Destroy(gameObject);
+        }
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             _itemDictionary = FindAnyObjectByType<ItemDictionary>();
+            RebuildItemCounts();
         }
+
+        #endregion
+
+        #region Inventory Control Setting
 
         //Hàm này giúp kiểm tra inventory và thêm prefab item vào inventory khi người chơi nhặt item, gọi ở PlayerItemCollector
         public bool AddItem(GameObject itemPrefab)
@@ -46,6 +67,7 @@ namespace _Project._Scripts.UI
                     {
                         //Nếu trùng thì sẽ tăng số lượng lên
                         slotItem.AddToStack();
+                        RebuildItemCounts();
                         return true;
                     }
                 }
@@ -62,6 +84,7 @@ namespace _Project._Scripts.UI
                     GameObject newItem = Instantiate(itemPrefab, slotTransform);
                     newItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                     slot._currentItem = newItem;
+                    RebuildItemCounts();
                     return true;
                 }
             }
@@ -70,6 +93,76 @@ namespace _Project._Scripts.UI
             Debug.Log("Inventory is full");
             return false;
         }
+
+        /// <summary>
+        /// Hàm này chủ yếu giúp kích hoạt event OnInventoryChanged khi inventory có thay đổi gì đó
+        /// như là nhặt, drop, ...
+        /// </summary>
+        public void RebuildItemCounts()
+        {
+            //Dọn sạch dictionary (xóa dữ liệu cũ và lưu dữ liệu mới)
+            _itemCountCache.Clear();
+
+            //Duyệt qua trong inventory
+            foreach(Transform slotTransform in _inventoryPanel.transform)
+            {
+                Slot slot = slotTransform.GetComponent<Slot>();
+                if(slot._currentItem != null)
+                {
+                    Item item = slot._currentItem.GetComponent<Item>();
+                    if(item != null)
+                    {
+                        //Lưu vào dictionary với key là itemID và value là quantity (số lượng)
+                        //Nếu có số lượng trước đó thì sẽ cộng thêm với số lượng của item vừa thêm
+                        _itemCountCache[item._itemID] = _itemCountCache.GetValueOrDefault(item._itemID, 0) + item._quantity;
+                    }
+                }
+            }
+
+            //Kích hoạt event OnInventoryChanged, có nghĩa là inventory vừa thay đổi
+            OnInventoryChanged?.Invoke();
+        }
+
+        /// <summary>
+        /// Hàm chỉ đơn giản là lấy Dictionary với ID và Quantity (Số lượng)
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<int, int> GetItemCounts() => _itemCountCache;
+
+        /// <summary>
+        /// Hàm này sẽ xóa item khỏi Inventory bằng itemID và số lượng sẽ xóa
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <param name="amount"></param>
+        public void RemoveItemsFromInventory(int itemID, int amount)
+        {
+            //Đầu tiên tất nhiên là duyệt qua inventory
+            foreach(Transform slotTransform in _inventoryPanel.transform)
+            {
+                if (amount <= 0) break; //Nếu số lượng cần xóa là 0 thì thoát khỏi foreach
+
+                Slot slot = slotTransform.GetComponent<Slot>();
+                if(slot?._currentItem?.GetComponent<Item>() is Item item && item._itemID == itemID)
+                {
+                    //Dùng Mathf.Min để lấy số lượng ít nhất để xóa số lượng của item (tránh số âm)
+                    int removed = Mathf.Min(amount, item._quantity);
+                    item.RemoveFromStack(removed); //Trừ số lượng
+                    amount -= removed;
+
+                    //Nếu số lượng của item dưới 0 thì xóa item trong inventory
+                    if(item._quantity <= 0)
+                    {
+                        Destroy(slot._currentItem);
+                        slot._currentItem = null;
+                    }
+                }
+            }
+
+            //Kích hoạt event cho biết có thay đổi trong inventory
+            RebuildItemCounts();
+        }
+
+        #endregion
 
         #region Inventory Saving System
 
@@ -136,6 +229,8 @@ namespace _Project._Scripts.UI
                     }
                 }
             }
+
+            RebuildItemCounts();
         }
 
         #endregion

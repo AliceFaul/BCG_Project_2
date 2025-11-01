@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Project._Scripts.Core;
 using _Project._Scripts.UI;
 using UnityEngine;
@@ -8,7 +9,9 @@ namespace _Project._Scripts.Player
     [RequireComponent(typeof(PlayerMovement), typeof(Material))]
     public class PlayerHealth : MonoBehaviour, IDamageable
     {
-        PlayerMovement _movement;
+        PlayerStats _stats;
+        public event Action OnDead;
+        public event Action OnRevive;
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
         [Header("Các thông số máu")]
@@ -35,25 +38,40 @@ namespace _Project._Scripts.Player
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _stats = GetComponent<PlayerStats>();
+            _maxHealth = _stats.Health;
             _currentHealth = _maxHealth;
-            _movement = GetComponent<PlayerMovement>();
+            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
+
+            _stats.OnStatChanged += UpdateMaxHealth;
+            _stats.OnStatsInitialize += UpdateMaxHealth;
+        }
+
+        void UpdateMaxHealth()
+        {
+            float percent = _currentHealth / _maxHealth;
+            _maxHealth = _stats.Health;
+
+            _currentHealth = _maxHealth;
             HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
         }
 
         //Hàm trừ máu, nếu damage là âm sẽ mất máu còn dương sẽ hồi máu
         public void TakeDamage(float damage)
         {
-            _currentHealth += damage;
+            float damageTaken = damage * (damage / (damage + _stats.Defense));
+            
+            _currentHealth -= damageTaken;
             DamageParticle();
             SoundEffectManager.Play("Hit");
-            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
+            HUDController.Instance.UpdateHealthUI(Mathf.Round(_currentHealth), _maxHealth);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
+                OnDead?.Invoke();
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
                 StartCoroutine(Dissolve(gameObject, _fade));
-                _movement._canMove = false;
             }
 
             StartCoroutine(DamageFlasher());
@@ -64,6 +82,16 @@ namespace _Project._Scripts.Player
             if (_damageParticle == null) return;
 
             ParticleSystem damageParti = Instantiate(_damageParticle, transform.position, Quaternion.identity);
+        }
+
+        public void Revive()
+        {
+            _currentHealth = _maxHealth;
+            HUDController.Instance.UpdateHealthUI(_currentHealth, _maxHealth);
+
+            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().material = _damageFlash;
+            OnRevive?.Invoke();
         }
 
         #endregion
@@ -88,6 +116,7 @@ namespace _Project._Scripts.Player
             }
 
             player.SetActive(false);
+            yield return new WaitForSeconds(1f);
         }
         #endregion
 

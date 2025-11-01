@@ -5,6 +5,7 @@ using _Project._Scripts.UI;
 using _Project._Scripts.Gameplay;
 using System.Collections.Generic;
 using System.Linq;
+using _Project._Scripts.Player;
 
 namespace _Project._Scripts.Core
 {
@@ -14,6 +15,8 @@ namespace _Project._Scripts.Core
         private InventoryController _invenController;
         private HotbarController _hotbarController;
         private Chest[] _chests;
+        private Checkpoint[] _checkpoints;
+        private PlayerStats _playerStats;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
@@ -30,6 +33,8 @@ namespace _Project._Scripts.Core
             _invenController = FindAnyObjectByType<InventoryController>();
             _hotbarController = FindAnyObjectByType<HotbarController>();
             _chests = FindObjectsByType<Chest>(FindObjectsSortMode.None);
+            _checkpoints = FindObjectsByType<Checkpoint>(FindObjectsSortMode.None);
+            _playerStats = FindAnyObjectByType<PlayerStats>();
         }
 
         //Hàm dùng để save lại qua saveData và ghi vào Json
@@ -41,7 +46,12 @@ namespace _Project._Scripts.Core
                 _mapBoundary = FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D.name,
                 _inventorySaveData = _invenController.GetInventoryItems(),
                 _hotbarSaveData = _hotbarController.GetHotBarItems(),
-                _chestSaveData = GetChestState()
+                _chestSaveData = GetChestState(),
+                _questSaveData = QuestController.Instance._activeQuests,
+                _handinQuestSaveData = QuestController.Instance._handinQuestIDs,
+                _levelData = HUDController.Instance.GetLevelData(),
+                _statsData = _playerStats.GetStatsData(),
+                _checkpointSaveData = GetCheckpointState()
             };
 
             File.WriteAllText(_saveLocation, JsonUtility.ToJson(saveData));
@@ -87,6 +97,40 @@ namespace _Project._Scripts.Core
 
         #endregion
 
+        #region Checkpoint Saving System
+
+        List<CheckpointSaveData> GetCheckpointState()
+        {
+            List<CheckpointSaveData> checkpointStates = new List<CheckpointSaveData>();
+
+            foreach(Checkpoint cp in _checkpoints)
+            {
+                CheckpointSaveData checkpointSaveData = new CheckpointSaveData
+                {
+                    _checkpointID = cp._CheckpointID,
+                    _isActivated = cp._IsActivated
+                };
+                checkpointStates.Add(checkpointSaveData);
+            }
+
+            return checkpointStates;
+        }
+
+        void LoadCheckpointState(List<CheckpointSaveData> data)
+        {
+            if (data == null) return;
+
+            foreach(Checkpoint cp in _checkpoints)
+            {
+                CheckpointSaveData checkpointSaveData = data.FirstOrDefault(c => c._checkpointID == cp._CheckpointID);
+
+                if (checkpointSaveData != null)
+                    cp.SetActivateCheckpoint(checkpointSaveData._isActivated);
+            }
+        }
+
+        #endregion
+
         //Hàm dùng để Load lại game qua Json
         public void LoadGame()
         {
@@ -99,6 +143,11 @@ namespace _Project._Scripts.Core
                 _invenController.SetInventoryItems(saveData._inventorySaveData);
                 _hotbarController.SetHotBarItems(saveData._hotbarSaveData);
                 LoadChestState(saveData._chestSaveData);
+                LoadCheckpointState(saveData._checkpointSaveData);
+                QuestController.Instance.LoadQuestProgress(saveData._questSaveData);
+                QuestController.Instance._handinQuestIDs = saveData._handinQuestSaveData;
+                HUDController.Instance.SetPlayerLevelData(saveData._levelData);
+                _playerStats.SetPlayerData(saveData._statsData);
             }
             //Nếu không tìm thấy file Json trong game thì sẽ tự động Save Game
             else

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace _Project._Scripts.Core
 {
+    /// <summary>
+    /// Script này có thể coi là một thư viện chứa tất cả item trong game và gán ID cho các item
+    /// và tạo ra prefab item theo ID
+    /// </summary>
     public class ItemDictionary : MonoBehaviour
     {
         [Header("Danh sách các item trong game")]

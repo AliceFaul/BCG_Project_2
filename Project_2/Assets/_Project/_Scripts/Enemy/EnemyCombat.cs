@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.UI;
+using UnityEngine;
 
 namespace _Project._Scripts.Enemies
 {
@@ -22,7 +23,8 @@ namespace _Project._Scripts.Enemies
                 IDamageable damageable = hit.GetComponent<IDamageable>();
                 if (damageable != null)
                 {
-                    damageable.TakeDamage(-_damage);
+                    damageable.TakeDamage(_damage);
+                    DamagePopup.CreatePopup(hit.transform.position, _damage, false);
                     IKnockbacked knockbacked = hit.GetComponent<IKnockbacked>();
                     if(knockbacked != null)
                     {

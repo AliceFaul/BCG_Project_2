@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using _Project._Scripts.Core;
 using System;
+using _Project._Scripts.UI;
 
 namespace _Project._Scripts.Enemies
 {
@@ -24,6 +25,7 @@ namespace _Project._Scripts.Enemies
         private float _fade = 1f;
         [Tooltip("Màu sắc khi chết")]
         [SerializeField] private Color _deadColor = Color.black;
+        [SerializeField] private int _enemyExperience = 5;
 
         //Setup hiệu ứng khi trúng đòn đánh
         [Tooltip("Chỉnh màu damage flash")]
@@ -60,6 +62,7 @@ namespace _Project._Scripts.Enemies
                 _isDead = true;
                 _currentHealth = 0;
                 OnDead?.Invoke();
+                HUDController.Instance.AddExperience(_enemyExperience);
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
                 StartCoroutine(Die(gameObject, _fade));
             }

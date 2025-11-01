@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.UI;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 
@@ -180,6 +181,8 @@ namespace _Project._Scripts.Gameplay
             {
                 Destroy(gameObject);
             }
+
+            InventoryController.Instance.RebuildItemCounts();
         }
     }
 }
