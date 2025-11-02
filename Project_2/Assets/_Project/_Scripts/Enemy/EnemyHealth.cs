@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using _Project._Scripts.Core;
 using System;
 using _Project._Scripts.UI;
+using Pathfinding;
 
 namespace _Project._Scripts.Enemies
 {
@@ -11,6 +12,7 @@ namespace _Project._Scripts.Enemies
     {
         //Biến event gửi tín hiệu qua movement để ngừng di chuyển
         public event Action OnDead;
+        EnemyInfo _info;
 
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
@@ -39,6 +41,34 @@ namespace _Project._Scripts.Enemies
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _info = GetComponent<EnemyInfo>();
+
+            if (_info != null)
+            {
+                EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+
+                _maxHealth = stats._enemyHP;
+                _enemyExperience = stats._enemyExperience;
+            }
+
+            _currentHealth = _maxHealth;
+            UpdateHealthBar();
+        }
+
+        private void OnEnable()
+        {
+            _isDead = false;
+            GetComponent<SpriteRenderer>().material = _damageFlash;
+            GetComponent<SpriteRenderer>().color = Color.white;
+
+            if (_info != null)
+            {
+                EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+
+                _maxHealth = stats._enemyHP;
+                _enemyExperience = stats._enemyExperience;
+            }
+
             _currentHealth = _maxHealth;
             UpdateHealthBar();
         }

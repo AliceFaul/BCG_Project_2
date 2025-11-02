@@ -51,7 +51,8 @@ namespace _Project._Scripts.UI
 
         [Header("Các property cần thiết cho Level System")]
         [SerializeField] private AnimationCurve _experienceCurve;
-        private int _currentLevel, _totalExperience;
+        public int _currentLevel;
+        private int _totalExperience;
         private int _previousLevelsExperience, _nextLevelsExperience;
         public event Action OnLevelUp;
 
