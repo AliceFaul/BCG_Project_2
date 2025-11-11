@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7597dceb6df6304d80acb2af3e0f9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemSO: {fileID: 11400000, guid: bad102f3dd158244f97968b0fcff8b05, type: 2}
   _itemID: 2
   _name: Meat
   _quantity: 1

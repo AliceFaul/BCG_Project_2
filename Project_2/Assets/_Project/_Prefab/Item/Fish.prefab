@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7597dceb6df6304d80acb2af3e0f9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemSO: {fileID: 11400000, guid: 24bae16ea4de90f45b8fae67c48990dc, type: 2}
   _itemID: 1
   _name: Fish
   _quantity: 1

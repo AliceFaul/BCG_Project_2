@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c2ae21d12bd4419485d79d9bfdf0c, type: 3}
+  m_Name: OrbWater
+  m_EditorClassIdentifier: 
+  skillName: OrbWater
+  skillDescription: 
+  normalSprite: {fileID: -7148899402789621793, guid: e9d84090dd9e0dc48970fc1fd148f19c, type: 3}
+  usedSprite: {fileID: -6943874694722531127, guid: 4eb92a10f328cd444895b92610cdc31f, type: 3}
+  cooldown: 5
+  requiredLevel: 1

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using _Project._Scripts.Core;
 using System;
+using UnityEngine.UI;
+using TMPro;
+using System.Data.Common;
 
 namespace _Project._Scripts.UI
 {
@@ -10,6 +13,12 @@ namespace _Project._Scripts.UI
     /// </summary>
     public class InventoryController : MonoBehaviour
     {
+        [Header("UI hiển thị mô tả Item")]
+        [SerializeField] private Image itemImage;          // Kéo object "ItemImage" vào đây
+        [SerializeField] private TMP_Text itemNameText;    // Kéo "ItemName"
+        [SerializeField] private TMP_Text itemDescText;    // Kéo "ItemDescription"
+        [SerializeField] private GameObject descriptionPanel; // Kéo "ItemDescriptionPanel" hoặc panel cha
+
         //Singleton của InventoryController
         public static InventoryController Instance { get; private set; }
 
@@ -49,6 +58,33 @@ namespace _Project._Scripts.UI
 
         #region Inventory Control Setting
 
+        public void SetupDescriptionPage(ItemSO data)
+        {
+            if (data == null)
+            {
+                Debug.LogWarning("ItemSO bị null!");
+                return;
+            }
+
+            // Gán dữ liệu vào UI
+            itemImage.sprite = data.ItemImage;
+            itemNameText.text = data.Name;
+            itemDescText.text = data.Description;
+
+            // Bật panel mô tả
+            if(descriptionPanel != null)
+            {
+                SetDescription(true);
+                if (data.Description != null)
+                {
+                    descriptionPanel.GetComponentInChildren<TMP_Text>().text = data.Description;
+                }
+            }
+        }
+        public void SetDescription(bool isActive)
+        {
+            descriptionPanel.SetActive(isActive);
+        }
         //Hàm này giúp kiểm tra inventory và thêm prefab item vào inventory khi người chơi nhặt item, gọi ở PlayerItemCollector
         public bool AddItem(GameObject itemPrefab)
         {
@@ -201,6 +237,7 @@ namespace _Project._Scripts.UI
             for(int i = 0; i < _slotCount; i++)
             {
                 Instantiate(_slotPrefab, _inventoryPanel.transform);
+                Debug.LogWarning($"Created {_slotCount} slots");
             }
 
             //Lúc này sẽ setup lại item trong InventorySaveData 

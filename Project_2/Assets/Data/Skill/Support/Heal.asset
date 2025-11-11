@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c2ae21d12bd4419485d79d9bfdf0c, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  skillName: Heal
+  skillDescription: 
+  normalSprite: {fileID: 2903848411162822477, guid: 6a604c14a0d007b479ade4f9650eea7f, type: 3}
+  usedSprite: {fileID: -5369262818884664796, guid: 1932f314f4c98df479c31cf54b24dd68, type: 3}
+  cooldown: 5
+  requiredLevel: 1

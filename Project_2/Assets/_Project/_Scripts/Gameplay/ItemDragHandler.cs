@@ -124,8 +124,20 @@ namespace _Project._Scripts.Gameplay
         //Sẽ sử dụng để hiện thông tin của item bằng ScriptableObject của Item (Update trong tương lai)
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Click item");
+            // Lấy component Item đang được click
+            Item item = GetComponent<Item>();
+            if (item == null || item._itemSO == null)
+            {
+                Debug.LogWarning("Không có dữ liệu ItemSO để hiển thị");
+                return;
+            }
+
+            // Gọi hàm có sẵn trong InventoryController để hiển thị mô tả
+            InventoryController.Instance.SetupDescriptionPage(item._itemSO);
+
+            Debug.Log($"Click item: {item._name}");
         }
+
 
         #endregion
 
