@@ -9,7 +9,7 @@ public class SkillTreeButton : MonoBehaviour
     private Button button;
 
     private void Awake()
-    {
+    { 
         button = GetComponent<Button>();
         button.onClick.AddListener(OnClickSkill);
     }
@@ -20,9 +20,9 @@ public class SkillTreeButton : MonoBehaviour
         if (UIManager.Instance != null)
             UIManager.Instance.ShowSkillDescription(skillData);
 
-        // Gán kỹ năng ra HUD
-        //if (UIManager.Instance != null)
-            //UIManager.Instance.AssignSkillToHud(skillData);
+         //Gán kỹ năng ra HUD
+        if (UIManager.Instance != null)
+            UIManager.Instance.AssignSkillToHud(skillData);
 
         Debug.Log($"Đã chọn kỹ năng: {skillData.skillName}");
     }
