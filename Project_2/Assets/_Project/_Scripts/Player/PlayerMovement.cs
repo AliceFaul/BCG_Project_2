@@ -122,7 +122,7 @@ namespace _Project._Scripts.Player
             ChangeState(PlayerState.Special);
             PlayerLevelUpParticle();
             _rb.linearVelocity = Vector2.zero;
-
+            
             Debug.LogWarning("Player in special dance");
         }
 
@@ -301,6 +301,7 @@ namespace _Project._Scripts.Player
                     _anim.SetFloat("InputY", _moveInput.y);
                     break;
                 case PlayerState.Running:
+                    _anim.SetBool("isMoving", true);
                     _anim.SetBool("isRunning", true);
                     _anim.SetFloat("InputX", _moveInput.x);
                     _anim.SetFloat("InputY", _moveInput.y);

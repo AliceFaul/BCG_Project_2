@@ -1,4 +1,5 @@
-﻿using Unity.Cinemachine;
+﻿using _Project._Scripts.UI;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace _Project._Scripts.Core
@@ -24,8 +25,11 @@ namespace _Project._Scripts.Core
 
             if(collision.CompareTag("Player"))
             {
-                _cmCam.BoundingShape2D = _mapBoundary;
-                MovePlayerPosition(collision.gameObject);
+                StartCoroutine(FadeTransition.Instance.FadeMapTransition(() =>
+                {
+                    _cmCam.BoundingShape2D = _mapBoundary;
+                    MovePlayerPosition(collision.gameObject);
+                }));
             }
         }
 
