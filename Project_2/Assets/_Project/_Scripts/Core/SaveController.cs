@@ -6,6 +6,7 @@ using _Project._Scripts.Gameplay;
 using System.Collections.Generic;
 using System.Linq;
 using _Project._Scripts.Player;
+using System.Collections;
 
 namespace _Project._Scripts.Core
 {
@@ -23,7 +24,7 @@ namespace _Project._Scripts.Core
         {
             Initialize();
 
-            LoadGame();
+            StartCoroutine(LoadGame());
         }
 
         //Hàm khởi tạo
@@ -132,14 +133,16 @@ namespace _Project._Scripts.Core
         #endregion
 
         //Hàm dùng để Load lại game qua Json
-        public void LoadGame()
+        public IEnumerator LoadGame()
         {
+            yield return null;
+
             if(File.Exists(_saveLocation))
             {
                 SaveData saveData = JsonUtility.FromJson<SaveData>(File.ReadAllText(_saveLocation));
 
                 GameObject.FindGameObjectWithTag("Player").transform.position = saveData._playerPosition;
-                FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = GameObject.Find(saveData._mapBoundary).GetComponent<PolygonCollider2D>();
+                FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = GameObject.Find(saveData._mapBoundary)?.GetComponent<PolygonCollider2D>();
                 _invenController.SetInventoryItems(saveData._inventorySaveData);
                 _hotbarController.SetHotBarItems(saveData._hotbarSaveData);
                 LoadChestState(saveData._chestSaveData);

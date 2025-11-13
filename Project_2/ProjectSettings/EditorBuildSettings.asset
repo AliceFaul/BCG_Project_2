@@ -6,8 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 02bf39aaeadfd2344b9c41b25eac0868
+  - enabled: 1
+    path: Assets/Scenes/PersistentGameplay.unity
+    guid: 38b13eb62de3826449ab6c077c6d0ce3
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: f35aaf87b3819c2439f69c28d80a9710
+  - enabled: 1
     path: Assets/Scenes/EarthBiome.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/FrostBiome.unity
+    guid: 603888e7dc58099409c789d8d7730318
+  - enabled: 1
+    path: Assets/Scenes/LavaBiome.unity
+    guid: 1ce573919625d5742959f0448214d22d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
