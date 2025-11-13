@@ -19,15 +19,7 @@ namespace _Project._Scripts.Gameplay
         public void Interact()
         {
             if (_type == PortalType.Enter)
-            {
-                if (_data.IsOnCooldown())
-                {
-                    Debug.Log($"{_data._dungeonName} in cooldown");
-                    return;
-                }
-
                 DungeonUIController.Instance.ShowDungeonConfirmUI(_data, _dungeonBoundary, _entryPoint.position);
-            }
             else if (_type == PortalType.Exit)
                 DungeonController.Instance.ExitDungeon(_data, _overworldBoundary, _exitPoint.position);
         }

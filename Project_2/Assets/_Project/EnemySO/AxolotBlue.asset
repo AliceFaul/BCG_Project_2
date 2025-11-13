@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyID: AxolotBlue
   _enemyName: Axolot Blue
-  _baseHealth: 100
-  _baseDamage: 25
-  _baseExperience: 5
+  _baseHealth: 110
+  _baseDamage: 30
+  _baseExperience: 7
   _healthGrowth: 1.15
   _damageGrowth: 1.1
   _experienceGrowth: 1.1

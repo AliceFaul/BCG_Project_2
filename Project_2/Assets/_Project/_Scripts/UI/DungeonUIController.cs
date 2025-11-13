@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.Core;
+﻿using System.Collections;
+using _Project._Scripts.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace _Project._Scripts.UI
         [SerializeField] private GameObject _dungeonPanel;
         [SerializeField] private TMP_Text _dungeonNameText;
         [SerializeField] private TMP_Text _dungeonLevelText;
+        [SerializeField] private TMP_Text _dungeonCooldownText;
         [SerializeField] private TMP_Dropdown _difficultDropDown;
         [SerializeField] private Button _confirmButton;
         [SerializeField] private Button _cancelButton;
@@ -21,6 +23,7 @@ namespace _Project._Scripts.UI
         PolygonCollider2D _currentBoundary;
         Difficult _currentDiff;
         Vector3 _currentEntryPoint;
+        Coroutine _cooldownRoutine;
 
         private void Awake()
         {
@@ -47,6 +50,10 @@ namespace _Project._Scripts.UI
 
             _difficultDropDown.value = 0;
             OnDifficultChanged(0);
+
+            if (_cooldownRoutine != null)
+                StopCoroutine(_cooldownRoutine);
+            _cooldownRoutine = StartCoroutine(UpdateCooldownUI());
         }
 
         #region Dungeon UI Setting
@@ -60,6 +67,8 @@ namespace _Project._Scripts.UI
 
         void OnConfirm()
         {
+            if (_currentData.IsOnCooldown()) return;
+
             DungeonController.Instance.EnterDungeon(_currentData, _currentBoundary, _currentEntryPoint);
             Hide();
         }
@@ -70,8 +79,48 @@ namespace _Project._Scripts.UI
             Hide();
         }
 
-        public void Hide() => _dungeonPanel.SetActive(false);
+        public void Hide()
+        {
+            if(_cooldownRoutine != null)
+                StopCoroutine(_cooldownRoutine);
+            _dungeonPanel.SetActive(false);
+        }
 
         #endregion
+
+        #region DungeonCooldown Coroutine
+
+        IEnumerator UpdateCooldownUI()
+        {
+            while(CurrentPanelActive())
+            {
+                if(_currentData.IsOnCooldown())
+                {
+                    float remaining = _currentData._lastClearTime - Time.time;
+                    if(remaining < 0) remaining = 0;
+
+                    int min = Mathf.FloorToInt(remaining / 60);
+                    int sec = Mathf.FloorToInt(remaining % 60);
+
+                    if(min > 0)
+                        _dungeonCooldownText.text = $"Cooldown: {min:D2}:{sec:D2}";
+                    else
+                        _dungeonCooldownText.text = $"Cooldown: {sec:D2}";
+
+                    _confirmButton.interactable = false;
+                }
+                else
+                {
+                    _dungeonCooldownText.text = "";
+                    _confirmButton.interactable = true;
+                }
+
+                yield return new WaitForSeconds(1f);
+            }
+        }
+
+        #endregion
+
+        bool CurrentPanelActive() => _dungeonPanel != null && _dungeonPanel.activeSelf;
     }
 }

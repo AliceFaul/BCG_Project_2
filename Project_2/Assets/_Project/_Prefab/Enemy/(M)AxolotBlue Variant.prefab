@@ -8,10 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 223827688674736506, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
+    - target: {fileID: 678017438138217890, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1537a287c3ba2a44dac96e3e0c61c7a5, type: 2}
     - target: {fileID: 1211921226240643704, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
@@ -68,92 +68,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 2c2050f429aa09c488a32be59395b5db, type: 2}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_fontColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_fontColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_fontColor.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -7543008623660292608, guid: 2c2050f429aa09c488a32be59395b5db, type: 2}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4278190080
-      objectReference: {fileID: 0}
-    - target: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422860427417390034, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3422860427417390034, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 3826406078408917618, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_Name
-      value: Info
-      objectReference: {fileID: 0}
-    - target: {fileID: 5439642988996449650, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: _enemyName
-      value: 
-      objectReference: {fileID: 5667711633426095959}
-    - target: {fileID: 6091942111020546964, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091942111020546964, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1864194696830243024, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-      insertIndex: 9
-      addedObject: {fileID: 6386684325319518928}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
---- !u!114 &5667711633426095959 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3313345628100194406, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-  m_PrefabInstance: {fileID: 7159773397708664625}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &8827737841720934369 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1864194696830243024, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
-  m_PrefabInstance: {fileID: 7159773397708664625}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6386684325319518928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827737841720934369}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd33271ef8aa375499e56e7d1d06c703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyData: {fileID: 11400000, guid: 1537a287c3ba2a44dac96e3e0c61c7a5, type: 2}

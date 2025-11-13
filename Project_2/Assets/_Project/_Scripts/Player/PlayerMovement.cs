@@ -301,14 +301,14 @@ namespace _Project._Scripts.Player
                     _anim.SetFloat("InputY", _moveInput.y);
                     break;
                 case PlayerState.Running:
-                    _anim.SetBool("isMoving", true);
                     _anim.SetBool("isRunning", true);
                     _anim.SetFloat("InputX", _moveInput.x);
                     _anim.SetFloat("InputY", _moveInput.y);
                     break;
                 case PlayerState.Special:
                     if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || 
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") ||
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Running") ||
                         _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
                     {
                         _anim.SetBool("isSpecial", true);
@@ -332,7 +332,8 @@ namespace _Project._Scripts.Player
 
                     //Chạy animation Attack của Player
                     if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") ||
+                            _anim.GetCurrentAnimatorStateInfo(0).IsName("Running"))
                     {
                         _anim.SetBool("isAttacking", true);
                         _anim.SetFloat("MouseInputX", dir.x);

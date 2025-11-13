@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using _Project._Scripts.Core;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -48,10 +49,14 @@ namespace _Project._Scripts.UI
 
         public IEnumerator FadeMapTransition(Action duringFade = null)
         {
-            duringFade?.Invoke();
+            PauseController.SetPaused(true);
             yield return FadeRoutine(1, null);
 
+            duringFade?.Invoke();
+
+            yield return new WaitForSeconds(.2f);
             yield return FadeRoutine(0, null);
+            PauseController.SetPaused(false);
         }
 
         public IEnumerator FadeOutIn(Action duringFade = null)

@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48a8b8e139ccb44dbed8442f365cbda, type: 3}
   m_Name: TestDungeon
   m_EditorClassIdentifier: 
-  _dungeonID: Testde9a59ba-bbff-436f-a3df-650db682e355
+  _dungeonID: Test442b6501-a7c6-4337-bf62-724bb7cf5929
   _dungeonName: Test
   _resetTime: 20
   _isCleared: 0
   _normalLevelRequirement: 1
   _hardLevelRequirement: 5
   _dungeonDifficult: 0
-  _entryPosition: {x: -1.96, y: -2.71, z: 0}
-  _exitPosition: {x: -1.54, y: -3.99, z: 0}
   _lastClearTime: 0

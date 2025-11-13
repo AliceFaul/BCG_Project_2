@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &9166139099397362615
+--- !u!1 &5121388195879008596
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6881470508142184899}
-  - component: {fileID: 7538188287878585152}
-  - component: {fileID: 3313345628100194406}
+  - component: {fileID: 7008746860105227663}
+  - component: {fileID: 8389330776447812004}
+  - component: {fileID: 4645540708430853004}
   m_Layer: 5
-  m_Name: Name
+  m_Name: Name (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &6881470508142184899
+--- !u!224 &7008746860105227663
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9166139099397362615}
+  m_GameObject: {fileID: 5121388195879008596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -34,24 +34,24 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.87}
-  m_SizeDelta: {x: 12.4109, y: 0.9331}
+  m_AnchoredPosition: {x: 0, y: 0.8}
+  m_SizeDelta: {x: 3.3733, y: 0.6052}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &7538188287878585152
+--- !u!222 &8389330776447812004
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9166139099397362615}
+  m_GameObject: {fileID: 5121388195879008596}
   m_CullTransparentMesh: 1
---- !u!114 &3313345628100194406
+--- !u!114 &4645540708430853004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9166139099397362615}
+  m_GameObject: {fileID: 5121388195879008596}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -152,6 +152,14 @@ PrefabInstance:
       propertyPath: m_Offset.x
       value: 0.0064167976
       objectReference: {fileID: 0}
+    - target: {fileID: 3415698099478990513, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3499697388935749719, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
+      propertyPath: _enemyName
+      value: 
+      objectReference: {fileID: 4645540708430853004}
     - target: {fileID: 4521784455039602868, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_labelHash
       value: 1.5635439e-22
@@ -164,13 +172,17 @@ PrefabInstance:
       propertyPath: m_CategoryHash
       value: 9.932601e-39
       objectReference: {fileID: 0}
+    - target: {fileID: 5689790497687009111, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
+      propertyPath: m_Name
+      value: Info
+      objectReference: {fileID: 0}
     - target: {fileID: 6051579063434868639, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 659797372610145418, guid: 22440f7a4ddf6d346b170c6d0c2b2e72, type: 3}
     - target: {fileID: 6083346244733239031, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.066
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6083346244733239031, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -178,11 +190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6319178753972362189, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.688579
+      value: -0.88
       objectReference: {fileID: 0}
     - target: {fileID: 6319178753972362189, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.74765646
+      value: 15.69
       objectReference: {fileID: 0}
     - target: {fileID: 6319178753972362189, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       propertyPath: m_LocalPosition.z
@@ -233,8 +245,11 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3415698099478990513, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6881470508142184899}
+      addedObject: {fileID: 7008746860105227663}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7075965848057849333, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
+      insertIndex: 9
+      addedObject: {fileID: 678017438138217890}
     - targetCorrespondingSourceObject: {fileID: 7075965848057849333, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9019673033002055023}
@@ -247,6 +262,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7075965848057849333, guid: 00c6097b109ec7a4e8332c87da488803, type: 3}
   m_PrefabInstance: {fileID: 8929532234922423589}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &678017438138217890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864194696830243024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd33271ef8aa375499e56e7d1d06c703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyData: {fileID: 11400000, guid: 9f4d6ce6bfcb044428316553b57dca6b, type: 2}
 --- !u!114 &9019673033002055023
 MonoBehaviour:
   m_ObjectHideFlags: 0
