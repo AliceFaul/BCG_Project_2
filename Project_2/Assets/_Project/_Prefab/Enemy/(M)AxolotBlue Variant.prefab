@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: (M)AxolotBlue Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2829978665998374562, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
+      propertyPath: _maxHealth
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 2888941898667033274, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_Sprite
       value: 
