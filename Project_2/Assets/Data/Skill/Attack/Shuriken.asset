@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Shuriken
   m_EditorClassIdentifier: 
   skillName: Shuriken
+  skillDescription: 
   normalSprite: {fileID: -6454969007074664543, guid: 75e73c21cedf39340a80c29883c618a2, type: 3}
   usedSprite: {fileID: 2483768934073473708, guid: 226371c285617ba41b30be6b188c6ef2, type: 3}
   cooldown: 5
   requiredLevel: 1
+  skillEffectPrefab: {fileID: 657467463731215748, guid: 4c1c02cfc7e03204e9f18d8f1b171d18, type: 3}
+  effectDuration: 10

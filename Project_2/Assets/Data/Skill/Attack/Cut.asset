@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: Cut
   m_EditorClassIdentifier: 
   skillName: Cut
+  skillDescription: 
   normalSprite: {fileID: 1509163340474212072, guid: a0533644a19ec8a45b4ae8a70d5390a2, type: 3}
   usedSprite: {fileID: -7635884486496366486, guid: fedbac79b4ad0364b87efbaa9830a316, type: 3}
   cooldown: 5
   requiredLevel: 1
+  skillEffectPrefab: {fileID: 2892357785419726330, guid: cc890efb194e45a4b96702d10f8d297c, type: 3}
+  effectDuration: 50

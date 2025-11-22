@@ -237,7 +237,6 @@ namespace _Project._Scripts.UI
             for(int i = 0; i < _slotCount; i++)
             {
                 Instantiate(_slotPrefab, _inventoryPanel.transform);
-                Debug.LogWarning($"Created {_slotCount} slots");
             }
 
             //Lúc này sẽ setup lại item trong InventorySaveData 

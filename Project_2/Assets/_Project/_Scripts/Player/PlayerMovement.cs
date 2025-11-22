@@ -256,7 +256,7 @@ namespace _Project._Scripts.Player
         //Hàm gọi trong Animation Event
         public void EndAttack()
         {
-            if (_inputBuffered) return;
+            //if (_inputBuffered) return;
 
             _anim.SetBool("isAttacking", false);
             _inputBuffered = false;

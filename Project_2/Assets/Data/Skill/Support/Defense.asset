@@ -18,3 +18,5 @@ MonoBehaviour:
   usedSprite: {fileID: -4875109684069104391, guid: ba6a64c5b43e07d46930acf6ecd80383, type: 3}
   cooldown: 5
   requiredLevel: 1
+  skillEffectPrefab: {fileID: 7818223009468804138, guid: 8cca30e16cf905840aa5f3226310a99b, type: 3}
+  effectDuration: 10

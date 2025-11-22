@@ -21,8 +21,8 @@ public class SkillTreeButton : MonoBehaviour
             UIManager.Instance.ShowSkillDescription(skillData);
 
          //Gán kỹ năng ra HUD
-        if (UIManager.Instance != null)
-            UIManager.Instance.AssignSkillToHud(skillData);
+        //if (UIManager.Instance != null)
+            //UIManager.Instance.AssignSkillToHud(skillData);
 
         Debug.Log($"Đã chọn kỹ năng: {skillData.skillName}");
     }
