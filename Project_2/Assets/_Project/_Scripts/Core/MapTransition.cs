@@ -25,7 +25,7 @@ namespace _Project._Scripts.Core
 
             if(collision.CompareTag("Player"))
             {
-                StartCoroutine(FadeTransition.Instance.FadeMapTransition(() =>
+                StartCoroutine(FadeTransition.Instance.FadeMapTransition(() => 
                 {
                     _cmCam.BoundingShape2D = _mapBoundary;
                     MovePlayerPosition(collision.gameObject);

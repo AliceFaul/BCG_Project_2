@@ -11,7 +11,7 @@ namespace _Project._Scripts.UI
         public static FadeTransition Instance { get; private set; }
 
         [SerializeField] private CanvasGroup _fadePanel;
-        [SerializeField] private float _fadeDuration = 1f;
+        [SerializeField] private float _fadeDuration = .5f;
 
         private void Awake()
         {
@@ -53,8 +53,8 @@ namespace _Project._Scripts.UI
             yield return FadeRoutine(1, null);
 
             duringFade?.Invoke();
-
             yield return new WaitForSeconds(.3f);
+
             yield return FadeRoutine(0, null);
             PauseController.SetPaused(false);
         }
@@ -69,7 +69,7 @@ namespace _Project._Scripts.UI
             Transform player = GameObject.FindWithTag("Player").transform;
 
             float time = 0f;
-            while((brain.IsBlending || Vector3.Distance(cam.position, player.position) > .5f) &&
+            while ((brain.IsBlending || Vector3.Distance(cam.position, player.position) > .5f) &&
                 time < 1.5f)
             {
                 time += Time.deltaTime;
