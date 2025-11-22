@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/PersistentGameplay.unity
     guid: 38b13eb62de3826449ab6c077c6d0ce3
   - enabled: 1
-    path: Assets/Scenes/Loading.unity
+    path: Assets/Scenes/Bootstrapper.unity
     guid: f35aaf87b3819c2439f69c28d80a9710
   - enabled: 1
     path: Assets/Scenes/EarthBiome.unity

@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a48a8b8e139ccb44dbed8442f365cbda, type: 3}
   m_Name: TestDungeon
   m_EditorClassIdentifier: 
-  _dungeonID: Test442b6501-a7c6-4337-bf62-724bb7cf5929
-  _dungeonName: Test
+  _dungeonID: Oxford Treasures994a65e0-052a-4b2a-b3cf-6a3bf0adce93
+  _dungeonName: Oxford Treasures
   _resetTime: 20
   _isCleared: 0
   _normalLevelRequirement: 1

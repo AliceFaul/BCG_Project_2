@@ -68,9 +68,9 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
             GameObject enemyObj = enemyPool.GetFromPool();
             enemyObj.transform.position = spawnPoint.position;
-            enemyObj.transform.rotation = spawnPoint.rotation;
             enemyObj.SetActive(true);
 
             totalSpawned++;
