@@ -19,6 +19,7 @@ namespace _Project._Scripts.UI
         [SerializeField] private Image _experienceImage;
         [SerializeField] private TMP_Text _experienceText;
         [SerializeField] private GameObject _addExpButton;
+        [SerializeField] private GameObject _saveButton;
 
         [Space(10)]
 
@@ -68,6 +69,7 @@ namespace _Project._Scripts.UI
             UpdateLevel();
 
             _addExpButton.GetComponent<Button>().onClick.AddListener(() => AddExperience(20));
+            _saveButton.GetComponent<Button>().onClick.AddListener(() => SaveController.Instance.SaveGame());
         }
 
         #region Level UI Controller

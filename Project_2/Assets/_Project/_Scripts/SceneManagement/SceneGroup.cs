@@ -8,6 +8,7 @@ namespace _Project._Scripts.SceneManagement
     public class SceneGroup
     {
         public string _GroupName = "New Scene Group";
+        public int _buildIndex;
         public List<SceneData> _Scenes;
 
         public string FindSceneNameByType(SceneType sceneType)

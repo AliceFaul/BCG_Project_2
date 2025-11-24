@@ -4,7 +4,6 @@ using UnityEngine.UI;
 using _Project._Scripts.Core;
 using System;
 using _Project._Scripts.UI;
-using Pathfinding;
 
 namespace _Project._Scripts.Enemies
 {

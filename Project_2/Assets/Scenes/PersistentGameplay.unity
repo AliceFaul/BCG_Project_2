@@ -3719,7 +3719,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 678762685}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: _Project._Scripts.Core.SaveController, Assembly-CSharp
         m_MethodName: SaveGame
         m_Mode: 1
@@ -4209,7 +4209,6 @@ GameObject:
   m_Component:
   - component: {fileID: 678762683}
   - component: {fileID: 678762684}
-  - component: {fileID: 678762685}
   - component: {fileID: 678762686}
   - component: {fileID: 678762687}
   - component: {fileID: 678762688}
@@ -4254,18 +4253,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3158d9c57e5539943a2429f3ce50eee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &678762685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678762682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3990efdbb0db40d46a58d46d6e9b25dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &678762686
@@ -7406,7 +7393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1283764281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9364,6 +9351,7 @@ MonoBehaviour:
   _experienceImage: {fileID: 1807127066}
   _experienceText: {fileID: 1397331946}
   _addExpButton: {fileID: 799666910}
+  _saveButton: {fileID: 559711216}
   _healthText: {fileID: 2047206080}
   _healthImage: {fileID: 1076855483}
   _energyText: {fileID: 1586750850}

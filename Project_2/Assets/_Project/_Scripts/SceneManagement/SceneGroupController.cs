@@ -13,7 +13,7 @@ namespace _Project._Scripts.SceneManagement
         public event Action<string> OnSceneUnLoaded = delegate { };
         public event Action OnSceneGroupLoaded = delegate { };
 
-        SceneGroup _ActiveSceneGroup;
+        public SceneGroup _ActiveSceneGroup;
 
         public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
         {

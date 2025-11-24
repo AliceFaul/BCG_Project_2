@@ -2644,7 +2644,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &762926783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2821,12 +2821,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectsToHide:
   - {fileID: 392512794}
-  _persistentScene:
-    _sceneAsset: {fileID: 102900000, guid: 38b13eb62de3826449ab6c077c6d0ce3, type: 3}
-    _sceneName: PersistentGameplay
-  _startBiomeScene:
-    _sceneAsset: {fileID: 102900000, guid: 8c9cfa26abfee488c85f1582747f6a02, type: 3}
-    _sceneName: EarthBiome
 --- !u!4 &836734481
 Transform:
   m_ObjectHideFlags: 0

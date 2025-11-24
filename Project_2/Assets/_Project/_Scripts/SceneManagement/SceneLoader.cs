@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,7 +12,7 @@ namespace _Project._Scripts.SceneManagement
         [SerializeField] private float _fillSpeed;
         [SerializeField] private Canvas _loadingCanvas;
         [SerializeField] private Camera _loadingCamera;
-        [SerializeField] private SceneGroup[] _sceneGroups;
+        [SerializeField] public SceneGroup[] _sceneGroups;
 
         float _targetProgress;
         bool _isLoading;
@@ -65,6 +66,20 @@ namespace _Project._Scripts.SceneManagement
             _isLoading = enable;
             _loadingCanvas.gameObject.SetActive(enable);
             _loadingCamera.gameObject.SetActive(enable);
+        }
+
+        public int GetSceneIndexByName(string name)
+        {
+            SceneGroup sceneGroup = _sceneGroups.FirstOrDefault(g => g._GroupName == name);
+
+            if(sceneGroup == null)
+            {
+                Debug.LogError($"SceneGroup {sceneGroup._GroupName} not found => fallback Earth SceneGroup");
+                var earth = _sceneGroups.FirstOrDefault(g => g._GroupName == "Earth");
+                return earth == null ? earth._buildIndex : 0;
+            }
+
+            return sceneGroup._buildIndex;
         }
     }
 
