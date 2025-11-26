@@ -23,7 +23,7 @@ namespace _Project._Scripts.Player
         [Tooltip("Thông số dùng cho việc di chuyển")]
         private Rigidbody2D _rb;
         private Animator _anim;
-        [SerializeField] public PlayerState _state;
+        [SerializeField] private PlayerState _state;
         PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
         PlayerStats _stats;
@@ -34,7 +34,6 @@ namespace _Project._Scripts.Player
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
         [SerializeField] private float _footstepSpeed = 1.5f;
-        [SerializeField] private float _footstepRunSpeed = 1.5f;
         [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
@@ -49,6 +48,23 @@ namespace _Project._Scripts.Player
         private bool _isKnockbacked = false;
         private bool _isPlayingFootstep = false;
         private bool _isRunning = false;
+
+        // dùng cho skill3 của boss
+        public void Freeze(float duration)
+        {
+            StartCoroutine(FreezeRoutine(duration));
+        }
+
+        private IEnumerator FreezeRoutine(float duration)
+        {
+            SetPlayerControl(false);
+            Debug.Log("Player bị đóng băng " + duration + " giây");
+
+            yield return new WaitForSeconds(duration);
+
+            SetPlayerControl(true);
+            Debug.Log("Player hết đóng băng");
+        }
 
         private void Awake()
         {
@@ -90,7 +106,6 @@ namespace _Project._Scripts.Player
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
         void FixedUpdate()
         {
-            if (_isKnockbacked) return;
             Movement();
         }
 
@@ -123,7 +138,7 @@ namespace _Project._Scripts.Player
             ChangeState(PlayerState.Special);
             PlayerLevelUpParticle();
             _rb.linearVelocity = Vector2.zero;
-            
+
             Debug.LogWarning("Player in special dance");
         }
 
@@ -210,7 +225,7 @@ namespace _Project._Scripts.Player
                     _staminaTimer -= Time.deltaTime;
                     if(_staminaTimer <= 0f)
                     {
-                        _playerStamina.ChangeStamina(-3f);
+                        _playerStamina.ChangeStamina(-1f);
                         _staminaTimer = _staminaDrainRate;
                     }
                 }
@@ -257,6 +272,8 @@ namespace _Project._Scripts.Player
         //Hàm gọi trong Animation Event
         public void EndAttack()
         {
+            //if (_inputBuffered) return;
+
             _anim.SetBool("isAttacking", false);
             _inputBuffered = false;
             ChangeState(PlayerState.Idle);
@@ -308,8 +325,7 @@ namespace _Project._Scripts.Player
                     break;
                 case PlayerState.Special:
                     if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || 
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") ||
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Running") ||
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
                         _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
                     {
                         _anim.SetBool("isSpecial", true);
@@ -333,8 +349,7 @@ namespace _Project._Scripts.Player
 
                     //Chạy animation Attack của Player
                     if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") ||
-                            _anim.GetCurrentAnimatorStateInfo(0).IsName("Running"))
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
                     {
                         _anim.SetBool("isAttacking", true);
                         _anim.SetFloat("MouseInputX", dir.x);
@@ -383,7 +398,7 @@ namespace _Project._Scripts.Player
         void StartFootstep()
         {
             _isPlayingFootstep = true;
-            InvokeRepeating(nameof(PlayFootstep), 0f, _isRunning ? _footstepRunSpeed : _footstepSpeed);
+            InvokeRepeating(nameof(PlayFootstep), 0f, _footstepSpeed);
         }
 
         void PlayFootstep()

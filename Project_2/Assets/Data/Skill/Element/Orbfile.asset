@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c2ae21d12bd4419485d79d9bfdf0c, type: 3}
+  m_Name: Orbfile
+  m_EditorClassIdentifier: 
+  skillName: OrbFile
+  skillDescription: 
+  normalSprite: {fileID: -748796600851884618, guid: f444c6e78b86fb7449bcf1d45606839b, type: 3}
+  usedSprite: {fileID: -6943874694722531127, guid: 4eb92a10f328cd444895b92610cdc31f, type: 3}
+  cooldown: 5
+  requiredLevel: 1
+  skillEffectPrefab: {fileID: 5037087134952130173, guid: 83994191108199847be07dd7c1c0645b, type: 3}
+  effectDuration: 10

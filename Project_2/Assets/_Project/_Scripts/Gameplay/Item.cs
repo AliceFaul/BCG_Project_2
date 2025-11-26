@@ -8,6 +8,8 @@ using UnityEngine.UI;
 /// </summary>
 public class Item : MonoBehaviour
 {
+    public ItemSO _itemSO; // Dùng để chứa dữ liệu của item dưới dạng ScriptableObject
+
     public int _itemID; //ID của item
     public string _name; //Tên của item 
 

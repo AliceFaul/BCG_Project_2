@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Item
+  - Boss
+  - Skill
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - Enemy
   - Tile
   - BloomCamera
-  - 
+  - trigger
   - 
   - 
   - 
@@ -55,6 +58,9 @@ TagManager:
   - name: Player
     uniqueID: 2034929901
     locked: 0
+  - name: Skill
+    uniqueID: 1396699707
+    locked: 0
   - name: WalkBehind
     uniqueID: 2968782901
     locked: 0
@@ -63,6 +69,18 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1579424507
+    locked: 0
+  - name: Boss
+    uniqueID: 4241727517
+    locked: 0
+  - name: Bullet
+    uniqueID: 3409513065
+    locked: 0
+  - name: HPRegenBar
+    uniqueID: 1486302453
+    locked: 0
+  - name: UIHP
+    uniqueID: 925884697
     locked: 0
   m_RenderingLayers:
   - Default

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c2ae21d12bd4419485d79d9bfdf0c, type: 3}
+  m_Name: Defense
+  m_EditorClassIdentifier: 
+  skillName: Defense
+  skillDescription: 
+  normalSprite: {fileID: -205144704122338166, guid: e85114ce437341e4382d1253cb2b2d0c, type: 3}
+  usedSprite: {fileID: -4875109684069104391, guid: ba6a64c5b43e07d46930acf6ecd80383, type: 3}
+  cooldown: 5
+  requiredLevel: 1
+  skillEffectPrefab: {fileID: 7818223009468804138, guid: 8cca30e16cf905840aa5f3226310a99b, type: 3}
+  effectDuration: 10
