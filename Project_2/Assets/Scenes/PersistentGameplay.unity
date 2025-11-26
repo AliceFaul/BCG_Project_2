@@ -4211,7 +4211,6 @@ GameObject:
   - component: {fileID: 678762684}
   - component: {fileID: 678762686}
   - component: {fileID: 678762687}
-  - component: {fileID: 678762688}
   - component: {fileID: 678762689}
   - component: {fileID: 678762690}
   m_Layer: 0
@@ -4285,18 +4284,6 @@ MonoBehaviour:
   _hotbarPanel: {fileID: 389216215}
   _slotPrefab: {fileID: 5389564673509921745, guid: 0da5d01d1a9ac2e45b30a4d4d35e52ec, type: 3}
   _slotCount: 10
---- !u!114 &678762688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678762682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72fcec54da25071408eb1974102b671e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &678762689
 MonoBehaviour:
   m_ObjectHideFlags: 0

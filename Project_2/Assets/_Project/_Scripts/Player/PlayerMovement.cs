@@ -23,7 +23,7 @@ namespace _Project._Scripts.Player
         [Tooltip("Thông số dùng cho việc di chuyển")]
         private Rigidbody2D _rb;
         private Animator _anim;
-        [SerializeField] private PlayerState _state;
+        [SerializeField] public PlayerState _state;
         PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
         PlayerStats _stats;
@@ -34,6 +34,7 @@ namespace _Project._Scripts.Player
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
         [SerializeField] private float _footstepSpeed = 1.5f;
+        [SerializeField] private float _footstepRunSpeed = 1.5f;
         [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
@@ -209,7 +210,7 @@ namespace _Project._Scripts.Player
                     _staminaTimer -= Time.deltaTime;
                     if(_staminaTimer <= 0f)
                     {
-                        _playerStamina.ChangeStamina(-1f);
+                        _playerStamina.ChangeStamina(-3f);
                         _staminaTimer = _staminaDrainRate;
                     }
                 }
@@ -382,7 +383,7 @@ namespace _Project._Scripts.Player
         void StartFootstep()
         {
             _isPlayingFootstep = true;
-            InvokeRepeating(nameof(PlayFootstep), 0f, _footstepSpeed);
+            InvokeRepeating(nameof(PlayFootstep), 0f, _isRunning ? _footstepRunSpeed : _footstepSpeed);
         }
 
         void PlayFootstep()

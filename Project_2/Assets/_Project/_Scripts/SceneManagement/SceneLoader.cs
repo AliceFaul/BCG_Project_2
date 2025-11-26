@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using _Project._Scripts.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -64,6 +65,7 @@ namespace _Project._Scripts.SceneManagement
         void EnableLoadingScreen(bool enable = true)
         {
             _isLoading = enable;
+            PauseController.SetPaused(enable);
             _loadingCanvas.gameObject.SetActive(enable);
             _loadingCamera.gameObject.SetActive(enable);
         }

@@ -9,7 +9,6 @@ namespace _Project._Scripts.Core
     [RequireComponent(typeof(AudioSource), typeof(SoundEffectLibrary))]
     public class SoundEffectManager : MonoBehaviour
     {
-        //Singleton Sound Effect
         public static SoundEffectManager Instance { get; private set; }
 
         //Thiết lập các component cần thiết
@@ -23,19 +22,14 @@ namespace _Project._Scripts.Core
 
         private void Awake()
         {
-            //Thiết lập Singleton
-            if (Instance == null)
-            {
-                Instance = this;
-                //Gán 2 component AudioSource trong Unity để sử dụng 2 Source khác nhau
-                AudioSource[] audioSources = GetComponents<AudioSource>();
-                _sfSource = audioSources[0];
-                _randomPitchAudioSource = audioSources[1];
-
-                _dictionary = GetComponent<SoundEffectLibrary>();
-            }
+            if(Instance == null) Instance = this;
             else Destroy(gameObject);
-            //không cần DontDestroyOnLoad vì GameManager đã có DontDestroyOnLoad
+
+            AudioSource[] audioSources = GetComponents<AudioSource>();
+            _sfSource = audioSources[0];
+            _randomPitchAudioSource = audioSources[1];
+
+            _dictionary = GetComponent<SoundEffectLibrary>();
 
             //Tải âm thanh đã lưu
             LoadSfxVolume();
