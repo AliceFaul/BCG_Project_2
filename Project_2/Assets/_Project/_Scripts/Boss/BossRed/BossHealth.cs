@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
+using System.Collections;
 
 namespace _Project._Scripts.Enemies.Bosses
 {
@@ -27,6 +28,9 @@ namespace _Project._Scripts.Enemies.Bosses
 
         public BossPillar pillarA;
         public BossPillar pillarB;
+
+        [Header("Respawn settings")]
+        public float respawnTime = 2f; // thời gian hồi sinh
 
         BossController boss;
 
@@ -73,6 +77,13 @@ namespace _Project._Scripts.Enemies.Bosses
                 healthFill.transform.parent.gameObject.SetActive(false);
         }
 
+        public void UpdateHealthBar()
+        {
+            if (healthFill == null) return;
+
+            healthFill.fillAmount = currentHealth / maxHealth;
+        }
+
         // ---------------------------
         // CHỊU SÁT THƯƠNG (Player gọi)
         // ---------------------------
@@ -90,33 +101,52 @@ namespace _Project._Scripts.Enemies.Bosses
             if (anim != null)
                 boss.ChangeState(BossRedState.Hit);
 
-            if (healthFill != null)
-                healthFill.fillAmount = currentHealth / maxHealth;
+            UpdateHealthBar();
 
             Debug.Log("Boss nhận damage: " + realDamage);
 
             if (currentHealth <= 0)
             {
-                Die();
+                StartCoroutine(Die());
             }
         }
 
         // ---------------------------
         // BOSS CHẾT
         // ---------------------------
-        private void Die()
+        private IEnumerator Die()
         {
             isDead = true;
-
             Debug.Log("BOSS DIE");
 
-            if (anim != null)
-                anim.SetTrigger("Die");
+            HideHealth();
 
-            OnBossDead?.Invoke();
+            yield return new WaitForSeconds(0.1f);
 
-            Destroy(gameObject);
-
+            OnBossDead?.Invoke();   // báo cho controller
+            gameObject.SetActive(false); // tắt toàn bộ boss
         }
+
+        public void Respawn()
+        {
+            isDead = false;
+            currentHealth = maxHealth;
+            UpdateHealthBar();
+
+            // Reset boss
+            boss.ResetBoss();
+
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+
+            Debug.Log("BOSS HỒI SINH");
+        }
+        public void FullHeal()
+        {
+            isDead = false;
+            currentHealth = maxHealth;
+            UpdateHealthBar();
+            GetComponent<SpriteRenderer>().enabled = true;
+        }
+
     }
 }
