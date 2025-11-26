@@ -25,6 +25,14 @@ namespace _Project._Scripts.UI
         [SerializeField] private Button _defenseButton;
         [SerializeField] private Button _skillDamageButton;
 
+        [Header("Text của các thông số trong thông tin của Player")]
+        [SerializeField] private TMP_Text _healthValueText;
+        [SerializeField] private TMP_Text _energyValueText;
+        [SerializeField] private TMP_Text _staminaValueText;
+        [SerializeField] private TMP_Text _defenseValueText;
+        [SerializeField] private TMP_Text _attackDamageValueText;
+        [SerializeField] private TMP_Text _skillDamageValueText;
+
         PlayerStats _stats;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -41,9 +49,11 @@ namespace _Project._Scripts.UI
 
             _stats.OnPointChanged += UpdatePointText;
             _stats.OnStatChanged += UpdateStatsUI;
+            _stats.OnStatChanged += UpdateStatsInfo;
 
             UpdateStatsUI();
             UpdatePointText();
+            UpdateStatsInfo();
         }
 
         void AddPoint(string name)
@@ -66,6 +76,16 @@ namespace _Project._Scripts.UI
         void UpdatePointText()
         {
             _pointsText.text = $"Stat Points: {_stats.GetAvailablePoint}";
+        }
+
+        void UpdateStatsInfo()
+        {
+            _healthValueText.text = $"Health: \t {_stats.Health}";
+            _energyValueText.text = $"Energy: \t {_stats.Energy}";
+            _staminaValueText.text = $"Stamina: \t {_stats.Stamina}";
+            _defenseValueText.text = $"Defense: \t {_stats.Defense}";
+            _attackDamageValueText.text = $"Damage: \t {_stats.Attack}";
+            _skillDamageValueText.text = $"Skill Damage: \t {_stats.SkillDamage}";
         }
     }
 }

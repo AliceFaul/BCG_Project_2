@@ -16,10 +16,11 @@ namespace _Project._Scripts.UI
         [Header("Giao diện HUD của player")]
         [SerializeField] private int _maxLevel;
         [SerializeField] private TMP_Text _levelText;
+        [SerializeField] private TMP_Text _levelInfoText;
         [SerializeField] private Image _experienceImage;
         [SerializeField] private TMP_Text _experienceText;
         [SerializeField] private GameObject _addExpButton;
-        [SerializeField] private GameObject _saveButton;
+        //[SerializeField] private GameObject _saveButton;
 
         [Space(10)]
 
@@ -69,7 +70,7 @@ namespace _Project._Scripts.UI
             UpdateLevel();
 
             _addExpButton.GetComponent<Button>().onClick.AddListener(() => AddExperience(20));
-            _saveButton.GetComponent<Button>().onClick.AddListener(() => SaveController.Instance.SaveGame());
+            //_saveButton.GetComponent<Button>().onClick.AddListener(() => SaveController.Instance.SaveGame());
         }
 
         #region Level UI Controller
@@ -118,6 +119,7 @@ namespace _Project._Scripts.UI
             if(start < 0) start = 0;
 
             _levelText.text = _currentLevel.ToString();
+            _levelInfoText.text = $"Level: \t {_currentLevel}";
             _experienceText.text = $"{start} / {end} exp";
             _experienceImage.fillAmount = (float)start / (float)end;
         }

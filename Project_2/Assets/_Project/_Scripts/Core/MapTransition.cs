@@ -46,6 +46,8 @@ namespace _Project._Scripts.Core
                 {
                     if (_boundaryNextSceneName == null || _nextSceneGroupName == null) return;
 
+                    MovePlayerPosition(collision.gameObject);
+
                     _onSceneLoadedDelegate = () => SetBoundaryInNextScene(_boundaryNextSceneName);
 
                     _sceneLoader._sceneController.OnSceneGroupLoaded += _onSceneLoadedDelegate;

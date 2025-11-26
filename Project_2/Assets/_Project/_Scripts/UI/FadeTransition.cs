@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using _Project._Scripts.Core;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -47,6 +48,20 @@ namespace _Project._Scripts.UI
             onComplete?.Invoke();
         }
 
+        //async Task Fade(float targetTransparency)
+        //{
+        //    float start = _fadePanel.alpha, t = 0f;
+
+        //    while(t < _fadeDuration)
+        //    {
+        //        t += Time.deltaTime;
+        //        _fadePanel.alpha = Mathf.Lerp(start, targetTransparency, t / _fadeDuration);
+        //        await Task.Yield();
+        //    }
+
+        //    _fadePanel.alpha = targetTransparency;
+        //}
+
         public IEnumerator FadeMapTransition(Action duringFade = null)
         {
             PauseController.SetPaused(true);
@@ -58,6 +73,16 @@ namespace _Project._Scripts.UI
             yield return FadeRoutine(0, null);
             PauseController.SetPaused(false);
         }
+
+        //public async Task FadeOut()
+        //{
+        //    await Fade(1);
+        //}
+
+        //public async Task FadeIn()
+        //{
+        //    await Fade(0);
+        //}
 
         public IEnumerator FadeOutIn(Action duringFade = null)
         {

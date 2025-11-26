@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Bootstrapper.unity
+    guid: f35aaf87b3819c2439f69c28d80a9710
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 02bf39aaeadfd2344b9c41b25eac0868
   - enabled: 1
     path: Assets/Scenes/PersistentGameplay.unity
     guid: 38b13eb62de3826449ab6c077c6d0ce3
-  - enabled: 1
-    path: Assets/Scenes/Bootstrapper.unity
-    guid: f35aaf87b3819c2439f69c28d80a9710
   - enabled: 1
     path: Assets/Scenes/EarthBiome.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02

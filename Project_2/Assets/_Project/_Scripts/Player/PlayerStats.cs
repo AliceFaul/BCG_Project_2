@@ -39,8 +39,8 @@ namespace _Project._Scripts.Player
         public int Energy => (int)_Energy.Value;
         public int Stamina => (int)_Stamina.Value;
         public int Defense => (int)_Defense.Value;
-        public float Attack => (float)Math.Round(_Attack.Value, 4);
-        public float SkillDamage => (float)Math.Round(_SkillDamage.Value);
+        public float Attack => Mathf.RoundToInt(_Attack.Value);
+        public float SkillDamage => Mathf.RoundToInt(_SkillDamage.Value);
 
         #endregion
 

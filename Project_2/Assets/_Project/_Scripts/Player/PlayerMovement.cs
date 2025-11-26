@@ -23,7 +23,7 @@ namespace _Project._Scripts.Player
         [Tooltip("Thông số dùng cho việc di chuyển")]
         private Rigidbody2D _rb;
         private Animator _anim;
-        [SerializeField] private PlayerState _state;
+        [SerializeField] public PlayerState _state;
         PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
         PlayerStats _stats;
@@ -326,7 +326,8 @@ namespace _Project._Scripts.Player
                 case PlayerState.Special:
                     if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || 
                         _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
-                        _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+                        _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Running"))
                     {
                         _anim.SetBool("isSpecial", true);
                     }
@@ -349,7 +350,8 @@ namespace _Project._Scripts.Player
 
                     //Chạy animation Attack của Player
                     if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Running"))
                     {
                         _anim.SetBool("isAttacking", true);
                         _anim.SetFloat("MouseInputX", dir.x);

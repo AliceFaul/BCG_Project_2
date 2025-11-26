@@ -10,8 +10,9 @@ namespace _Project._Scripts.Player
         public Vector2 _moveInput { get; private set; }
         public bool _attackInput { get; private set; }
         public bool _menuInput { get; private set; }
+        public bool _pauseInput { get; private set; }
+        public bool _infoInput { get; private set; }
         public bool _interactInput { get; private set; }
-
         public bool _runningInput { get; private set; }
 
         private void Awake()
@@ -20,7 +21,6 @@ namespace _Project._Scripts.Player
             if (Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else
             {
@@ -39,7 +39,9 @@ namespace _Project._Scripts.Player
         {
             _moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             _attackInput = Input.GetMouseButtonDown(0);
-            _menuInput = Input.GetKeyDown(KeyCode.F);
+            _menuInput = Input.GetKeyDown(KeyCode.B);
+            _infoInput = Input.GetKeyUp(KeyCode.F);
+            _pauseInput = Input.GetKeyDown(KeyCode.Escape);
             _interactInput = Input.GetKeyDown(KeyCode.E);
             _runningInput = Input.GetKey(KeyCode.LeftShift);
         }

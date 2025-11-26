@@ -12,6 +12,8 @@ namespace _Project._Scripts.SceneManagement
         [SerializeField] private Image _loadingImage;
         [SerializeField] private float _fillSpeed;
         [SerializeField] private Canvas _loadingCanvas;
+        [SerializeField] private CanvasGroup _loadingCanvasGroup;
+        [SerializeField] private float _fadeDuration;
         [SerializeField] private Camera _loadingCamera;
         [SerializeField] public SceneGroup[] _sceneGroups;
 
@@ -58,7 +60,11 @@ namespace _Project._Scripts.SceneManagement
             progress._Progressed += target => _targetProgress = Mathf.Max(target, _targetProgress);
 
             EnableLoadingScreen();
+            await Fade(1);
+
             await _sceneController.LoadScenes(_sceneGroups[index], progress);
+
+            await Fade(0);
             EnableLoadingScreen(false);
         }
 
@@ -82,6 +88,20 @@ namespace _Project._Scripts.SceneManagement
             }
 
             return sceneGroup._buildIndex;
+        }
+
+        async Task Fade(float targetTransparency)
+        {
+            float start = _loadingCanvasGroup.alpha, t = 0f;
+
+            while (t < _fadeDuration)
+            {
+                t += Time.deltaTime;
+                _loadingCanvasGroup.alpha = Mathf.Lerp(start, targetTransparency, t / _fadeDuration);
+                await Task.Yield();
+            }
+
+            _loadingCanvasGroup.alpha = targetTransparency;
         }
     }
 

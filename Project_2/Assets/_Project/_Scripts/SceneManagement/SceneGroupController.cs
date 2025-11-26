@@ -45,7 +45,7 @@ namespace _Project._Scripts.SceneManagement
                 OnSceneLoaded.Invoke(sceneData._Name);
             }
 
-            while(!operationGroup.IsDone)
+            while (!operationGroup.IsDone)
             {
                 progress?.Report(operationGroup.Progress);
                 await Task.Delay(100);
