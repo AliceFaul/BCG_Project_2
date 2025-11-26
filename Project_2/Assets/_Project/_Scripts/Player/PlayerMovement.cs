@@ -49,6 +49,23 @@ namespace _Project._Scripts.Player
         private bool _isPlayingFootstep = false;
         private bool _isRunning = false;
 
+        // dùng cho skill3 của boss
+        public void Freeze(float duration)
+        {
+            StartCoroutine(FreezeRoutine(duration));
+        }
+
+        private IEnumerator FreezeRoutine(float duration)
+        {
+            SetPlayerControl(false);
+            Debug.Log("Player bị đóng băng " + duration + " giây");
+
+            yield return new WaitForSeconds(duration);
+
+            SetPlayerControl(true);
+            Debug.Log("Player hết đóng băng");
+        }
+
         private void Awake()
         {
             //Tham chiếu các component của player 
@@ -89,7 +106,6 @@ namespace _Project._Scripts.Player
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
         void FixedUpdate()
         {
-            if (_isKnockbacked) return;
             Movement();
         }
 

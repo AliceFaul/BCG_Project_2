@@ -1,83 +1,88 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
-public class FrogHealth : MonoBehaviour, IDamageable, IKnockbacked
+namespace _Project._Scripts.Enemies.Bosses
 {
-    public float maxHealth = 200f;
-    public float currentHealth;
-
-    public GameObject healthUI;
-    public UnityEngine.UI.Image healthBarFill;
-
-    private Rigidbody2D rb;
-    private bool isStunned = false;
-
-    private void Start()
+    public class FrogHealth : MonoBehaviour, IDamageable
     {
-        rb = GetComponent<Rigidbody2D>();
+        public float maxHealth = 200f;
+        public float currentHealth;
 
-        currentHealth = maxHealth;
-        HideHealth();
-        UpdateUI();
-    }
+        public GameObject healthUI;
+        public Image healthBarFill;
 
-    public void TakeDamage(float damage)
-    {
-        float realDamage = -damage;
-        currentHealth -= realDamage;
+        //private bool isStunned = false;
 
-        if (currentHealth < 0)
-            currentHealth = 0;
+        private bool canTakeDamage = false; // <--- cờ kiểm soát nhận sát thương
 
-        UpdateUI();
-
-        // hiệu ứng bị đánh
-        GetComponent<Animator>().SetTrigger("Hit");
-
-        if (currentHealth <= 0)
+        private void Start()
         {
-            Die();
+            currentHealth = maxHealth;
+
+            HideHealth();
+            UpdateUI();
+        }
+
+        public void TakeDamage(float damage)
+        {
+            if (!canTakeDamage)
+            {
+                Debug.Log("Boss không nhận sát thương lúc nhảy hoặc idle");
+                return;
+            }
+            else
+            {
+                float realDamage = -damage;
+                currentHealth -= realDamage;
+
+                if (currentHealth < 0)
+                    currentHealth = 0;
+
+                UpdateUI();
+
+                // hiệu ứng bị đánh
+                GetComponent<FrogController>().ChangeState(BossState.Hit);
+
+                if (currentHealth <= 0)
+                {
+                    Die();
+                }
+            }
+        }
+
+        // Thêm phương thức để bật/tắt nhận sát thương từ bên ngoài (ví dụ từ FrogController)
+        public void SetCanTakeDamage(bool value)
+        {
+            canTakeDamage = value;
+        }
+
+        //private void RemoveStun()
+        //{
+        //    isStunned = false;
+        //    rb.linearVelocity = Vector2.zero;
+        //}
+
+        private void UpdateUI()
+        {
+            if (healthBarFill)
+                healthBarFill.fillAmount = currentHealth / maxHealth;
+        }
+
+        public void HideHealth()
+        {
+            if (healthUI)
+                healthUI.SetActive(false);
+        }
+
+        private void Die()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void ShowHealth()
+        {
+            if (healthUI)
+                healthUI.SetActive(true);
         }
     }
-
-    public void Knockback(Transform attacker, float force, float stunTime)
-    {
-        if (rb == null) return;
-
-        if (isStunned) return;
-
-        isStunned = true;
-
-        Vector2 dir = (transform.position - attacker.position).normalized;
-        rb.linearVelocity = dir * force;
-
-        // tắt stun sau stunTime
-        Invoke(nameof(RemoveStun), stunTime);
-    }
-
-    private void RemoveStun()
-    {
-        isStunned = false;
-        rb.linearVelocity = Vector2.zero;
-    }
-
-    private void UpdateUI()
-    {
-        if (healthBarFill)
-            healthBarFill.fillAmount = currentHealth / maxHealth;
-    }
-
-    public void HideHealth()
-    {
-        if (healthUI) healthUI.SetActive(false);
-    }
-
-    private void Die()
-    {
-        Destroy(gameObject);
-    }
-    public void ShowHealth()
-    {
-        if (healthUI) healthUI.SetActive(true);
-    }
-
 }

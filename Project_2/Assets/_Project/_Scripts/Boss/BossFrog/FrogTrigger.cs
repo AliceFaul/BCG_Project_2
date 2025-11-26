@@ -1,24 +1,42 @@
 ﻿using UnityEngine;
 
-public class FrogTrigger : MonoBehaviour
+namespace _Project._Scripts.Enemies.Bosses
 {
-    public FrogController boss;
-    public FrogHealth bossHealth;   
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class FrogTrigger : MonoBehaviour
     {
-        if (collision.CompareTag("Player"))
-        {
-            boss.OnPlayerEnter();
-            bossHealth.ShowHealth();   // bật UI máu
-        }
-    }
+        FrogController boss;
+        FrogHealth bossHealth;
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
+        private void Start()
         {
-            boss.OnPlayerExit();
-            bossHealth.HideHealth();   // tắt UI máu
+            bossHealth = FindAnyObjectByType<FrogHealth>();
+            boss = FindAnyObjectByType<FrogController>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                boss.OnPlayerEnter();
+                bossHealth.ShowHealth();
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            // Nếu player rời vùng → boss về chỗ cũ
+            if (collision.CompareTag("Player"))
+            {
+                boss.OnPlayerExit();
+                bossHealth.HideHealth();
+            }
+
+            // Nếu chính con boss rời vùng → boss về chỗ cũ
+            if (collision.CompareTag("Boss"))
+            {
+                Debug.Log("Boss tự ra khỏi vùng → quay về startPos");
+                boss.ForceReturnToStart();
+            }
         }
     }
 }
