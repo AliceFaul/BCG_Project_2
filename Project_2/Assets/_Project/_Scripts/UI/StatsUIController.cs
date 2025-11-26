@@ -60,7 +60,7 @@ namespace _Project._Scripts.UI
         {
             _stats.IncreaseStats(name);
             UpdateStatsUI();
-            SoundEffectManager.Play("PowerUp");
+            SoundEffectManager.Instance.Play("PowerUp");
         }
 
         void UpdateStatsUI()

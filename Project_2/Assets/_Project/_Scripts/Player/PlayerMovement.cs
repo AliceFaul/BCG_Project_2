@@ -189,7 +189,7 @@ namespace _Project._Scripts.Player
                 _playerStamina._currentStamina >= _attackStamina)
             {
                 ChangeState(PlayerState.Attack);
-                SoundEffectManager.Play("Whoosh");
+                SoundEffectManager.Instance.Play("Whoosh");
             }
 
             //Input tương tác
@@ -405,7 +405,7 @@ namespace _Project._Scripts.Player
 
         void PlayFootstep()
         {
-            SoundEffectManager.Play("Footstep", true);
+            SoundEffectManager.Instance.Play("Footstep", true);
         }
 
         #endregion

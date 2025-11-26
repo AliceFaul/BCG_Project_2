@@ -92,7 +92,7 @@ namespace _Project._Scripts.UI
             while(_totalExperience >= _nextLevelsExperience)
             {
                 _currentLevel++;
-                SoundEffectManager.Play("LevelUp");
+                SoundEffectManager.Instance.Play("LevelUp");
                 UpdateLevel();
                 isLevelUp = true;
             }

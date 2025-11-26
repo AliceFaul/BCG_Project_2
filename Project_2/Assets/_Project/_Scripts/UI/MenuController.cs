@@ -44,7 +44,7 @@ namespace _Project._Scripts.UI
                     return;
                 }
 
-                SoundEffectManager.Play("Menu");
+                SoundEffectManager.Instance.Play("Menu");
                 _menuCanvas.SetActive(!_menuCanvas.activeSelf);
                 PauseController.SetPaused(_menuCanvas.activeSelf);
                 HUDController.Instance.HidePlayerHUD(_menuCanvas.activeSelf);
@@ -62,7 +62,7 @@ namespace _Project._Scripts.UI
                 if(!_pauseMenu.activeSelf && PauseController.IsGamePaused)
                     return;
 
-                SoundEffectManager.Play("Menu");
+                SoundEffectManager.Instance.Play("Menu");
                 _pauseMenu.SetActive(!_pauseMenu.activeSelf);
                 Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
                 HUDController.Instance.HidePlayerHUD(_pauseMenu.activeSelf);
@@ -74,7 +74,7 @@ namespace _Project._Scripts.UI
             if (!_pauseMenu.activeSelf && PauseController.IsGamePaused)
                 return;
 
-            SoundEffectManager.Play("Menu");
+            SoundEffectManager.Instance.Play("Menu");
             _pauseMenu.SetActive(!_pauseMenu.activeSelf);
             Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
             HUDController.Instance.HidePlayerHUD(_pauseMenu.activeSelf);
@@ -105,7 +105,7 @@ namespace _Project._Scripts.UI
                     return;
                 }
 
-                SoundEffectManager.Play("Menu");
+                SoundEffectManager.Instance.Play("Menu");
                 _infoMenu.SetActive(!_infoMenu.activeSelf);
                 PauseController.SetPaused(_infoMenu.activeSelf);
                 HUDController.Instance.HidePlayerHUD(_infoMenu.activeSelf);

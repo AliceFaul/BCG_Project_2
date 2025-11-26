@@ -59,6 +59,7 @@ namespace _Project._Scripts.UI
             _deathPanel.gameObject.SetActive(true);
             StartCoroutine(DeathCoroutineFlow());
             HUDController.Instance.HidePlayerHUD(true);
+            BGMController.Instance.PauseBGM();
         }
 
         void HideDeathScreen()
@@ -71,6 +72,7 @@ namespace _Project._Scripts.UI
 
             _deathPanel.gameObject.SetActive(false);
             HUDController.Instance.HidePlayerHUD(false);
+            BGMController.Instance.PlayBGM(false);
         }
 
         public void RevivePlayer()
