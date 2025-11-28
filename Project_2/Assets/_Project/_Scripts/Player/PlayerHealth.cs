@@ -32,7 +32,7 @@ namespace _Project._Scripts.Player
         [SerializeField] private float _flashTime = 0.25f;
         [SerializeField] private AnimationCurve _flashSpeedCurve;
         [SerializeField] private ParticleSystem _damageParticle;
-
+        private bool isInvincible = false; // cờ miễn sát thương
         #region Heath Unity Life Cycle
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -59,24 +59,41 @@ namespace _Project._Scripts.Player
         //Hàm trừ máu, nếu damage là âm sẽ mất máu còn dương sẽ hồi máu
         public void TakeDamage(float damage)
         {
+            if (isInvincible)
+            {
+                Debug.Log("Player đang miễn sát thương!");
+                return;
+            }
+
             float damageTaken = damage * (damage / (damage + _stats.Defense));
-            
             _currentHealth -= damageTaken;
-            DamageParticle();
-            SoundEffectManager.Play("Hit");
+
             HUDController.Instance.UpdateHealthUI(Mathf.Round(_currentHealth), _maxHealth);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
                 OnDead?.Invoke();
-                gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
-                StartCoroutine(Dissolve(gameObject, _fade));
+                // hiệu ứng chết...
             }
 
             StartCoroutine(DamageFlasher());
         }
 
+        public void SetInvincible(float duration)
+        {
+            if (!isInvincible)
+                StartCoroutine(InvincibleRoutine(duration));
+        }
+
+        private IEnumerator InvincibleRoutine(float duration)
+        {
+            isInvincible = true;
+            Debug.Log("Player miễn sát thương!");
+            yield return new WaitForSeconds(duration);
+            isInvincible = false;
+            Debug.Log("Miễn sát thương kết thúc!");
+        }
         void DamageParticle()
         {
             if (_damageParticle == null) return;
