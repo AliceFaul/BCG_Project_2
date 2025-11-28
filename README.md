@@ -4,7 +4,7 @@ Project 2 là một dự án game 2D Top-Down RPG của team BCG.
 
 ## **TÊN GAME**
 
-* (tạm chưa biết)
+* Ninja Froggo
 
 ## **THỂ LOẠI**
 
