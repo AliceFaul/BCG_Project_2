@@ -13,12 +13,17 @@ namespace _Project._Scripts.Core
         public static DialogueController Instance { get; private set; } //Singleton của DialogueController
 
         [Header("Những thành phần trong Dialogue UI")]
-        [SerializeField] public GameObject _dialoguePanel; //Là UI Dialogue 
+        [SerializeField] public GameObject _dialoguePanel; //Là UI Dialogue
         [SerializeField] public TMP_Text _dialogueText, _nameText; //Hội thoại và tên NPC trong UI và được chỉnh sửa nội dung bằng NPCDialogue
-        [SerializeField] public Image _npcPortrait; //Là ảnh chân dung của NPC và cũng được chỉnh sửa theo NPCDialogue
+        [SerializeField] public Image _npcPortrait, _playerPortrait; //Là ảnh chân dung của NPC và cũng được chỉnh sửa theo NPCDialogue
 
         [SerializeField] private Transform _choiceContainer; //Là panel chứa choice button
         [SerializeField] private GameObject _pfChoiceButton; //Prefab choice button
+
+        [SerializeField] private GameObject _hotbar;
+
+        Color _bright = Color.white;
+        Color _dim = new Color(1, 1, 1, .4f);
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
@@ -29,6 +34,8 @@ namespace _Project._Scripts.Core
             Destroy(gameObject);
         }
 
+        public void HideHotbar(bool enable) => _hotbar.SetActive(!enable);
+
         #region Setting Info UI Dialogue
 
         /// <summary>
@@ -37,6 +44,11 @@ namespace _Project._Scripts.Core
         public void ShowDialogueUI(bool show)
         {
             _dialoguePanel.SetActive(show);
+        }
+
+        public void SetUpPlayerInfo(string name)
+        {
+            _nameText.text = name;
         }
 
         //Hàm phụ trách việc thiết lập các thông tin như tên và ảnh chân dung
@@ -51,6 +63,28 @@ namespace _Project._Scripts.Core
         {
             _dialogueText.text = text;
         }
+
+        #region Speaker Mode Setting
+
+        /// <summary>
+        /// NPC nói chuyện - Tắt dialogueBox của Player, Portrait Player tối lại
+        /// </summary>
+        public void ShowNPCSpeaking()
+        {
+            _npcPortrait.color = _bright;
+            _playerPortrait.color = _dim;
+        }
+
+        /// <summary>
+        /// Player nói chuyện - Tắt dialogueBox của NPC, Portrait NPC tối lại
+        /// </summary>
+        public void ShowPlayerSpeaking()
+        {
+            _npcPortrait.color = _dim;
+            _playerPortrait.color = _bright;
+        }
+
+        #endregion
 
         #endregion
 

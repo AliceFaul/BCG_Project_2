@@ -1,5 +1,6 @@
 ﻿using _Project._Scripts.Player;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +33,7 @@ public class SkillIcon : MonoBehaviour
     {
         currentSkill = null;
         skillImage.sprite = null;
-        skillImage.color = new Color(1, 1, 1, 0);
+        skillImage.color = Color.black;
 
         isCoolingDown = false;
 

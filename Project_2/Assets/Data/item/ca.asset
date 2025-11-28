@@ -17,3 +17,5 @@ MonoBehaviour:
   <Description>k__BackingField: 'mot con ca '
   <ItemImage>k__BackingField: {fileID: -1915776564401465818, guid: a1b0dd98a4f121147b9d99191020c20c, type: 3}
   <Location>k__BackingField: 'ca de an '
+  _price: 15
+  _itemPrefab: {fileID: 605265575408515205, guid: 1c3bf72467120b94192793141af6c323, type: 3}

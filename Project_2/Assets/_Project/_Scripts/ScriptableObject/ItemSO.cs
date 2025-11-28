@@ -1,5 +1,4 @@
-using _Project._Scripts.Gameplay;
-using System.Globalization;
+using _Project._Scripts.Player;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -17,8 +16,11 @@ public class ItemSO : ScriptableObject
     [field: SerializeField]
     public string Location { get; set; }
 
-    public virtual void Use(StatModifier stats = null)
-    {
-        Debug.Log("Use Items");
-    }
-}
+    [Header("In Shop Setting")]
+    public int _price;
+    public GameObject _itemPrefab;
+} 
+
+public enum ItemUseType { Consumable, PermanentStat, TemporaryBuff, KeyItem, Equipment }
+
+public enum StatType { Health, }

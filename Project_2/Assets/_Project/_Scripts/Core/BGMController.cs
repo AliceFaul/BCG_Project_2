@@ -1,15 +1,16 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace _Project._Scripts.Core
 {
     [RequireComponent(typeof(AudioSource))]
-    public class BGMController : PersistentSingleton<BGMController>
+    public class BGMController : MonoBehaviour
     {
+        public static BGMController Instance { get; private set; }
+
         AudioSource _source;
-        Slider _bgmSlider;
+        [SerializeField] Slider _bgmSlider;
 
         [SerializeField] private AudioClip _bgmNormalClips;
         [SerializeField] private AudioClip _bgmCombatClips;
@@ -19,48 +20,76 @@ namespace _Project._Scripts.Core
         MusicMode _mode;
         float _savedVolume;
 
+        private void Awake()
+        {
+            if(Instance == null)
+            {
+                Instance = this;
+            }
+            else
+                Destroy(gameObject);
+
+            _source = GetComponent<AudioSource>();
+
+            LoadBGMVolume();
+
+            //_sceneLoader = FindAnyObjectByType<SceneLoader>();
+
+            //if (_sceneLoader != null)
+            //{
+            //    _sceneLoader._sceneController.OnSceneLoaded += OnSceneLoaded;
+            //    Debug.Log("BGMController has subscribe OnSceneGroupLoaded");
+            //}
+        }
+
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            _source = GetComponent<AudioSource>();
-            SceneManager.sceneLoaded += OnSceneLoaded;
-
             _savedVolume = PlayerPrefs.GetFloat(bgmVolumeKey, 1f);
 
-            if(_bgmNormalClips)
+            if(_bgmNormalClips != null)
             {
                 _source.volume = _savedVolume;
                 PlayBGM(false, _bgmNormalClips);
             }
+
+            _bgmSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if(!_bgmSlider)
-            {
-                var slider = GameObject.Find("MusicSlider").GetComponent<Slider>();
-                
-                if(slider)
-                {
-                    _bgmSlider = slider;
-                    _bgmSlider.value = _savedVolume;
+        //void OnSceneLoaded(string sceneName)
+        //{
+        //    if(_bgmSlider == null)
+        //    {
+        //        if (sceneName == "MainMenu" || sceneName == "PersistentGameplay")
+        //        {
+        //            GameObject slider = GameObject.Find("MusicSlider");
 
-                    _bgmSlider.onValueChanged.RemoveAllListeners();
-                    _bgmSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
-                }
-            }
-        }
+        //            if (slider != null)
+        //            {
+        //                _bgmSlider = slider.GetComponent<Slider>();
+        //                _bgmSlider.value = _savedVolume;
 
-        private void OnDestroy()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
+        //                _bgmSlider.onValueChanged.RemoveAllListeners();
+        //                _bgmSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
+        //            }
+        //            else
+        //            {
+        //                Debug.LogWarning("BGM Slider not found");
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("BGM Slider has reference");
+        //    }
+        //}
 
         public void PlayBGM(bool resetSong, AudioClip clip = null)
         {
             if(clip != null)
             {
                 _source.clip = clip;
+                _source.Play();
             }
             else if(_source.clip != null)
             {

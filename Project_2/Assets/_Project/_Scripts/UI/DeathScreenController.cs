@@ -14,6 +14,8 @@ namespace _Project._Scripts.UI
         private const float _minDistance = 1f;
         private const float _maxDistance = 2f;
 
+        [SerializeField] private CanvasGroup _uiCanvasGroup;
+
         [Header("Tham chiếu các object trong UI vào")]
         [SerializeField] private CanvasGroup _deathPanel;
         [SerializeField] private CanvasGroup _deathTextGroup;
@@ -59,7 +61,15 @@ namespace _Project._Scripts.UI
             _deathPanel.gameObject.SetActive(true);
             StartCoroutine(DeathCoroutineFlow());
             HUDController.Instance.HidePlayerHUD(true);
+            HideUICanvas(true);
             BGMController.Instance.PauseBGM();
+        }
+
+        void HideUICanvas(bool enable)
+        {
+            _uiCanvasGroup.alpha = enable ? 0 : 1;
+            _uiCanvasGroup.blocksRaycasts = !enable;
+            _uiCanvasGroup.interactable = !enable;
         }
 
         void HideDeathScreen()
@@ -71,7 +81,9 @@ namespace _Project._Scripts.UI
             _reviveGroup.alpha = 0;
 
             _deathPanel.gameObject.SetActive(false);
+
             HUDController.Instance.HidePlayerHUD(false);
+            HideUICanvas(false);
             BGMController.Instance.PlayBGM(false);
         }
 
