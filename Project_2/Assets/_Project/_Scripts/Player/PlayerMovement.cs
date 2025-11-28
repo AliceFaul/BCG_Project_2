@@ -189,7 +189,10 @@ namespace _Project._Scripts.Player
                 _playerStamina._currentStamina >= _attackStamina)
             {
                 ChangeState(PlayerState.Attack);
-                SoundEffectManager.Instance.Play("Whoosh");
+
+                if (SoundEffectManager.Instance == null) return;
+
+                    SoundEffectManager.Instance.Play("Whoosh");
             }
 
             //Input tương tác
@@ -405,6 +408,8 @@ namespace _Project._Scripts.Player
 
         void PlayFootstep()
         {
+            if(SoundEffectManager.Instance == null) return;
+
             SoundEffectManager.Instance.Play("Footstep", true);
         }
 
