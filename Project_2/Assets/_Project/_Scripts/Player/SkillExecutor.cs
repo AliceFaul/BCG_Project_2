@@ -99,7 +99,21 @@ public class SkillExecutor : MonoBehaviour
 
     void SpawnMist(Vector3 pos)
     {
-        Debug.Log("Tạo sương mù giữ enemy đứng yên!");
+        Debug.Log("Tạo sương mù! Freeze toàn bộ enemy 5s");
+
+        // Tìm toàn bộ enemy
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            EnemyAI ai = enemy.GetComponent<EnemyAI>();
+            if (ai != null)
+            {
+                ai.SetFrozen(5f); // đóng băng 5 giây
+            }
+        }
+
+        // Nếu có hiệu ứng sương mù
+        // Instantiate(mistPrefab, pos, Quaternion.identity);
     }
 
     void ShootFireBall(Vector3 pos)

@@ -27,7 +27,8 @@ namespace _Project._Scripts.Enemies
 
         //Các cờ quản lý trạng thái
         private bool _isDead = false;
-        private bool isFrozen = false; // skill Mist sẽ bật/tắt
+        bool isFrozen = false;
+        float frozenTimer = 0f;
 
         #region Unity Life Cycle
 
@@ -44,17 +45,44 @@ namespace _Project._Scripts.Enemies
                 Debug.Log("Subscribe OnDead!!");
             }
         }
+        public void SetFrozen(float duration)
+        {
+            isFrozen = true;
+            frozenTimer = duration;
+
+            _path.canMove = false;  // khóa Pathfinding
+            rb.linearVelocity = Vector2.zero;
+
+            if (_anim != null)
+                _anim.speed = 0; // đứng hình
+        }
 
         private void Update()
         {
-            if (_isDead || isFrozen) return; // đứng yên khi chết hoặc bị Mist
+            if (_isDead) return;
 
+            // ======= FROZEN STATE =======
+            if (isFrozen)
+            {
+                frozenTimer -= Time.deltaTime;
+
+                _path.canMove = false;      // đứng yên
+                rb.linearVelocity = Vector2.zero;
+
+                if (frozenTimer <= 0)
+                    Unfreeze();
+
+                return;
+            }
+
+            // ======= AI bình thường =======
             if (_state != EnemyState.Knockbacked)
             {
                 if (_attackTimer > 0f)
                 {
                     _attackTimer -= Time.deltaTime;
                 }
+
                 CheckForPlayer();
 
                 if (_state == EnemyState.Moving)
@@ -63,27 +91,20 @@ namespace _Project._Scripts.Enemies
                 }
                 else if (_state == EnemyState.Attacking)
                 {
-                    //rb.linearVelocity = Vector2.zero;
                     _path.destination = Vector3.zero;
                 }
             }
         }
-        // Hàm cho skill Mist
-        public void SetFrozen(float duration)
+        void Unfreeze()
         {
-            StartCoroutine(FrozenRoutine(duration));
+            isFrozen = false;
+
+            _path.canMove = true;
+
+            if (_anim != null)
+                _anim.speed = 1;
         }
 
-        private IEnumerator FrozenRoutine(float duration)
-        {
-            isFrozen = true;
-            _path.canMove = false;
-            Debug.Log(name + " bị đứng yên bởi Mist!");
-            yield return new WaitForSeconds(duration);
-            isFrozen = false;
-            _path.canMove = true;
-            Debug.Log(name + " có thể di chuyển lại!");
-        }
         void StopMoving()
         {
             _isDead = true;
