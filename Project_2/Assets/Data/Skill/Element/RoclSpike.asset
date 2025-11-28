@@ -22,3 +22,4 @@ MonoBehaviour:
   skillEffectPrefab: {fileID: 6462514576318645720, guid: 1e67d2b2afae584409b1c88458af7031, type: 3}
   effectDuration: 10
   spawnType: 1
+  type: 8
