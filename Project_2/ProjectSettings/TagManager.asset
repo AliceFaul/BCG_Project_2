@@ -9,6 +9,7 @@ TagManager:
   - Boss
   - Skill
   - Bullet
+  - Waylight
   layers:
   - Default
   - TransparentFX

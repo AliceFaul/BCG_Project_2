@@ -1,4 +1,5 @@
 ﻿using _Project._Scripts.Player;
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -14,12 +15,25 @@ public class SkillIcon : MonoBehaviour
     private SkillData currentSkill;
     private bool isCoolingDown = false;
 
+    [Header("Hotkey")]
+    public KeyCode hotkey;   // <- PHÍM DÙNG SKILL
+
     private void Start()
     {
         if (skillImage == null) skillImage = GetComponent<Image>();
         ClearSkill();
     }
-
+    private void Update()
+    {
+        // --- DÙNG PHÍM ---
+        if (currentSkill != null && !isCoolingDown)
+        {
+            if (Input.GetKeyDown(hotkey))
+            {
+                OnClickSkill();
+            }
+        }
+    }
     // Gán kỹ năng vào ô
     public void SetSkill(SkillData data)
     {
@@ -49,29 +63,62 @@ public class SkillIcon : MonoBehaviour
 
         Debug.Log("Dùng kỹ năng: " + currentSkill.skillName);
 
-        // TÌM PLAYER BẰNG TAG
+        // Lấy player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null && currentSkill.skillEffectPrefab != null)
+        if (player == null)
         {
-            Vector3 pos = player.transform.position;
+            Debug.LogWarning("Không tìm thấy Player!");
+            return;
+        }
 
-            // Tạo hiệu ứng skill
+        Vector3 spawnPos = Vector3.zero;
+
+        //========== XÁC ĐỊNH VỊ TRÍ SPAWN ==========
+        if (currentSkill.spawnType == SkillSpawnType.AtPlayer)
+        {
+            spawnPos = player.transform.position;
+        }
+        else if (currentSkill.spawnType == SkillSpawnType.AtMouse)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 10f; // khoảng cách từ camera đến world
+            spawnPos = Camera.main.ScreenToWorldPoint(mousePos);
+        }
+
+
+        //========== GỌI LOGIC SKILL CỦA PLAYER ==========
+        SkillExecutor executor = player.GetComponent<SkillExecutor>();
+        if (executor != null)
+        {
+            executor.ExecuteSkill(currentSkill, spawnPos);
+        }
+        else
+        {
+            Debug.LogWarning("Player không có SkillExecutor!");
+        }
+
+
+        //========== TẠO HIỆU ỨNG VFX ========== 
+        if (currentSkill.skillEffectPrefab != null)
+        {
             GameObject effect = Instantiate(
                 currentSkill.skillEffectPrefab,
-                pos,
+                spawnPos,
                 Quaternion.identity
             );
 
-            // muốn hiệu ứng đi theo player
-            effect.transform.SetParent(player.transform);
-            // Xử lý Animator 
+            // Nếu skill sinh tại người → effect follow player
+            if (currentSkill.spawnType == SkillSpawnType.AtPlayer)
+            {
+                effect.transform.SetParent(player.transform);
+            }
+
             Animator anim = effect.GetComponent<Animator>();
             if (anim != null)
             {
-                Debug.Log("Animaion is ready running");
                 anim.Play(0);
 
+                // Lấy độ dài animation
                 float animLength = 0f;
                 if (anim.runtimeAnimatorController != null &&
                     anim.runtimeAnimatorController.animationClips.Length > 0)
@@ -79,19 +126,20 @@ public class SkillIcon : MonoBehaviour
                     animLength = anim.runtimeAnimatorController.animationClips[0].length;
                 }
 
-                Destroy(effect, animLength); // Xóa sau khi chạy xong animation
+                Destroy(effect, animLength);
             }
             else
             {
-                Debug.LogWarning("Skill animator missing");
-                Destroy(effect, currentSkill.effectDuration); // Nếu không có Animator
+                // Nếu không có animator → dùng thời gian trong SkillData
+                Destroy(effect, currentSkill.effectDuration);
             }
-
-            Debug.Log("Đã tạo hiệu ứng skill");
         }
 
+
+        //========== BẮT ĐẦU COOLDOWN ==========
         StartCoroutine(CooldownRoutine());
     }
+
 
     // Cooldown
     private IEnumerator CooldownRoutine()
