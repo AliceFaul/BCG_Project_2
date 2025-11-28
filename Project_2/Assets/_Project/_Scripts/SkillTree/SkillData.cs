@@ -16,9 +16,35 @@ public class SkillData : ScriptableObject
 
     [Header("Thông số kỹ năng")]
     public float cooldown = 5f;   // thoi gian hoi chiêu 
-    public int requiredLevel = 1; // level mo khóa
+
+    [Header("Điều kiện mở khóa")]
+    public int requiredLevel = 1;
+    public int requiredCoin = 0;
 
     [Header("Hiệu ứng kỹ năng")]
     public GameObject skillEffectPrefab;
     public float effectDuration = 10f; //thoi gian ton tai hieu ung 
+
+    [Header("Kiểu xuất hiện")]
+    public SkillSpawnType spawnType = SkillSpawnType.AtPlayer;
+    public SkillType type;
+
 }
+public enum SkillSpawnType
+{
+    AtPlayer,
+    AtMouse
+}
+public enum SkillType
+{
+    Kunai,
+    Shuriken,
+    Cut,
+    Heal,
+    Defense,
+    Mist,
+    OrbFire,
+    OrbWater,
+    RockSpike
+}
+
