@@ -16,6 +16,8 @@ namespace _Project._Scripts.Gameplay
         private int _dialogueIndex; //Index của đoạn hội thoại, biến này sẽ cho biết đoạn hội thoại hiện tại đang hiện ra
         private bool _isTyping, _isDialogueActive;
 
+        private bool _isPlayerSpeaking;
+
         //Biến trạng thái enum của quest ở NPC này
         private QuestState _questState = QuestState.NotStarted;
 
@@ -71,13 +73,20 @@ namespace _Project._Scripts.Gameplay
 
             _isDialogueActive = true; //Cho biết dialogue đang được bật
 
-            //Set name và portrait theo dialogueData
-            _dialogueUI.SetupInfo(_dialogueData._npcName, _dialogueData._npcPortrait);
-
             //Bật UI dialogue và bật pause
             _dialogueUI.ShowDialogueUI(true);
+            _dialogueUI.HideHotbar(true);
             PauseController.SetPaused(true);
             HUDController.Instance.HidePlayerHUD(true);
+
+            _isPlayerSpeaking = _dialogueData._firstLineIsPlayer;
+
+            if(_isPlayerSpeaking)
+                _dialogueUI.SetUpPlayerInfo(_dialogueData._playerName);
+            else
+                _dialogueUI.SetupInfo(_dialogueData._npcName, _dialogueData._npcPortrait);
+
+            UpdateSpeakerUI(_isPlayerSpeaking);
 
             //Bắt đầu hiện ra nội dung hội thoại
             DisplayCurrentLine();
@@ -148,6 +157,8 @@ namespace _Project._Scripts.Gameplay
             //Xuất ra đoạn hội thoại tiếp theo bình thường theo _dialogueIndex
             if(++_dialogueIndex < _dialogueData._dialogueLines.Length)
             {
+                _isPlayerSpeaking = false;
+                UpdateSpeakerUI(_isPlayerSpeaking);
                 DisplayCurrentLine();
             }
             else
@@ -166,12 +177,19 @@ namespace _Project._Scripts.Gameplay
             {
                 int nextIndex = choice._nextDialogueIndexes[i];
                 bool giveQuest = choice._giveQuests[i];
-                _dialogueUI.CreateChoice(choice._choices[i], () => ChooseOption(nextIndex, giveQuest));
+
+                string playerLine = null;
+                if(choice._playerReplyLines != null && i < choice._playerReplyLines.Length)
+                {
+                    playerLine = choice._playerReplyLines[i];
+                }
+
+                _dialogueUI.CreateChoice(choice._choices[i], () => ChooseOption(nextIndex, giveQuest, playerLine));
             }
         }
 
         //Hàm này thay đổi _dialogueIndex sau đó xóa lựa chọn và hiện ra đoạn hội thoại với _dialogueIndex mới
-        void ChooseOption(int nextIndex, bool giveQuest)
+        void ChooseOption(int nextIndex, bool giveQuest, string playerText)
         {
             if(giveQuest)
             {
@@ -179,9 +197,25 @@ namespace _Project._Scripts.Gameplay
                 _questState = QuestState.InProgress;
             }
 
-            _dialogueIndex = nextIndex;
+            StopAllCoroutines();
             _dialogueUI.ClearChoice();
-            DisplayCurrentLine();
+
+            if(string.IsNullOrEmpty(playerText))
+            {
+                _dialogueIndex = nextIndex;
+                _isPlayerSpeaking = false;
+
+                _dialogueUI.SetupInfo(_dialogueData._npcName, _dialogueData._npcPortrait);
+                UpdateSpeakerUI(_isPlayerSpeaking);
+
+                DisplayCurrentLine();
+                return;
+            }
+
+            _isPlayerSpeaking = true;
+            UpdateSpeakerUI(_isPlayerSpeaking);
+
+            StartCoroutine(PlayerSpeakThenContinue(playerText, nextIndex));
         }
 
         #endregion
@@ -215,6 +249,45 @@ namespace _Project._Scripts.Gameplay
                 yield return new WaitForSeconds(_dialogueData._autoProgressDelay);
                 NextLine();
             }
+        }
+
+        /// <summary>
+        /// Hàm Coroutine player nói chuyện sau khi chọn option
+        /// </summary>
+        /// <param name="playerText"></param>
+        /// <param name="nextIndex"></param>
+        /// <returns></returns>
+        IEnumerator PlayerSpeakThenContinue(string playerText, int nextIndex)
+        {
+            _isTyping = true;
+
+            _dialogueUI.SetUpPlayerInfo(_dialogueData._playerName);
+            _dialogueUI.SetupDialogueText("");
+
+            foreach(char c in playerText)
+            {
+                _dialogueUI.SetupDialogueText(_dialogueUI._dialogueText.text += c);
+                yield return new WaitForSeconds(_dialogueData._typingSpeed);
+            }
+
+            _isTyping = false;
+
+            yield return new WaitForSeconds(_dialogueData._autoProgressDelay);
+
+            _dialogueIndex = nextIndex;
+            _isPlayerSpeaking = false;
+            _dialogueUI.SetupInfo(_dialogueData._npcName, _dialogueData._npcPortrait);
+            UpdateSpeakerUI(_isPlayerSpeaking);
+
+            DisplayCurrentLine();
+        }
+
+        void UpdateSpeakerUI(bool isPlayer)
+        {
+            if(isPlayer)
+                _dialogueUI.ShowPlayerSpeaking();
+            else
+                _dialogueUI.ShowNPCSpeaking();
         }
 
         /// <summary>

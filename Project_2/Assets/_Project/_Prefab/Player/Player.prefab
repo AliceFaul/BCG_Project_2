@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 951875001355187789}
   - component: {fileID: 5657726437596941349}
   - component: {fileID: 1155609388347363092}
+  - component: {fileID: 7735954676369174635}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -350,7 +351,6 @@ MonoBehaviour:
   _runSpeed: 6
   _state: 0
   _footstepSpeed: 0.6
-  _footstepRunSpeed: 1.2
   _attackCD: 1.2
   _dashDistance: 0.7
   _attackStamina: 5
@@ -502,6 +502,18 @@ MonoBehaviour:
   _defensePoint: 1
   _skillDamagePoint: 1
   _pointPerLevel: 3
+--- !u!114 &7735954676369174635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207468080898817216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47784b1802dc7d44dbec7cd38cf613d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5378598945434193472
 GameObject:
   m_ObjectHideFlags: 0

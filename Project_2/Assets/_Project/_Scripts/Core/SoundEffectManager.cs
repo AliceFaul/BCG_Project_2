@@ -26,7 +26,6 @@ namespace _Project._Scripts.Core
             if(Instance == null)
             {
                 Instance = this;
-                DontDestroyOnLoad(gameObject);
             }
             else Destroy(gameObject);
 
@@ -40,25 +39,9 @@ namespace _Project._Scripts.Core
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
-
             if (!_sfSlider) return;
 
             _sfSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
-        }
-
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            if(!_sfSlider)
-            {
-                _sfSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
-                LoadSfxVolume();
-            }
-        }
-
-        private void OnDestroy()
-        {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public void Play(string name, bool randomPitch = false) //Nếu muốn sử dụng source randomPitch thì sẽ set true nhưng mặc định là false

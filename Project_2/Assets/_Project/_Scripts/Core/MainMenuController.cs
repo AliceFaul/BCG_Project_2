@@ -21,5 +21,10 @@ namespace _Project._Scripts.Core
                 _objectsToHide[i].SetActive(false);
             }
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

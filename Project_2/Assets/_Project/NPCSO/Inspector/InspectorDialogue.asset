@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d276be7fe25012e4eb8c96f0a037fc13, type: 3}
   m_Name: InspectorDialogue
   m_EditorClassIdentifier: 
+  _playerName: Froggo
   _npcName: Inspector
   _npcPortrait: {fileID: 21300000, guid: 3429cc249df164146ad095227d481e86, type: 3}
   _dialogueLines:
@@ -34,11 +35,15 @@ MonoBehaviour:
     _choices:
     - Yes
     - No
+    _playerReplyLines:
+    - Yeah, i can help.
+    - Nahhh
     _nextDialogueIndexes: 0600000003000000
     _giveQuests: 0100
   - _dialogueIndex: 4
     _choices:
     - Don't worry!
+    _playerReplyLines: []
     _nextDialogueIndexes: 05000000
     _giveQuests: 00
   _questInProgressIndex: 6

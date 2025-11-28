@@ -7,6 +7,10 @@
 [CreateAssetMenu(fileName = "NewNPCDialogue", menuName = "NPCDialogue")]
 public class NPCDialogue : ScriptableObject
 {
+    [Header("Thiết lập thông tin của Player")]
+    public string _playerName = "Froggo";
+    public bool _firstLineIsPlayer;
+
     //Thiết lập các thông tin và lời nói của NPC
     public string _npcName; //Tên của NPC
     public Sprite _npcPortrait; //Ảnh chân dung của NPC đang nói
@@ -34,6 +38,8 @@ public class DialogueChoice
     public int _dialogueIndex; //Index chỉ ra đến đoạn hội thoại nào sẽ xuất hiện Choice
     [Tooltip("Là câu trả lời của người chơi")]
     public string[] _choices; //Mảng string này sẽ lưu câu trả lời của người chơi
+    [Tooltip("Lời thoại của player tương ứng với lựa chọn")]
+    public string[] _playerReplyLines;
     [Tooltip("Index của đoạn sẽ từ lựa chọn tương đương với thứ tự trong mảng choices ở trên")]
     public int[] _nextDialogueIndexes; //Index sẽ từ lựa chọn của người chơi mà sẽ chỉ tới đoạn hội thoại của câu trả lời đó
     public bool[] _giveQuests; //Tick true có nghĩa là lựa chọn đó sẽ cho quest (Thứ tự tương đương với _choices) 

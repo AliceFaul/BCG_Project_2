@@ -106,6 +106,8 @@ namespace _Project._Scripts.Player
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
         void FixedUpdate()
         {
+            if (_isKnockbacked) return;
+
             Movement();
         }
 
@@ -383,9 +385,9 @@ namespace _Project._Scripts.Player
         {
             _isKnockbacked = true;
             Vector2 dir = (transform.position - obj.position).normalized;
-            _rb.linearVelocity = dir * knockbackForce;
+            _rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
             StartCoroutine(KnockbackCounter(stunTime));
-            //Debug.Log("Player has knockbacked");
+            Debug.Log("Player has knockbacked");
         }
 
         #endregion
