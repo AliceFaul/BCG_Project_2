@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c2ae21d12bd4419485d79d9bfdf0c, type: 3}
+  m_Name: Shuriken
+  m_EditorClassIdentifier: 
+  skillName: Shuriken
+  skillDescription: 
+  normalSprite: {fileID: -6454969007074664543, guid: 75e73c21cedf39340a80c29883c618a2, type: 3}
+  usedSprite: {fileID: 2483768934073473708, guid: 226371c285617ba41b30be6b188c6ef2, type: 3}
+  cooldown: 5
+  requiredLevel: 1
+  skillEffectPrefab: {fileID: 657467463731215748, guid: 4c1c02cfc7e03204e9f18d8f1b171d18, type: 3}
+  effectDuration: 10

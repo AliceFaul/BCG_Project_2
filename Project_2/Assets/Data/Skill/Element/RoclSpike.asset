@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c2ae21d12bd4419485d79d9bfdf0c, type: 3}
+  m_Name: RoclSpike
+  m_EditorClassIdentifier: 
+  skillName: RockSpike
+  skillDescription: 
+  normalSprite: {fileID: 4006003791991473683, guid: 8b22770459d3d1846a8cff3c6b12d1e5, type: 3}
+  usedSprite: {fileID: 5721799984867193860, guid: fbc5571a017016c458d95d16b9d1d485, type: 3}
+  cooldown: 5
+  requiredLevel: 1
+  skillEffectPrefab: {fileID: 6462514576318645720, guid: 1e67d2b2afae584409b1c88458af7031, type: 3}
+  effectDuration: 10

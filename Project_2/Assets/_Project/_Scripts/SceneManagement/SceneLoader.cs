@@ -1,0 +1,119 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using _Project._Scripts.Core;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace _Project._Scripts.SceneManagement
+{
+    public class SceneLoader : MonoBehaviour
+    {
+        [SerializeField] private Image _loadingImage;
+        [SerializeField] private float _fillSpeed;
+        [SerializeField] private Canvas _loadingCanvas;
+        [SerializeField] private CanvasGroup _loadingCanvasGroup;
+        [SerializeField] private float _fadeDuration;
+        [SerializeField] private Camera _loadingCamera;
+        [SerializeField] public SceneGroup[] _sceneGroups;
+
+        float _targetProgress;
+        bool _isLoading;
+        
+        public readonly SceneGroupController _sceneController = new SceneGroupController();
+
+        private void Awake()
+        {
+            _sceneController.OnSceneLoaded += sceneName => Debug.Log($"Loaded scene: {sceneName}");
+            _sceneController.OnSceneUnLoaded += sceneName => Debug.Log($"Unloaded scene: {sceneName}");
+            _sceneController.OnSceneGroupLoaded += () => Debug.Log($"Loaded scene group");
+        }
+
+        async void Start()
+        {
+            await LoadingSceneGroup(0);
+        }
+
+        private void Update()
+        {
+            if (!_isLoading) return;
+
+            float currentFillAmount = _loadingImage.fillAmount;
+            float progressDifferent = Mathf.Abs(currentFillAmount - _targetProgress);
+            float dynamicSpeed = progressDifferent * _fillSpeed;
+
+            _loadingImage.fillAmount = Mathf.Lerp(currentFillAmount, _targetProgress, Time.deltaTime * dynamicSpeed);
+        }
+
+        public async Task LoadingSceneGroup(int index)
+        {
+            _loadingImage.fillAmount = 0f;
+            _targetProgress = 1f;
+
+            if(index < 0 || index >= _sceneGroups.Length)
+            {
+                Debug.LogError($"Invalid scene group index: {index}");
+                return;
+            }
+
+            LoadingProgress progress = new LoadingProgress();
+            progress._Progressed += target => _targetProgress = Mathf.Max(target, _targetProgress);
+
+            EnableLoadingScreen();
+            await Fade(1);
+
+            await _sceneController.LoadScenes(_sceneGroups[index], progress);
+
+            await Fade(0);
+            EnableLoadingScreen(false);
+        }
+
+        void EnableLoadingScreen(bool enable = true)
+        {
+            _isLoading = enable;
+            PauseController.SetPaused(enable);
+            _loadingCanvas.gameObject.SetActive(enable);
+            _loadingCamera.gameObject.SetActive(enable);
+        }
+
+        public int GetSceneIndexByName(string name)
+        {
+            SceneGroup sceneGroup = _sceneGroups.FirstOrDefault(g => g._GroupName == name);
+
+            if(sceneGroup == null)
+            {
+                Debug.LogError($"SceneGroup {sceneGroup._GroupName} not found => fallback Earth SceneGroup");
+                var earth = _sceneGroups.FirstOrDefault(g => g._GroupName == "Earth");
+                return earth == null ? earth._buildIndex : 0;
+            }
+
+            return sceneGroup._buildIndex;
+        }
+
+        async Task Fade(float targetTransparency)
+        {
+            float start = _loadingCanvasGroup.alpha, t = 0f;
+
+            while (t < _fadeDuration)
+            {
+                t += Time.deltaTime;
+                _loadingCanvasGroup.alpha = Mathf.Lerp(start, targetTransparency, t / _fadeDuration);
+                await Task.Yield();
+            }
+
+            _loadingCanvasGroup.alpha = targetTransparency;
+        }
+    }
+
+    public class LoadingProgress : IProgress<float>
+    {
+        public event Action<float> _Progressed;
+
+        const float ratio = 1f;
+
+        public void Report(float value)
+        {
+            _Progressed?.Invoke(value / ratio);
+        }
+    }
+}

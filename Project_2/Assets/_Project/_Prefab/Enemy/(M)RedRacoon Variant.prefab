@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2851039706362048783, guid: 975cfd36b3506684d8ca8acc0655fd64, type: 3}
+      propertyPath: m_SpriteHash
+      value: 914169634
+      objectReference: {fileID: 0}
+    - target: {fileID: 5380659818141013540, guid: 975cfd36b3506684d8ca8acc0655fd64, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: 8345314a1fee6a24791254ede045aef9, type: 3}
     - target: {fileID: 5684190446999140982, guid: 975cfd36b3506684d8ca8acc0655fd64, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.4649634
@@ -54,7 +62,7 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: 01ba1014689494c41b40176552c7ece8, type: 3}
     - target: {fileID: 8890835680757941326, guid: 975cfd36b3506684d8ca8acc0655fd64, type: 3}
       propertyPath: m_Name
-      value: (M)RedRacoon
+      value: (M)RedRacoon Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

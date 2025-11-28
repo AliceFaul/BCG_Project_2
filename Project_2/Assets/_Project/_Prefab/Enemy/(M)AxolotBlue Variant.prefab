@@ -8,13 +8,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678017438138217890, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1537a287c3ba2a44dac96e3e0c61c7a5, type: 2}
     - target: {fileID: 1211921226240643704, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
       objectReference: {fileID: 7108339969198208228, guid: caf36f65d3d52234398a71e6d9600e4c, type: 3}
     - target: {fileID: 1864194696830243024, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_Name
-      value: (M)AxolotBlue
+      value: (M)AxolotBlue Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 2829978665998374562, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
+      propertyPath: _maxHealth
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2888941898667033274, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_Sprite
@@ -22,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 659797372610145418, guid: e91c075c09a62ef42a0b30ffe4a203b2, type: 3}
     - target: {fileID: 3197038799314267880, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.4649634
+      value: -0.88
       objectReference: {fileID: 0}
     - target: {fileID: 3197038799314267880, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7599489
+      value: 15.69
       objectReference: {fileID: 0}
     - target: {fileID: 3197038799314267880, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_LocalPosition.z

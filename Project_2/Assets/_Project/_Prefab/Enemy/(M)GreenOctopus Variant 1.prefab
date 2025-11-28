@@ -8,13 +8,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2769716946805469092, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
+      propertyPath: m_labelHash
+      value: 1.3248684e-37
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769716946805469092, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
+      propertyPath: m_SpriteHash
+      value: 914169634
+      objectReference: {fileID: 0}
+    - target: {fileID: 2769716946805469092, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
+      propertyPath: m_CategoryHash
+      value: 0.009161512
+      objectReference: {fileID: 0}
+    - target: {fileID: 5425464235742529679, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 5546671543968653177, guid: 6e6bd7ff9cae9ae478e8470d2712a3f4, type: 3}
     - target: {fileID: 5693291527871866077, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.4649634
+      value: -0.85108745
       objectReference: {fileID: 0}
     - target: {fileID: 5693291527871866077, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7599489
+      value: 15.464251
       objectReference: {fileID: 0}
     - target: {fileID: 5693291527871866077, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: 4f23b6771e7a0764ea15627959d06677, type: 3}
     - target: {fileID: 8827750782548073189, guid: f18f2d21c0692bc45a97b34ec134c045, type: 3}
       propertyPath: m_Name
-      value: (M)GreenOctopus
+      value: (M)GreenOctopus Variant 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

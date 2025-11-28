@@ -1,10 +1,13 @@
-﻿using _Project._Scripts.UI;
+﻿using _Project._Scripts.Core;
+using _Project._Scripts.UI;
 using UnityEngine;
 
 namespace _Project._Scripts.Player
 {
     public class PlayerCombat : MonoBehaviour
     {
+        PlayerStats _stats;
+
         [Header("Các biến tham chiếu")]
         [SerializeField] private Transform _attackPoint;
         [SerializeField] private LayerMask _enemyLayer;
@@ -14,7 +17,6 @@ namespace _Project._Scripts.Player
 
         [Header("Các biến thiết lập")]
         [Tooltip("Dùng để gây sát thương")]
-        [SerializeField] private float _damage = 15f;
         [SerializeField] private float _attackRange = 15f;
         [SerializeField] private float _moveOffset = 0.2f;
         [Tooltip("Lực đẩy khi tấn công")]
@@ -22,9 +24,17 @@ namespace _Project._Scripts.Player
         [Tooltip("Thời gian bị stun của enemies bị đánh trúng")]
         [SerializeField] private float _stunTime = 1f; //Thời gian bị stun của enemies bị đánh trúng
 
+        private void Start()
+        {
+            _stats = GetComponent<PlayerStats>();
+        }
+
         // Update is called once per frame
         void Update()
         {
+            if (PauseController.IsGamePaused)
+                return;
+
             MoveAttackPoint();
         }
 
@@ -97,9 +107,15 @@ namespace _Project._Scripts.Player
                 IDamageable damageable = hit.GetComponent<IDamageable>();
                 if(damageable != null)
                 {
-                    damageable.TakeDamage(-_damage);
+                    bool isCritDMG = Random.Range(0, 100) < 30;
+                    float damage = _stats.Attack;
+
+                    if (isCritDMG) damage *= 2f;
+
+                    damageable.TakeDamage(-Mathf.Round(damage));
+                    SoundEffectManager.Instance.Play("Slash");
                     Debug.Log("Enemy take damage");
-                    DamagePopup.CreatePopup(hit.transform.position, _damage, false);
+                    DamagePopup.CreatePopup(hit.transform.position, Mathf.Round(damage), isCritDMG);
                     IKnockbacked knockbacked = hit.GetComponent<IKnockbacked>();
                     if (knockbacked != null)
                     {

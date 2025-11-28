@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using Pathfinding;
+using TMPro;
 using UnityEngine;
 
 namespace _Project._Scripts.Enemies
@@ -7,12 +9,16 @@ namespace _Project._Scripts.Enemies
     public class EnemyAI : MonoBehaviour, IKnockbacked
     {
         EnemyHealth health;
+        EnemyInfo _info;
+        AIPath _path;
         [SerializeField] private EnemyState _state;
         private Animator _anim;
 
         [Header("Cấu hình Movement")]
         [SerializeField] private float moveSpeed = 2f;   // tốc độ di chuyển
         [SerializeField] private Rigidbody2D rb;         // rigidbody để di chuyển
+        public string _enemyID;
+        [SerializeField] private TMP_Text _enemyName;
         private Transform targetPlayer; // player khi phát hiện
 
         [Header("Cấu hình Attack")]
@@ -33,12 +39,30 @@ namespace _Project._Scripts.Enemies
             rb = GetComponent<Rigidbody2D>();
             health = GetComponent<EnemyHealth>();
             _anim = GetComponent<Animator>();
+            _path = GetComponent<AIPath>();
+            _info = GetComponent<EnemyInfo>();
 
             if (health != null)
             {
                 health.OnDead += StopMoving;
                 Debug.Log("Subscribe OnDead!!");
             }
+
+            if(_info != null)
+            {
+                _enemyID = _info.GetEnemyID;
+                _enemyName.text = _info.GetEnemyName;
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (_info == null) return;
+
+            _enemyID = _info.GetEnemyID;
+            _enemyName.text = _info.GetEnemyName;
+
+            _isDead = false;
         }
 
         private void Update()
@@ -59,7 +83,8 @@ namespace _Project._Scripts.Enemies
                 }
                 else if (_state == EnemyState.Attacking)
                 {
-                    rb.linearVelocity = Vector2.zero;
+                    //rb.linearVelocity = Vector2.zero;
+                    _path.destination = Vector3.zero;
                 }
             }
         }
@@ -76,8 +101,13 @@ namespace _Project._Scripts.Enemies
         //Hàm truy đuổi, lấy theo hướng của Player
         void Chase()
         {
-            Vector2 dir = (targetPlayer.position - transform.position).normalized;
-            rb.linearVelocity = dir * moveSpeed;
+
+            //Vector2 dir = (targetPlayer.position - transform.position).normalized;
+            //rb.linearVelocity = dir * moveSpeed;
+
+            _path.canMove = true;
+            _path.maxSpeed = moveSpeed;
+            _path.destination = targetPlayer.position;
         }
 
         //Hàm cốt lõi tìm kiếm player, tính toán khoảng cách để chuyển state
@@ -105,7 +135,9 @@ namespace _Project._Scripts.Enemies
             //Nếu không tìm thấy thì đứng yên
             else
             {
-                rb.linearVelocity = Vector2.zero;
+                //rb.linearVelocity = Vector2.zero;
+                _path.destination = Vector3.zero;
+                _path.canMove = false;
                 ChangeState(EnemyState.Idle);
             }
         }
@@ -131,14 +163,14 @@ namespace _Project._Scripts.Enemies
             if (_state == EnemyState.Idle)
             {
                 _anim.SetBool("isIdle", true);
-                _anim.SetFloat("LastHorizontal", rb.linearVelocity.x);
-                _anim.SetFloat("LastVertical", rb.linearVelocity.y);
+                _anim.SetFloat("LastHorizontal", _path.destination.x);
+                _anim.SetFloat("LastVertical", _path.destination.y);
             }
             else if (_state == EnemyState.Moving)
             {
                 _anim.SetBool("isWalk", true);
-                _anim.SetFloat("Horizontal", rb.linearVelocity.x);
-                _anim.SetFloat("Vertical", rb.linearVelocity.y);
+                _anim.SetFloat("Horizontal", _path.destination.x);
+                _anim.SetFloat("Vertical", _path.destination.y);
             }
             else if (_state == EnemyState.Attacking)
             {
@@ -160,14 +192,14 @@ namespace _Project._Scripts.Enemies
             ChangeState(EnemyState.Knockbacked);
             StartCoroutine(StunTime(stunTime));
             Vector2 dir = (transform.position - obj.position).normalized;
-            rb.linearVelocity = dir * knockbackForce;
+            _path.destination = dir * knockbackForce;
             Debug.Log("Enemy has knockbacked");
         }
 
         IEnumerator StunTime(float stunTime)
         {
             yield return new WaitForSeconds(.15f);
-            rb.linearVelocity = Vector2.zero;
+            _path.destination = Vector2.zero;
             yield return new WaitForSeconds(stunTime);
             ChangeState(EnemyState.Idle);
         }

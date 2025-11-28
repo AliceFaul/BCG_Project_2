@@ -3,13 +3,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using _Project._Scripts.Core;
 using System;
+using _Project._Scripts.UI;
 
 namespace _Project._Scripts.Enemies
 {
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
+        private EnemyPool _pool; // Tham chiếu pool sinh ra enemy này
+
         //Biến event gửi tín hiệu qua movement để ngừng di chuyển
         public event Action OnDead;
+        EnemyInfo _info;
 
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
@@ -22,6 +26,7 @@ namespace _Project._Scripts.Enemies
         private float _fade = 1f;
         [Tooltip("Màu sắc khi chết")]
         [SerializeField] private Color _deadColor = Color.black;
+        [SerializeField] private int _enemyExperience = 5;
 
         //Setup hiệu ứng khi trúng đòn đánh
         [Tooltip("Chỉnh màu damage flash")]
@@ -37,6 +42,34 @@ namespace _Project._Scripts.Enemies
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _info = GetComponent<EnemyInfo>();
+
+            if (_info != null)
+            {
+                EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+
+                _maxHealth = stats._enemyHP;
+                _enemyExperience = stats._enemyExperience;
+            }
+
+            _currentHealth = _maxHealth;
+            UpdateHealthBar();
+        }
+
+        private void OnEnable()
+        {
+            _isDead = false;
+            GetComponent<SpriteRenderer>().material = _damageFlash;
+            GetComponent<SpriteRenderer>().color = Color.white;
+
+            if (_info != null)
+            {
+                EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+
+                _maxHealth = stats._enemyHP;
+                _enemyExperience = stats._enemyExperience;
+            }
+
             _currentHealth = _maxHealth;
             UpdateHealthBar();
         }
@@ -50,6 +83,7 @@ namespace _Project._Scripts.Enemies
 
             _currentHealth += damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
+            SoundEffectManager.Instance.Play("Hit");
             DamageParticle();
             UpdateHealthBar();
             if(_currentHealth <= 0)
@@ -57,6 +91,7 @@ namespace _Project._Scripts.Enemies
                 _isDead = true;
                 _currentHealth = 0;
                 OnDead?.Invoke();
+                HUDController.Instance.AddExperience(_enemyExperience);
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
                 StartCoroutine(Die(gameObject, _fade));
             }
@@ -104,7 +139,11 @@ namespace _Project._Scripts.Enemies
             }
 
             yield return new WaitForSeconds(0.2f);
-            obj.SetActive(false);
+            //áo sự kiện chết (cho spawner xử lý)
+            OnDead?.Invoke();
+
+            //  Trả lại pool
+            _pool.ReturnToPool(obj);
         }
 
         //Hàm Coroutine để sử dụng hiệu ứng Damage Flash
@@ -128,5 +167,14 @@ namespace _Project._Scripts.Enemies
         }
 
         #endregion
+        public void Initialize(EnemyPool pool)
+        {
+            _pool = pool;                  // Gán pool
+            _isDead = false;               // Reset trạng thái chết
+            _currentHealth = _maxHealth;   // Reset lại máu
+            UpdateHealthBar();             // Cập nhật thanh máu
+            gameObject.GetComponent<SpriteRenderer>().color = Color.white; // Reset lại màu enemy
+        }
+
     }
 }
