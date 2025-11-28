@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3152374650949694289}
   - component: {fileID: 8357729071359800041}
   - component: {fileID: 8886812270964567917}
+  - component: {fileID: 3165552134806306306}
   m_Layer: 0
   m_Name: Shuriken
   m_TagString: Skill
@@ -110,3 +111,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3165552134806306306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657467463731215748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8359ceb1debf703468188960cfdb76d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _distance: 1.5
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _knockbackForce: 1.2
+  _stunTime: 1.2

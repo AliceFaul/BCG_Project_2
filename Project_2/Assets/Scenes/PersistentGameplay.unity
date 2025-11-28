@@ -8493,7 +8493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 779886643}
   itemNameText: {fileID: 1494700595}
-  itemDescText: {fileID: 2057851613}
+  itemLocateText: {fileID: 0}
   descriptionPanel: {fileID: 954063989}
   _inventoryPanel: {fileID: 317255233}
   _slotPrefab: {fileID: 3680092790293289133, guid: 68d2b0ad66192f844b05ebc677890346, type: 3}
@@ -8559,7 +8559,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678762682}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41e1d39801a212a4ba72ee24e2c79682, type: 3}
   m_Name: 
@@ -8569,7 +8569,9 @@ MonoBehaviour:
   streetLightMaxIntensity: 1.5
   timeOfDay: 12
   dayDuration: 2000
-  rainPrefab: {fileID: 0}
+  rainPrefab: {fileID: 4238842137138157239, guid: 793af4e5af64806499809cbafdf22ecf, type: 3}
+  rainDrops: {fileID: 5294680245299948119, guid: 793af4e5af64806499809cbafdf22ecf, type: 3}
+  rainRipples: {fileID: 3049674258367615759, guid: b26eb36ec5ce85b4597b42f2c9569ad9, type: 3}
 --- !u!1 &687930852
 GameObject:
   m_ObjectHideFlags: 0

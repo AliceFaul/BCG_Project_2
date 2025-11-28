@@ -15,8 +15,8 @@ namespace _Project._Scripts.Player
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
         [Header("Các thông số máu")]
-        [SerializeField] private float _maxHealth = 100f; //Máu tối đa của người chơi
-        [SerializeField] private float _currentHealth; //Máu hiện tại của người chơi
+        [SerializeField] public float _maxHealth = 100f; //Máu tối đa của người chơi
+        [SerializeField] public float _currentHealth; //Máu hiện tại của người chơi
 
         [Space(10)]
 
@@ -67,14 +67,16 @@ namespace _Project._Scripts.Player
 
             float damageTaken = damage * (damage / (damage + _stats.Defense));
             _currentHealth -= damageTaken;
-
+            DamageParticle();
+            SoundEffectManager.Instance.Play("Hit");
             HUDController.Instance.UpdateHealthUI(Mathf.Round(_currentHealth), _maxHealth);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
                 OnDead?.Invoke();
-                // hiệu ứng chết...
+                gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
+                StartCoroutine(Dissolve(gameObject, _fade));
             }
 
             StartCoroutine(DamageFlasher());

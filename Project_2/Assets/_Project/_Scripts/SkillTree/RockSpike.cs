@@ -5,6 +5,9 @@ public class RockSpike : MonoBehaviour
 {
     private float damage;
 
+    [SerializeField] private float _knockbackForce;
+    [SerializeField] private float _stunTime;
+
     public void Init(float dmg)
     {
         damage = dmg;
@@ -14,10 +17,15 @@ public class RockSpike : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+            IDamageable enemyHealth = other.GetComponent<IDamageable>();
             if (enemyHealth != null)
             {
                 enemyHealth.TakeDamage(-damage);
+                IKnockbacked knockbacked = other.GetComponent<IKnockbacked>();
+                if(knockbacked != null)
+                {
+                    knockbacked.Knockback(transform, _knockbackForce, _stunTime);
+                }
                 Debug.Log("Gai ðá gây sát thýõng: " + damage);
             }
         }

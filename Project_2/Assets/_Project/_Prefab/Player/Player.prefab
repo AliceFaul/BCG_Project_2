@@ -128,13 +128,14 @@ GameObject:
   - component: {fileID: 3188487154825709572}
   - component: {fileID: 297884192612695280}
   - component: {fileID: 2205421967523477299}
+  - component: {fileID: 7735954676369174635}
   - component: {fileID: 3867353841579611734}
   - component: {fileID: 1410661574368989261}
   - component: {fileID: 2732292124938645096}
   - component: {fileID: 951875001355187789}
   - component: {fileID: 5657726437596941349}
   - component: {fileID: 1155609388347363092}
-  - component: {fileID: 7735954676369174635}
+  - component: {fileID: 8095847941127216871}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -323,6 +324,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7967de606bda85468217e6841d570e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7735954676369174635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207468080898817216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47784b1802dc7d44dbec7cd38cf613d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3867353841579611734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +515,7 @@ MonoBehaviour:
   _defensePoint: 1
   _skillDamagePoint: 1
   _pointPerLevel: 3
---- !u!114 &7735954676369174635
+--- !u!114 &8095847941127216871
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -511,9 +524,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1207468080898817216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47784b1802dc7d44dbec7cd38cf613d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 31046b8341fcf984ebb96785a0cf329a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerHealth: {fileID: 0}
+  fireballPrefab: {fileID: 5037087134952130173, guid: 83994191108199847be07dd7c1c0645b, type: 3}
+  rockSpikePrefab: {fileID: 6462514576318645720, guid: 1e67d2b2afae584409b1c88458af7031, type: 3}
+  _mistPrefab: {fileID: 5952430025418401561, guid: c4f7db24b73b34f429fc49ae30518165, type: 3}
+  _fogPuffPrefab: {fileID: 309356539487964232, guid: 6ddcafcd8b8690a46ba81fb932f185d2, type: 3}
 --- !u!1 &5378598945434193472
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +630,10 @@ PrefabInstance:
     - target: {fileID: 4238842137138157239, guid: 793af4e5af64806499809cbafdf22ecf, type: 3}
       propertyPath: m_Name
       value: RainDrops
+      objectReference: {fileID: 0}
+    - target: {fileID: 4238842137138157239, guid: 793af4e5af64806499809cbafdf22ecf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5294680245299948119, guid: 793af4e5af64806499809cbafdf22ecf, type: 3}
       propertyPath: playOnAwake
