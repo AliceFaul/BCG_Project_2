@@ -16,7 +16,7 @@ namespace _Project._Scripts.UI
         [Header("UI hiển thị mô tả Item")]
         [SerializeField] private Image itemImage;          // Kéo object "ItemImage" vào đây
         [SerializeField] private TMP_Text itemNameText;    // Kéo "ItemName"
-        [SerializeField] private TMP_Text itemDescText;    // Kéo "ItemDescription"
+        [SerializeField] private TMP_Text itemLocateText;    // Kéo "ItemDescription"
         [SerializeField] private GameObject descriptionPanel; // Kéo "ItemDescriptionPanel" hoặc panel cha
 
         //Singleton của InventoryController
@@ -69,7 +69,7 @@ namespace _Project._Scripts.UI
             // Gán dữ liệu vào UI
             itemImage.sprite = data.ItemImage;
             itemNameText.text = data.Name;
-            itemDescText.text = data.Description;
+            itemLocateText.text = data.Location;
 
             // Bật panel mô tả
             if(descriptionPanel != null)

@@ -22,7 +22,18 @@ public class UIManager : MonoBehaviour
         if (actionPanel != null)
             actionPanel.Show(skill);
     }
-
+    private void Start()
+    {
+        if (hudSlots.Length >= 6)
+        {
+            hudSlots[0].hotkey = KeyCode.Z;
+            hudSlots[1].hotkey = KeyCode.X;
+            hudSlots[2].hotkey = KeyCode.C;
+            hudSlots[3].hotkey = KeyCode.V;
+            hudSlots[4].hotkey = KeyCode.G;
+            hudSlots[5].hotkey = KeyCode.T;
+        }
+    }
     public void AssignSkillToHud(SkillData skill)
     {
         foreach (SkillIcon slot in hudSlots)
@@ -39,7 +50,7 @@ public class UIManager : MonoBehaviour
     }
     public void RemoveSkillFromHud(SkillData skill)
     {
-        foreach (SkillIcon slot in hudSlots)
+        foreach (SkillIcon slot in hudSlots)    
         {
             if (slot != null && slot.GetSkillData() == skill)
             {

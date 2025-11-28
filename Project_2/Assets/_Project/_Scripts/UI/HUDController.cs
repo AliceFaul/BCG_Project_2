@@ -55,6 +55,9 @@ namespace _Project._Scripts.UI
         private int _previousLevelsExperience, _nextLevelsExperience;
         public event Action OnLevelUp;
 
+        public int CurrentLevel => _currentLevel;
+
+
         private void Awake()
         {
             //Tạo Singleton
