@@ -1,4 +1,5 @@
 ﻿using _Project._Scripts.Player;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,41 +62,62 @@ public class SkillIcon : MonoBehaviour
 
         Debug.Log("Dùng kỹ năng: " + currentSkill.skillName);
 
+        // Lấy player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) return;
+        if (player == null)
+        {
+            Debug.LogWarning("Không tìm thấy Player!");
+            return;
+        }
 
-        Vector3 pos = Vector3.zero;
+        Vector3 spawnPos = Vector3.zero;
 
-        //---------- Xác định vị trí spawn ----------
+        //========== XÁC ĐỊNH VỊ TRÍ SPAWN ==========
         if (currentSkill.spawnType == SkillSpawnType.AtPlayer)
         {
-            pos = player.transform.position;
+            spawnPos = player.transform.position;
         }
         else if (currentSkill.spawnType == SkillSpawnType.AtMouse)
         {
             Vector3 mousePos = Input.mousePosition;
-            mousePos.z = 10f;
-            pos = Camera.main.ScreenToWorldPoint(mousePos);
+            mousePos.z = 10f; // khoảng cách từ camera đến world
+            spawnPos = Camera.main.ScreenToWorldPoint(mousePos);
         }
 
-        //---------- Tạo hiệu ứng ----------
+
+        //========== GỌI LOGIC SKILL CỦA PLAYER ==========
+        SkillExecutor executor = player.GetComponent<SkillExecutor>();
+        if (executor != null)
+        {
+            executor.ExecuteSkill(currentSkill, spawnPos);
+        }
+        else
+        {
+            Debug.LogWarning("Player không có SkillExecutor!");
+        }
+
+
+        //========== TẠO HIỆU ỨNG VFX ========== 
         if (currentSkill.skillEffectPrefab != null)
         {
             GameObject effect = Instantiate(
                 currentSkill.skillEffectPrefab,
-                pos,
+                spawnPos,
                 Quaternion.identity
             );
 
-            // Follow player nếu spawn tại người chơi
+            // Nếu skill sinh tại người → effect follow player
             if (currentSkill.spawnType == SkillSpawnType.AtPlayer)
+            {
                 effect.transform.SetParent(player.transform);
+            }
 
             Animator anim = effect.GetComponent<Animator>();
             if (anim != null)
             {
                 anim.Play(0);
 
+                // Lấy độ dài animation
                 float animLength = 0f;
                 if (anim.runtimeAnimatorController != null &&
                     anim.runtimeAnimatorController.animationClips.Length > 0)
@@ -107,12 +129,16 @@ public class SkillIcon : MonoBehaviour
             }
             else
             {
+                // Nếu không có animator → dùng thời gian trong SkillData
                 Destroy(effect, currentSkill.effectDuration);
             }
         }
 
+
+        //========== BẮT ĐẦU COOLDOWN ==========
         StartCoroutine(CooldownRoutine());
     }
+
 
     // Cooldown
     private IEnumerator CooldownRoutine()

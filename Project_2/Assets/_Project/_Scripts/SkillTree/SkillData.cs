@@ -27,9 +27,24 @@ public class SkillData : ScriptableObject
 
     [Header("Kiểu xuất hiện")]
     public SkillSpawnType spawnType = SkillSpawnType.AtPlayer;
+    public SkillType type;
+
 }
 public enum SkillSpawnType
 {
     AtPlayer,
     AtMouse
 }
+public enum SkillType
+{
+    Kunai,
+    Shuriken,
+    Cut,
+    Heal,
+    Defense,
+    Mist,
+    OrbFire,
+    OrbWater,
+    RockSpike
+}
+
