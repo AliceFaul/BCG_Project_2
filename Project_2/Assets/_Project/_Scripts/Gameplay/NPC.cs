@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Project._Scripts.Core;
 using _Project._Scripts.UI;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace _Project._Scripts.Gameplay
         private bool _isTyping, _isDialogueActive;
 
         private bool _isPlayerSpeaking;
+
+        public static event Action<string> OnNPCTalked;
 
         //Biến trạng thái enum của quest ở NPC này
         private QuestState _questState = QuestState.NotStarted;
@@ -47,6 +50,8 @@ namespace _Project._Scripts.Gameplay
             {
                 StartDialogue();
             }
+
+            OnNPCTalked?.Invoke(_dialogueData._npcID);
         }
 
         #endregion

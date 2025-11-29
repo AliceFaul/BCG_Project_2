@@ -15,6 +15,9 @@ namespace _Project._Scripts.Enemies
         //Biến event gửi tín hiệu qua movement để ngừng di chuyển
         public event Action OnDead;
         public event Action OnRevive;
+
+        public static event Action<string> OnEnemyDefeated;
+
         EnemyInfo _info;
 
         [SerializeField] private Material _objectDissolve, _damageFlash;
@@ -116,18 +119,15 @@ namespace _Project._Scripts.Enemies
             {
                 _isDead = true;
                 _currentHealth = 0;
+
                 OnDead?.Invoke();
+                if(gameObject.activeSelf)
+                    OnEnemyDefeated?.Invoke(_info._enemyData._enemyID);
+
                 HUDController.Instance.AddExperience(_enemyExperience);
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
+
                 StartCoroutine(Die(gameObject, _fade));
-
-                //áo sự kiện chết (cho spawner xử lý)
-                OnDead?.Invoke();
-
-                if(gameObject.GetComponent<IDungeonEnemy>() != null) return;  
-
-                //  Trả lại pool
-                _pool.ReturnToPool(gameObject);
             }
 
             StartCoroutine(DamageFlash());
@@ -172,7 +172,16 @@ namespace _Project._Scripts.Enemies
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.15f);
+
+            if(obj.GetComponent<IDungeonEnemy>() != null)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                _pool.ReturnToPool(obj);
+            }
         }
 
         //Hàm Coroutine để sử dụng hiệu ứng Damage Flash

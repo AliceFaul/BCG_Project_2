@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using _Project._Scripts.UI;
+using _Project._Scripts.Enemies;
+using _Project._Scripts.Gameplay;
 
 namespace _Project._Scripts.Core
 {
@@ -25,6 +27,10 @@ namespace _Project._Scripts.Core
 
             _questUI = FindAnyObjectByType<QuestUIController>();
             InventoryController.Instance.OnInventoryChanged += CheckInventoryChanged;
+
+            EnemyHealth.OnEnemyDefeated += CheckEnemyDefeated;
+
+            NPC.OnNPCTalked += CheckNPCTalked;
         }
 
         /// <summary>
@@ -191,6 +197,45 @@ namespace _Project._Scripts.Core
             return true;
         }
 
-        #endregion 
+        #endregion
+
+        #region Quest Defeat System
+
+        void CheckEnemyDefeated(string enemyID)
+        {
+            foreach(QuestProgress quest in _activeQuests)
+            {
+                foreach(QuestObjective objective in quest._objectives)
+                {
+                    if(objective._type != ObjectiveType.Defeat) continue;
+                    if(objective._objectiveID != enemyID.ToString()) continue;
+
+                    objective._currentAmount = Mathf.Min(objective._currentAmount + 1, objective._requireAmount);
+                }
+            }
+            _questUI.UpdateQuestLog();
+        }
+
+        #endregion
+
+        #region Quest Talking System
+
+        void CheckNPCTalked(string npcID)
+        {
+            foreach(QuestProgress quest in _activeQuests)
+            {
+                foreach(QuestObjective objective in quest._objectives)
+                {
+                    if(objective._type != ObjectiveType.Talk) continue;
+                    if(objective._objectiveID != npcID) continue;
+
+                    //Thường quest nói chuyện NPC chỉ nói với một người
+                    objective._currentAmount = 1;
+                }
+            }
+            _questUI.UpdateQuestLog();
+        }
+
+        #endregion
     }
 }
