@@ -40,6 +40,7 @@ namespace _Project._Scripts.UI
         public void ShowDungeonConfirmUI(DungeonData data, PolygonCollider2D dungeonBoundary, Vector3 entryPoint)
         {
             HUDController.Instance.HidePlayerHUD(true);
+            HUDController.Instance.HideHotbar(true);
 
             _currentData = data;
             _currentBoundary = dungeonBoundary;
@@ -76,6 +77,7 @@ namespace _Project._Scripts.UI
         void OnCancel()
         {
             HUDController.Instance?.HidePlayerHUD(false);
+            HUDController.Instance?.HideHotbar(false);
             Hide();
         }
 

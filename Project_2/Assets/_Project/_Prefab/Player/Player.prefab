@@ -391,7 +391,8 @@ MonoBehaviour:
   _walkSpeed: 3
   _runSpeed: 6
   _state: 0
-  _footstepSpeed: 0.6
+  _walkFootstepSpeed: 0.5
+  _runFootstepSpeed: 0.3
   _attackCD: 1.2
   _dashDistance: 0.7
   _attackStamina: 5

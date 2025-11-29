@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.Core;
+﻿using System.Collections;
+using _Project._Scripts.Core;
 using _Project._Scripts.Player;
 using _Project._Scripts.SceneManagement;
 using TMPro;
@@ -15,6 +16,7 @@ namespace _Project._Scripts.UI
         [SerializeField] private GameObject _menuCanvas;
         [SerializeField] private GameObject _pauseMenu;
         [SerializeField] private GameObject _infoMenu;
+        [SerializeField] private GameObject _questLog;
 
         [SerializeField] private TMP_Text _coinText;
 
@@ -38,6 +40,7 @@ namespace _Project._Scripts.UI
             ActiveMenu();
             ActivePauseMenu();
             ActiveInfoMenu();
+            ActiveQuestLog();
         }
 
         //Hàm bật tắt Menu bằng input của người chơi
@@ -52,8 +55,18 @@ namespace _Project._Scripts.UI
                     return;
                 }
 
+                if(!_menuCanvas.activeSelf)
+                {
+                    _menuCanvas.SetActive(true);
+                    _menuCanvas.GetComponent<Animator>().SetTrigger("Show");
+                }
+                else
+                {
+                    _menuCanvas.GetComponent<Animator>().SetTrigger("Hide");
+                    _menuCanvas.SetActive(false);
+                }
+
                 SoundEffectManager.Instance.Play("Menu");
-                _menuCanvas.SetActive(!_menuCanvas.activeSelf);
                 PauseController.SetPaused(_menuCanvas.activeSelf);
                 HUDController.Instance.HidePlayerHUD(_menuCanvas.activeSelf);
             }
@@ -65,15 +78,26 @@ namespace _Project._Scripts.UI
         {
             if (PlayerInput.Instance == null) return;
 
-            if(PlayerInput.Instance._pauseInput)
+            if (PlayerInput.Instance._pauseInput)
             {
-                if(!_pauseMenu.activeSelf && PauseController.IsGamePaused)
+                if (!_pauseMenu.activeSelf && PauseController.IsGamePaused)
                     return;
 
+                if (!_pauseMenu.activeSelf)
+                {
+                    _pauseMenu.SetActive(true);
+                    _pauseMenu.GetComponent<Animator>().SetTrigger("Show");
+                }
+                else
+                {
+                    _pauseMenu.SetActive(false);
+                }
+
                 SoundEffectManager.Instance.Play("Menu");
-                _pauseMenu.SetActive(!_pauseMenu.activeSelf);
-                Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
+                //Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
+                PauseController.SetPaused(_pauseMenu.activeSelf);
                 HUDController.Instance.HidePlayerHUD(_pauseMenu.activeSelf);
+                HUDController.Instance.HideHotbar(_pauseMenu.activeSelf);
             }
         }
 
@@ -84,8 +108,11 @@ namespace _Project._Scripts.UI
 
             SoundEffectManager.Instance.Play("Menu");
             _pauseMenu.SetActive(!_pauseMenu.activeSelf);
-            Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
+            _pauseMenu.GetComponent<Animator>().SetTrigger("Show");
+            //Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
+            PauseController.SetPaused(_pauseMenu.activeSelf);
             HUDController.Instance.HidePlayerHUD(_pauseMenu.activeSelf);
+            HUDController.Instance.HideHotbar(_pauseMenu.activeSelf);
         }
 
         public async void BackToMainMenu()
@@ -113,12 +140,65 @@ namespace _Project._Scripts.UI
                     return;
                 }
 
+                if (!_infoMenu.activeSelf)
+                {
+                    _infoMenu.SetActive(true);
+                    _infoMenu.GetComponent<Animator>().SetTrigger("Show");
+                }
+                else
+                {
+                    _infoMenu.SetActive(false);
+                }
+
                 SoundEffectManager.Instance.Play("Menu");
-                _infoMenu.SetActive(!_infoMenu.activeSelf);
                 PauseController.SetPaused(_infoMenu.activeSelf);
                 HUDController.Instance.HidePlayerHUD(_infoMenu.activeSelf);
+                HUDController.Instance.HideHotbar(_infoMenu.activeSelf);
             }
         }
+
+        #region Quest Log Setting
+
+        void ActiveQuestLog()
+        {
+            if (PlayerInput.Instance == null) return;
+
+            if (PlayerInput.Instance._questLogInput)
+            {
+                if (!_questLog.activeSelf && PauseController.IsGamePaused)
+                    return;
+
+                if (!_questLog.activeSelf)
+                {
+                    _questLog.SetActive(true);
+                    _questLog.GetComponent<Animator>().SetTrigger("Show");
+                }
+                else
+                {
+                    _questLog.SetActive(false);
+                }
+
+                SoundEffectManager.Instance.Play("Menu");
+                PauseController.SetPaused(_questLog.activeSelf);
+                HUDController.Instance.HidePlayerHUD(_questLog.activeSelf);
+                HUDController.Instance.HideHotbar(_questLog.activeSelf);
+            }
+        }
+
+        public void ActiveQuestLogByButton()
+        {
+            if (!_questLog.activeSelf && PauseController.IsGamePaused)
+                return;
+
+            SoundEffectManager.Instance.Play("Menu");
+            _questLog.SetActive(!_questLog.activeSelf);
+            _questLog.GetComponent<Animator>().SetTrigger("Show");
+            PauseController.SetPaused(_questLog.activeSelf);
+            HUDController.Instance.HidePlayerHUD(_questLog.activeSelf);
+            HUDController.Instance.HideHotbar(_questLog.activeSelf);
+        }
+
+        #endregion
 
         void UpdateCoinText()
         {

@@ -24,6 +24,7 @@ namespace _Project._Scripts.Core
             StartCoroutine(FadeTransition.Instance.FadeOutIn(() =>
             {
                 HUDController.Instance?.HidePlayerHUD(false);
+                HUDController.Instance?.HideHotbar(false);
                 GameObject player = GameObject.FindWithTag("Player");
                 if (player == null) return;
 
@@ -43,6 +44,7 @@ namespace _Project._Scripts.Core
             StartCoroutine(FadeTransition.Instance.FadeOutIn(() =>
             {
                 HUDController.Instance?.HidePlayerHUD(false);
+                HUDController.Instance?.HideHotbar(false);
                 GameObject player = GameObject.FindWithTag("Player");
                 if (player == null) return;
 

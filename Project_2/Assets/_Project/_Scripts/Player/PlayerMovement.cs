@@ -33,7 +33,8 @@ namespace _Project._Scripts.Player
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
-        [SerializeField] private float _footstepSpeed = 1.5f;
+        [SerializeField] private float _walkFootstepSpeed = 1.5f;
+        [SerializeField] private float _runFootstepSpeed = 1.5f;
         [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
@@ -226,6 +227,12 @@ namespace _Project._Scripts.Player
             {
                 if (_isRunning)
                 {
+                    if(_state != PlayerState.Running)
+                    {
+                        StopFootstep();
+                        StartFootstep();     // cập nhật lại tốc độ bước chân
+                    }
+
                     ChangeState(PlayerState.Running);
                     _staminaTimer -= Time.deltaTime;
                     if(_staminaTimer <= 0f)
@@ -236,6 +243,12 @@ namespace _Project._Scripts.Player
                 }
                 else
                 {
+                    if (_state != PlayerState.Walk)
+                    {
+                        StopFootstep();
+                        StartFootstep();     // cập nhật lại tốc độ bước chân
+                    }
+
                     ChangeState(PlayerState.Walk);
                     if(_staminaTimer < _staminaDrainRate)
                         _staminaTimer = _staminaDrainRate;
@@ -405,7 +418,10 @@ namespace _Project._Scripts.Player
         void StartFootstep()
         {
             _isPlayingFootstep = true;
-            InvokeRepeating(nameof(PlayFootstep), 0f, _footstepSpeed);
+
+            float rate = _isRunning ? _runFootstepSpeed : _walkFootstepSpeed;
+
+            InvokeRepeating(nameof(PlayFootstep), 0f, rate);
         }
 
         void PlayFootstep()

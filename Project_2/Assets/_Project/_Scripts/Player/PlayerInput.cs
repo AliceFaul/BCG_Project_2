@@ -15,6 +15,8 @@ namespace _Project._Scripts.Player
         public bool _infoInput { get; private set; }
         public bool _interactInput { get; private set; }
         public bool _runningInput { get; private set; }
+        public bool _questLogInput { get; private set; }
+
         public Dictionary<string, KeyCode> _skillInputDictionary = new Dictionary<string, KeyCode>();
 
         private void Awake()
@@ -46,6 +48,7 @@ namespace _Project._Scripts.Player
             _pauseInput = Input.GetKeyDown(KeyCode.Escape);
             _interactInput = Input.GetKeyDown(KeyCode.E);
             _runningInput = Input.GetKey(KeyCode.LeftShift);
+            _questLogInput = Input.GetKeyDown(KeyCode.Tab);
             HandlerSkillInput();
         }
 

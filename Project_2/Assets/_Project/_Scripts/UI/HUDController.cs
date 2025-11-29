@@ -20,6 +20,7 @@ namespace _Project._Scripts.UI
         [SerializeField] private Image _experienceImage;
         [SerializeField] private TMP_Text _experienceText;
         [SerializeField] private GameObject _addExpButton;
+        [SerializeField] private GameObject _hotbar;
         //[SerializeField] private GameObject _saveButton;
 
         [Space(10)]
@@ -297,6 +298,11 @@ namespace _Project._Scripts.UI
             _uiCG.alpha = isActive ? 0f : 1f;
             _uiCG.interactable = !isActive;
             _uiCG.blocksRaycasts = !isActive;
+        }
+
+        public void HideHotbar(bool enable)
+        {
+            _hotbar.GetComponent<CanvasGroup>().alpha = enable ? 0f : 1f;
         }
     }
 }
