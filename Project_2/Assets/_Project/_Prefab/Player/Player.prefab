@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 7735954676369174635}
   - component: {fileID: 1410661574368989261}
   - component: {fileID: 2732292124938645096}
+  - component: {fileID: 9074108637339539367}
   - component: {fileID: 951875001355187789}
   - component: {fileID: 5657726437596941349}
   - component: {fileID: 1155609388347363092}
@@ -350,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86de6a42f7fae3d42910a69de81cd12d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _consumableCooldown: 1
 --- !u!114 &3867353841579611734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +469,22 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _damageParticle: {fileID: 1799141818267455260, guid: d4e4648e86dd10942976f499566951a9, type: 3}
+--- !u!114 &9074108637339539367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207468080898817216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56540b12cd40c34d89d6bbfe6f8cbf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxEnergy: 100
+  _currentEnergy: 0
+  _recoverTime: 10
+  _recoveryAmount: 10
 --- !u!114 &951875001355187789
 MonoBehaviour:
   m_ObjectHideFlags: 0
