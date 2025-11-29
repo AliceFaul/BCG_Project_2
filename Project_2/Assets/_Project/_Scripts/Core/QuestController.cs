@@ -17,6 +17,7 @@ namespace _Project._Scripts.Core
         [Tooltip("Danh sách chứa các quest đang được người chơi thực hiện")]
         [SerializeField] public List<QuestProgress> _activeQuests = new();
         private QuestUIController _questUI;
+        List<string> _seenQuests = new();
         public List<string> _handinQuestIDs = new();
 
         private void Awake()
@@ -104,6 +105,22 @@ namespace _Project._Scripts.Core
         /// <returns></returns>
         public bool IsQuestHandedIn(string questID) => _handinQuestIDs.Contains(questID);
 
+        public bool HasSeenQuest(string questID)
+        {
+            return _seenQuests.Contains(questID);
+        }
+
+        public void MarkQuestSeen(string questID)
+        {
+            if (!_seenQuests.Contains(questID))
+                _seenQuests.Add(questID);
+        }
+
+        public void MarkQuestUnseen(string questID)
+        {
+            _seenQuests.Remove(questID);
+        }
+
         #endregion
 
         #region Quest Collect System
@@ -134,6 +151,17 @@ namespace _Project._Scripts.Core
                     if(objective._currentAmount != newAmount)
                     {
                         objective._currentAmount = newAmount;
+                    }
+
+                    if (quest.IsCompleted && !quest._completionPopupShown)
+                    {
+                        quest._completionPopupShown = true;
+
+                        HUDController.Instance.QueueQuestPopup(
+                            $"Quest Completed: {quest._quest._questName}"
+                        );
+
+                        HUDController.Instance.ShowPendingPopups();
                     }
                 }
             }
@@ -212,6 +240,17 @@ namespace _Project._Scripts.Core
 
                     objective._currentAmount = Mathf.Min(objective._currentAmount + 1, objective._requireAmount);
                 }
+
+                if (quest.IsCompleted && !quest._completionPopupShown)
+                {
+                    quest._completionPopupShown = true;
+
+                    HUDController.Instance.QueueQuestPopup(
+                        $"Quest Completed: {quest._quest._questName}"
+                    );
+
+                    HUDController.Instance.ShowPendingPopups();
+                }
             }
             _questUI.UpdateQuestLog();
         }
@@ -231,6 +270,17 @@ namespace _Project._Scripts.Core
 
                     //Thường quest nói chuyện NPC chỉ nói với một người
                     objective._currentAmount = 1;
+                }
+
+                if(quest.IsCompleted && !quest._completionPopupShown)
+                {
+                    quest._completionPopupShown = true;
+
+                    HUDController.Instance.QueueQuestPopup(
+                        $"Quest Completed: {quest._quest._questName}"
+                    );
+
+                    HUDController.Instance.ShowPendingPopups();
                 }
             }
             _questUI.UpdateQuestLog();

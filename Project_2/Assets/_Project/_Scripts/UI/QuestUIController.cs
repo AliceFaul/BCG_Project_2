@@ -24,7 +24,9 @@ namespace _Project._Scripts.UI
 
         public void UpdateQuestLog()
         {
-            foreach(Transform child in _questListContent)
+            if(_questListContent == null || _questListContent.Equals(null)) return;
+
+            foreach (Transform child in _questListContent)
             {
                 Destroy(child.gameObject);
             }

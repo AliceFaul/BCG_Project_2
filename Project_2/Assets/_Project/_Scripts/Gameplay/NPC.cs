@@ -198,7 +198,19 @@ namespace _Project._Scripts.Gameplay
         {
             if(giveQuest)
             {
+                string questID = _dialogueData._quest._questID;
+
                 QuestController.Instance.AcceptQuest(_dialogueData._quest);
+
+                if (!QuestController.Instance.HasSeenQuest(questID))
+                {
+                    HUDController.Instance.QueueQuestPopup(
+                        $"Receive quest: {_dialogueData._quest._questName}"
+                    );
+
+                    QuestController.Instance.MarkQuestSeen(questID);
+                }
+
                 _questState = QuestState.InProgress;
             }
 
@@ -312,6 +324,8 @@ namespace _Project._Scripts.Gameplay
             _dialogueUI.ShowDialogueUI(false);
             PauseController.SetPaused(false);
             HUDController.Instance.HidePlayerHUD(false);
+
+            HUDController.Instance.ShowPendingPopups();
         }
 
         //Hàm này giúp trả quest về cho NPC (xóa quest khỏi Quest Log)

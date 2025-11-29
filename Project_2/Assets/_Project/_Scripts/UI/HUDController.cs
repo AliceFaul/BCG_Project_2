@@ -51,6 +51,12 @@ namespace _Project._Scripts.UI
         [SerializeField] private float _popupDuration;
         private readonly Queue<GameObject> _activePopups = new();
 
+        [Header("Giao diện Quest Notification")]
+        [SerializeField] private GameObject _notificationContainer;
+        [SerializeField] private GameObject _notificationPrefab;
+        [SerializeField] private float _displayDuration;
+        readonly Queue<string> _messagePending = new();
+ 
         [Header("Các property cần thiết cho Level System")]
         [SerializeField] private AnimationCurve _experienceCurve;
         public int _currentLevel;
@@ -239,6 +245,47 @@ namespace _Project._Scripts.UI
             }
 
             Destroy(popup);
+        }
+
+        #endregion
+
+        #region Quest Notification Setting
+
+        public void QueueQuestPopup(string msg)
+            =>  _messagePending.Enqueue(msg);
+
+        public void ShowPendingPopups()
+        {
+            while (_messagePending.Count > 0)
+            {
+                string msg = _messagePending.Dequeue();
+                CreatePopup(msg);
+            }
+        }
+
+        void CreatePopup(string msg)
+        {
+            GameObject popup = Instantiate(_notificationPrefab, _notificationContainer.transform);
+            popup.GetComponentInChildren<TMP_Text>().text = msg;
+
+            Animator anim = popup.GetComponent<Animator>();
+            float hideTime = 1f;
+
+            // delay destroy dựa theo animation Hide
+            StartCoroutine(DestroyAfterAnim(popup, anim, hideTime));
+        }
+
+        IEnumerator DestroyAfterAnim(GameObject popup, Animator anim, float hideTime)
+        {
+            yield return new WaitForSeconds(2f);      // khoảng thời gian đứng yên
+
+            if (anim != null)
+                anim.SetTrigger("End");
+
+            yield return new WaitForSeconds(hideTime);
+
+            if (popup)
+                Destroy(popup);
         }
 
         #endregion
