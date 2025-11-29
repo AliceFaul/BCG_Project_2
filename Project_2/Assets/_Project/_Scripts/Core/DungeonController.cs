@@ -19,6 +19,8 @@ namespace _Project._Scripts.Core
 
         public void EnterDungeon(DungeonData data, PolygonCollider2D dungeonBoundary, Vector3 entryPoint, Difficult difficult)
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Battle);
+
             StartCoroutine(FadeTransition.Instance.FadeOutIn(() =>
             {
                 HUDController.Instance?.HidePlayerHUD(false);
@@ -36,6 +38,8 @@ namespace _Project._Scripts.Core
 
         public void ExitDungeon(DungeonData data, PolygonCollider2D overworldBoundary, Vector3 exitPoint)
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Normal);
+
             StartCoroutine(FadeTransition.Instance.FadeOutIn(() =>
             {
                 HUDController.Instance?.HidePlayerHUD(false);

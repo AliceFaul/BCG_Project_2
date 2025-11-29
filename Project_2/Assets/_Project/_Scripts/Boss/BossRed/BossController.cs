@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.Core;
+using UnityEngine;
 
 namespace _Project._Scripts.Enemies.Bosses
 {
@@ -114,6 +115,8 @@ namespace _Project._Scripts.Enemies.Bosses
         // ---------------------------------------------------------
         public void ActivateBoss()
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Battle);
+
             if (!hasStarted)
             {
                 anim.enabled = true;
@@ -143,6 +146,8 @@ namespace _Project._Scripts.Enemies.Bosses
         // ---------------------------------------------------------
         public void StopBoss()
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Normal);
+
             isActive = false;
             rb.linearVelocity = Vector2.zero;
 
