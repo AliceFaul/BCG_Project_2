@@ -15,8 +15,8 @@ namespace _Project._Scripts.Player
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
         [Header("Các thông số máu")]
-        [SerializeField] private float _maxHealth = 100f; //Máu tối đa của người chơi
-        [SerializeField] private float _currentHealth; //Máu hiện tại của người chơi
+        [SerializeField] public float _maxHealth = 100f; //Máu tối đa của người chơi
+        [SerializeField] public float _currentHealth; //Máu hiện tại của người chơi
 
         [Space(10)]
 
@@ -32,7 +32,7 @@ namespace _Project._Scripts.Player
         [SerializeField] private float _flashTime = 0.25f;
         [SerializeField] private AnimationCurve _flashSpeedCurve;
         [SerializeField] private ParticleSystem _damageParticle;
-
+        private bool isInvincible = false; // cờ miễn sát thương
         #region Heath Unity Life Cycle
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -59,8 +59,13 @@ namespace _Project._Scripts.Player
         //Hàm trừ máu, nếu damage là âm sẽ mất máu còn dương sẽ hồi máu
         public void TakeDamage(float damage)
         {
+            if (isInvincible)
+            {
+                Debug.Log("Player đang miễn sát thương!");
+                return;
+            }
+
             float damageTaken = damage * (damage / (damage + _stats.Defense));
-            
             _currentHealth -= damageTaken;
             DamageParticle();
             SoundEffectManager.Instance.Play("Hit");
@@ -77,6 +82,20 @@ namespace _Project._Scripts.Player
             StartCoroutine(DamageFlasher());
         }
 
+        public void SetInvincible(float duration)
+        {
+            if (!isInvincible)
+                StartCoroutine(InvincibleRoutine(duration));
+        }
+
+        private IEnumerator InvincibleRoutine(float duration)
+        {
+            isInvincible = true;
+            Debug.Log("Player miễn sát thương!");
+            yield return new WaitForSeconds(duration);
+            isInvincible = false;
+            Debug.Log("Miễn sát thương kết thúc!");
+        }
         void DamageParticle()
         {
             if (_damageParticle == null) return;

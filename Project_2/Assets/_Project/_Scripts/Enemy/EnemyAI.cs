@@ -31,6 +31,7 @@ namespace _Project._Scripts.Enemies
 
         //Các cờ quản lý trạng thái
         private bool _isDead = false;
+        private bool isFrozen = false; // skill Mist sẽ bật/tắt
 
         #region Unity Life Cycle
 
@@ -67,7 +68,7 @@ namespace _Project._Scripts.Enemies
 
         private void Update()
         {
-            if(_isDead) return;
+            if (_isDead || isFrozen) return; // đứng yên khi chết hoặc bị Mist
 
             if (_state != EnemyState.Knockbacked)
             {
@@ -88,7 +89,22 @@ namespace _Project._Scripts.Enemies
                 }
             }
         }
+        // Hàm cho skill Mist
+        public void SetFrozen(float duration)
+        {
+            StartCoroutine(FrozenRoutine(duration));
+        }
 
+        private IEnumerator FrozenRoutine(float duration)
+        {
+            isFrozen = true;
+            _path.canMove = false;
+            Debug.Log(name + " bị đứng yên bởi Mist!");
+            yield return new WaitForSeconds(duration);
+            isFrozen = false;
+            _path.canMove = true;
+            Debug.Log(name + " có thể di chuyển lại!");
+        }
         void StopMoving()
         {
             _isDead = true;

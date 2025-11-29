@@ -38,7 +38,7 @@ public class DayAndNightController : MonoBehaviour
     // Tìm tất cả đèn có tên WayLight
     void FindStreetLights()
     {
-        Light2D[] allLights = FindObjectsOfType<Light2D>(true);
+        Light2D[] allLights = FindObjectsByType<Light2D>(FindObjectsSortMode.None);
         var list = new System.Collections.Generic.List<Light2D>();
 
         foreach (var light in allLights)
