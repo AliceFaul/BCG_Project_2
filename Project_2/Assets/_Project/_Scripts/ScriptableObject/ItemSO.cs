@@ -33,10 +33,11 @@ public enum StatType { Health, Energy, Stamina, Attack, Defense, SkillDamage }
 /// <summary>
 /// Hiệu ứng và tác dụng của item
 /// </summary>
-public struct ItemEffect
+[System.Serializable]
+public class ItemEffect
 {
     public StatType _statType;
-    public StatModifier _modifierType;
+    public StatModifierType _modifierType;
     public float _value;
     public float _duration;
 }

@@ -69,7 +69,7 @@ namespace _Project._Scripts.UI
         {
             if (_currentData.IsOnCooldown()) return;
 
-            DungeonController.Instance.EnterDungeon(_currentData, _currentBoundary, _currentEntryPoint);
+            DungeonController.Instance.EnterDungeon(_currentData, _currentBoundary, _currentEntryPoint, _currentDiff);
             Hide();
         }
 

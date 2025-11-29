@@ -7,9 +7,9 @@ namespace _Project._Scripts.Gameplay
     public class DungeonEntry : MonoBehaviour, IInteractable
     {
         [SerializeField] private DungeonData _data;
-        [SerializeField] private PortalType _type;
-        [SerializeField] private Transform _entryPoint;
-        [SerializeField] private Transform _exitPoint;
+        [SerializeField] public PortalType _type;
+        [SerializeField] public Transform _entryPoint;
+        [SerializeField] public Transform _exitPoint;
 
         public PolygonCollider2D _dungeonBoundary;
         public PolygonCollider2D _overworldBoundary;

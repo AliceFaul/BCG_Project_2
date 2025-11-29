@@ -33,6 +33,7 @@ namespace _Project._Scripts.Player
         [SerializeField] private AnimationCurve _flashSpeedCurve;
         [SerializeField] private ParticleSystem _damageParticle;
         private bool isInvincible = false; // cờ miễn sát thương
+
         #region Heath Unity Life Cycle
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -68,16 +69,31 @@ namespace _Project._Scripts.Player
             float damageTaken = damage * (damage / (damage + _stats.Defense));
             _currentHealth -= damageTaken;
 
+            DamageParticle();
+            SoundEffectManager.Instance.Play("Hit");
+
             HUDController.Instance.UpdateHealthUI(Mathf.Round(_currentHealth), _maxHealth);
 
             if (_currentHealth <= 0)
             {
                 _currentHealth = 0;
                 OnDead?.Invoke();
-                // hiệu ứng chết...
+                gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
+                StartCoroutine(Dissolve(gameObject, _fade));
             }
 
             StartCoroutine(DamageFlasher());
+        }
+
+        public void Heal(int amount)
+        {
+            _currentHealth += amount;
+            HUDController.Instance.UpdateHealthUI(Mathf.Round(_currentHealth), _maxHealth);
+
+            if(_currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
         }
 
         public void SetInvincible(float duration)

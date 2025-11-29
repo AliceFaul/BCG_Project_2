@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.UI;
+﻿using _Project._Scripts.Player;
+using _Project._Scripts.UI;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ public class Item : MonoBehaviour
     public int _quantity = 1; //Số lượng của item
     [SerializeField] private TMP_Text _qtyText; //Text số lượng
 
+    PlayerItemConsumer _consumer;
+
     private void Awake()
     {
         if(_qtyText == null)
@@ -23,6 +26,14 @@ public class Item : MonoBehaviour
             _qtyText = GetComponentInChildren<TMP_Text>();
             Debug.Log("Implement qtyText");
         }
+
+        if(_consumer == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if(player != null)
+                _consumer = player.GetComponent<PlayerItemConsumer>();
+        }
+
         UpdateQuantityDisplay();
     }
 
@@ -74,6 +85,25 @@ public class Item : MonoBehaviour
     public virtual void UseItem()
     {
         Debug.Log("Use Item " + _name); //Test bằng tạo log 
+
+        if (_itemSO == null) return;
+
+        if(_consumer == null)
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+                _consumer = player.GetComponent<PlayerItemConsumer>();
+        }
+
+        if (_consumer == null) return;
+
+        bool used = _consumer.UseItem(_itemSO);
+
+        if(!used) return;
+        RemoveFromStack();
+
+        if (_quantity <= 0)
+            Destroy(gameObject);
     }
 
     public virtual void Pickup()

@@ -5,13 +5,18 @@ using UnityEngine;
 
 public class SkillExecutor : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    PlayerHealth playerHealth;
 
     [Header("Projectile Prefabs")]
     public GameObject fireballPrefab;
 
     [Header("Projectile Prefabs")]
     public GameObject rockSpikePrefab;
+
+    private void Start()
+    {
+        playerHealth = GetComponent<PlayerHealth>();
+    }
 
     public void ExecuteSkill(SkillData data, Vector3 spawnPos)
     {

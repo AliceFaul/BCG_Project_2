@@ -1,6 +1,7 @@
 ﻿using _Project._Scripts.Core;
 using _Project._Scripts.Player;
 using _Project._Scripts.SceneManagement;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +16,8 @@ namespace _Project._Scripts.UI
         [SerializeField] private GameObject _pauseMenu;
         [SerializeField] private GameObject _infoMenu;
 
+        [SerializeField] private TMP_Text _coinText;
+
         SceneLoader _sceneLoader;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +25,11 @@ namespace _Project._Scripts.UI
         {
             _menuCanvas.SetActive(false);
             _sceneLoader = FindAnyObjectByType<SceneLoader>();
+
+            if(PlayerWallet.Instance != null)
+                PlayerWallet.Instance.OnCoinChanged += OnCoinChanged;
+
+            PlayerWallet.Instance.RefreshCoinUI();
         }
 
         // Update is called once per frame
@@ -111,5 +119,14 @@ namespace _Project._Scripts.UI
                 HUDController.Instance.HidePlayerHUD(_infoMenu.activeSelf);
             }
         }
+
+        void UpdateCoinText()
+        {
+            if (PlayerWallet.Instance == null || _coinText == null) return;
+
+            _coinText.text = PlayerWallet.Instance.Coins.ToString();
+        }
+
+        void OnCoinChanged(int x) => UpdateCoinText();
     }
 }

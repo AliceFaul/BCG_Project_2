@@ -23,7 +23,7 @@ namespace _Project._Scripts.Enemies
             {
                 EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
 
-                _damage = stats._enemyDamage;
+                SetEnemyDamage(stats);
             }
         }
 
@@ -31,10 +31,16 @@ namespace _Project._Scripts.Enemies
         {
             if (_info != null)
             {
-                EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+                if(gameObject.GetComponent<IDungeonEnemy>() != null) return;
 
-                _damage = stats._enemyDamage;
+                EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+                SetEnemyDamage(stats);
             }
+        }
+
+        public void SetEnemyDamage(EnemyStats stats)
+        {
+            _damage = stats._enemyDamage;
         }
 
         //Hàm gọi trong Animation Event

@@ -8493,7 +8493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 779886643}
   itemNameText: {fileID: 1494700595}
-  itemDescText: {fileID: 2057851613}
+  itemLocateText: {fileID: 2057851613}
   descriptionPanel: {fileID: 954063989}
   _inventoryPanel: {fileID: 317255233}
   _slotPrefab: {fileID: 3680092790293289133, guid: 68d2b0ad66192f844b05ebc677890346, type: 3}
@@ -8559,7 +8559,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678762682}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41e1d39801a212a4ba72ee24e2c79682, type: 3}
   m_Name: 
@@ -8569,7 +8569,9 @@ MonoBehaviour:
   streetLightMaxIntensity: 1.5
   timeOfDay: 12
   dayDuration: 2000
-  rainPrefab: {fileID: 0}
+  rainPrefab: {fileID: 3482025916687795509}
+  rainDrops: {fileID: 3482025916687795508}
+  rainRipples: {fileID: 3482025916687795507}
 --- !u!1 &687930852
 GameObject:
   m_ObjectHideFlags: 0
@@ -26898,6 +26900,7 @@ MonoBehaviour:
   _menuCanvas: {fileID: 336149373}
   _pauseMenu: {fileID: 622376809}
   _infoMenu: {fileID: 627141502}
+  _coinText: {fileID: 2031408820}
 --- !u!225 &2068478423
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -28245,6 +28248,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a70e470d15a53046b9dfc549b2fbe3f, type: 3}
+--- !u!198 &3482025916687795507 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 9156029340074255038, guid: 6a70e470d15a53046b9dfc549b2fbe3f, type: 3}
+  m_PrefabInstance: {fileID: 3482025916687795506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3482025916687795508 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8519025465858893499, guid: 6a70e470d15a53046b9dfc549b2fbe3f, type: 3}
+  m_PrefabInstance: {fileID: 3482025916687795506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3482025916687795509 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5766041987957325639, guid: 6a70e470d15a53046b9dfc549b2fbe3f, type: 3}
+  m_PrefabInstance: {fileID: 3482025916687795506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8420668866380637719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28267,7 +28285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_AnchorMin.x
@@ -28275,7 +28293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_SizeDelta.x
@@ -28315,11 +28333,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 228.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2527142122519479221, guid: 6b6478935dfd4db4ab3545489217c6e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
