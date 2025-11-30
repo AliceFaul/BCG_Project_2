@@ -72,6 +72,19 @@ namespace _Project._Scripts.UI
             }
         }
 
+        public void ActiveMenuByButton()
+        {
+            if (!_menuCanvas.activeSelf && PauseController.IsGamePaused)
+                return;
+
+            SoundEffectManager.Instance.Play("Menu");
+            _menuCanvas.SetActive(!_menuCanvas.activeSelf);
+            _menuCanvas.GetComponent<Animator>().SetTrigger("Show");
+            //Time.timeScale = _pauseMenu.activeSelf ? 0 : 1;
+            PauseController.SetPaused(_menuCanvas.activeSelf);
+            HUDController.Instance.HidePlayerHUD(_menuCanvas.activeSelf);
+        }
+
         #region Pause Menu Controller
 
         void ActivePauseMenu()
@@ -155,6 +168,19 @@ namespace _Project._Scripts.UI
                 HUDController.Instance.HidePlayerHUD(_infoMenu.activeSelf);
                 HUDController.Instance.HideHotbar(_infoMenu.activeSelf);
             }
+        }
+
+        public void ActiveInfoByButton()
+        {
+            if (!_infoMenu.activeSelf && PauseController.IsGamePaused)
+                return;
+
+            SoundEffectManager.Instance.Play("Menu");
+            _infoMenu.SetActive(!_infoMenu.activeSelf);
+            _infoMenu.GetComponent<Animator>().SetTrigger("Show");
+            PauseController.SetPaused(_infoMenu.activeSelf);
+            HUDController.Instance.HidePlayerHUD(_infoMenu.activeSelf);
+            HUDController.Instance.HideHotbar(_infoMenu.activeSelf);
         }
 
         #region Quest Log Setting

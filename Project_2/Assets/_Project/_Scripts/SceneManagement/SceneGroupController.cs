@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using _Project._Scripts.Core;
 
 namespace _Project._Scripts.SceneManagement
 {
@@ -17,6 +18,8 @@ namespace _Project._Scripts.SceneManagement
 
         public async Task LoadScenes(SceneGroup group, IProgress<float> progress, bool reloadDupScenes = false)
         {
+            BGMController.Instance?.PauseBGM();
+
             _ActiveSceneGroup = group;
             var loadedScenes = new List<string>();
 
@@ -59,6 +62,8 @@ namespace _Project._Scripts.SceneManagement
             }
 
             OnSceneGroupLoaded.Invoke();
+
+            BGMController.Instance?.PlayBGM(false);
         }
 
         public async Task UnloadScenes()

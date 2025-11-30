@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using _Project._Scripts.Core;
+using TMPro;
 
 namespace _Project._Scripts.UI
 {
@@ -96,7 +97,12 @@ namespace _Project._Scripts.UI
             //Tạo lại các slot trong inventory page
             for (int i = 0; i < _slotCount; i++)
             {
-                Instantiate(_slotPrefab, _hotbarPanel.transform);
+                GameObject hotbarSlot = Instantiate(_slotPrefab, _hotbarPanel.transform);
+
+                TMP_Text hotbarNumberText = hotbarSlot.GetComponentInChildren<TMP_Text>();
+
+                int numberHotKey = (i < 9) ? (i + 1) : 0;
+                hotbarNumberText.text = numberHotKey.ToString();
             }
 
             //Lúc này sẽ setup lại item trong InventorySaveData 
