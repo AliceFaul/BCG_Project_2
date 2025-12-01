@@ -15,8 +15,8 @@ namespace _Project._Scripts.Player
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
         [Header("Các thông số máu")]
-        [SerializeField] private float _maxHealth = 100f; //Máu tối đa của người chơi
-        [SerializeField] private float _currentHealth; //Máu hiện tại của người chơi
+        [SerializeField] public float _maxHealth = 100f; //Máu tối đa của người chơi
+        [SerializeField] public float _currentHealth; //Máu hiện tại của người chơi
 
         [Space(10)]
 

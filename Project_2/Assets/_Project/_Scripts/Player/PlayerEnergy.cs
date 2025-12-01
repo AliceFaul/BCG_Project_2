@@ -78,7 +78,10 @@ namespace _Project._Scripts.Player
             HUDController.Instance.UpdateEnergyUI(_currentEnergy, _maxEnergy);
         }
 
-        //Hàm điều khiển energy, nếu amount là âm sẽ tiêu hao năng còn dương sẽ hồi năng lượng
+        /// <summary>
+        /// Hàm điều khiển energy, nếu amount là âm sẽ tiêu hao năng còn dương sẽ hồi năng lượng
+        /// </summary>
+        /// <param name="amount"></param>
         public void ChangeEnergy(float amount)
         {
             _currentEnergy += amount;
