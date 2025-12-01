@@ -1,5 +1,6 @@
 ﻿using _Project._Scripts.Core;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace _Project._Scripts.Gameplay
 {
@@ -11,6 +12,7 @@ namespace _Project._Scripts.Gameplay
         [Header("Property của một checkpoint")]
         [SerializeField] private ParticleSystem _smokeFX;
         [SerializeField] private GameObject _flame;
+        [SerializeField] private Light2D _flameLight;
         public PolygonCollider2D _mapBoundary = null;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,6 +24,7 @@ namespace _Project._Scripts.Gameplay
             {
                 _smokeFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
                 _flame.SetActive(false);
+                _flameLight.intensity = 0f;
             }
             else
                 Debug.LogWarning("Missing reference of checkpoint object");
@@ -57,6 +60,7 @@ namespace _Project._Scripts.Gameplay
                 {
                     _flame.SetActive(true);
                     _smokeFX.Play();
+                    _flameLight.intensity = 1f;
                 }
             }
             else
@@ -65,6 +69,7 @@ namespace _Project._Scripts.Gameplay
                 {
                     _flame.SetActive(false);
                     _smokeFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                    _flameLight.intensity = 0f;
                 }
             }
         }

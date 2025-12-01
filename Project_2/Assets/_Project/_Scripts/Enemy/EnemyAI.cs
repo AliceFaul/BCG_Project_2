@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Pathfinding;
+using TMPro;
 using UnityEngine;
 
 namespace _Project._Scripts.Enemies
@@ -8,13 +9,16 @@ namespace _Project._Scripts.Enemies
     public class EnemyAI : MonoBehaviour, IKnockbacked
     {
         EnemyHealth health;
+        EnemyInfo _info;
         AIPath _path;
         [SerializeField] private EnemyState _state;
         private Animator _anim;
 
         [Header("Cấu hình Movement")]
         [SerializeField] private float moveSpeed = 2f;   // tốc độ di chuyển
-        [SerializeField] private Rigidbody2D rb;         // rigidbody để di chuyển
+        Rigidbody2D rb;         // rigidbody để di chuyển
+        public string _enemyID;
+        [SerializeField] private TMP_Text _enemyName;
         private Transform targetPlayer; // player khi phát hiện
 
         [Header("Cấu hình Attack")]
@@ -38,12 +42,30 @@ namespace _Project._Scripts.Enemies
             health = GetComponent<EnemyHealth>();
             _anim = GetComponent<Animator>();
             _path = GetComponent<AIPath>();
+            _info = GetComponent<EnemyInfo>();
 
             if (health != null)
             {
                 health.OnDead += StopMoving;
+                health.OnRevive += Revive;
                 Debug.Log("Subscribe OnDead!!");
             }
+
+            if(_info != null)
+            {
+                _enemyID = _info.GetEnemyID;
+                _enemyName.text = _info.GetEnemyName;
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (_info == null) return;
+
+            _enemyID = _info.GetEnemyID;
+            _enemyName.text = _info.GetEnemyName;
+
+            _isDead = false;
         }
         public void SetFrozen(float duration)
         {
@@ -109,6 +131,8 @@ namespace _Project._Scripts.Enemies
         {
             _isDead = true;
         }
+
+        void Revive() => _isDead = false;
 
         #endregion
 

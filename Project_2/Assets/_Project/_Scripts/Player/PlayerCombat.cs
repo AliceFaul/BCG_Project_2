@@ -113,7 +113,7 @@ namespace _Project._Scripts.Player
                     if (isCritDMG) damage *= 2f;
 
                     damageable.TakeDamage(-Mathf.Round(damage));
-                    SoundEffectManager.Play("Slash");
+                    SoundEffectManager.Instance.Play("Slash");
                     Debug.Log("Enemy take damage");
                     DamagePopup.CreatePopup(hit.transform.position, Mathf.Round(damage), isCritDMG);
                     IKnockbacked knockbacked = hit.GetComponent<IKnockbacked>();

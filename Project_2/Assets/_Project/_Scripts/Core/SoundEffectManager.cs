@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace _Project._Scripts.Core
 {
@@ -9,13 +10,12 @@ namespace _Project._Scripts.Core
     [RequireComponent(typeof(AudioSource), typeof(SoundEffectLibrary))]
     public class SoundEffectManager : MonoBehaviour
     {
-        //Singleton Sound Effect
         public static SoundEffectManager Instance { get; private set; }
 
         //Thiết lập các component cần thiết
-        private static AudioSource _sfSource; //AudioSource của các âm thanh không thay đổi tần số
-        private static AudioSource _randomPitchAudioSource; //AudioSource của các âm thanh sẽ random tần số như Footstep,...
-        private static SoundEffectLibrary _dictionary;
+        private AudioSource _sfSource; //AudioSource của các âm thanh không thay đổi tần số
+        private AudioSource _randomPitchAudioSource; //AudioSource của các âm thanh sẽ random tần số như Footstep,...
+        private SoundEffectLibrary _dictionary;
 
         [SerializeField] private Slider _sfSlider;
         private const string SfxVolumeKey = "SfxVolume";
@@ -23,34 +23,28 @@ namespace _Project._Scripts.Core
 
         private void Awake()
         {
-            //Thiết lập Singleton
-            if (Instance == null)
+            if(Instance == null)
             {
                 Instance = this;
-                //Gán 2 component AudioSource trong Unity để sử dụng 2 Source khác nhau
-                AudioSource[] audioSources = GetComponents<AudioSource>();
-                _sfSource = audioSources[0];
-                _randomPitchAudioSource = audioSources[1];
-
-                _dictionary = GetComponent<SoundEffectLibrary>();
             }
             else Destroy(gameObject);
-            //không cần DontDestroyOnLoad vì GameManager đã có DontDestroyOnLoad
 
-            //Tải âm thanh đã lưu
-            LoadSfxVolume();
+            AudioSource[] audioSources = GetComponents<AudioSource>();
+            _sfSource = audioSources[0];
+            _randomPitchAudioSource = audioSources[1];
+
+            _dictionary = GetComponent<SoundEffectLibrary>();
         }
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            //Thay đổi âm thanh bằng slider
-            if (_sfSlider == null) return;
+            if (!_sfSlider) return;
 
             _sfSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
         }
 
-        public static void Play(string name, bool randomPitch = false) //Nếu muốn sử dụng source randomPitch thì sẽ set true nhưng mặc định là false
+        public void Play(string name, bool randomPitch = false) //Nếu muốn sử dụng source randomPitch thì sẽ set true nhưng mặc định là false
         {
             if (_dictionary == null || _sfSource == null) return;
 
@@ -71,7 +65,7 @@ namespace _Project._Scripts.Core
             }
         }
 
-        public static void SetVolume(float volume)
+        public void SetVolume(float volume)
         {
             _sfSource.volume = volume;
             _randomPitchAudioSource.volume = volume;
@@ -97,6 +91,8 @@ namespace _Project._Scripts.Core
             _randomPitchAudioSource.volume = PlayerPrefs.GetFloat(RandomPitchVolumeKey, 1f);
             _sfSlider.value = PlayerPrefs.GetFloat(SfxVolumeKey, 1f);
             _sfSlider.value = PlayerPrefs.GetFloat(RandomPitchVolumeKey, 1f);
+            _sfSlider.onValueChanged.RemoveAllListeners();
+            _sfSlider.onValueChanged.AddListener(SetVolume);
         }
     }
 }

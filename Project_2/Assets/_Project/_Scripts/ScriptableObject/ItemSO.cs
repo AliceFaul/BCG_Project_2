@@ -1,6 +1,6 @@
-using _Project._Scripts.Gameplay;
-using System.Globalization;
+﻿using _Project._Scripts.Gameplay;
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu]
 public class ItemSO : ScriptableObject
@@ -17,8 +17,27 @@ public class ItemSO : ScriptableObject
     [field: SerializeField]
     public string Location { get; set; }
 
-    public virtual void Use(StatModifier stats = null)
-    {
-        Debug.Log("Use Items");
-    }
+    [Header("In Shop Setting")]
+    public int _price;
+    public GameObject _itemPrefab;
+
+    [Header("Phân loại và tác dụng của item")]
+    public ItemUseType _type;
+    public List<ItemEffect> _effects;
+} 
+
+public enum ItemUseType { Consumable, PermanentStat, TemporaryBuff, KeyItem, Equipment }
+
+public enum StatType { Health, Energy, Stamina, Attack, Defense, SkillDamage }
+
+/// <summary>
+/// Hiệu ứng và tác dụng của item
+/// </summary>
+[System.Serializable]
+public class ItemEffect
+{
+    public StatType _statType;
+    public StatModifierType _modifierType;
+    public float _value;
+    public float _duration;
 }

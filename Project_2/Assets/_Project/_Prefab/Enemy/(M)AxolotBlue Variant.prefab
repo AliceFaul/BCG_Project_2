@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678017438138217890, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1537a287c3ba2a44dac96e3e0c61c7a5, type: 2}
     - target: {fileID: 1211921226240643704, guid: ac3598297fd850c488a598e89b161a5e, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 

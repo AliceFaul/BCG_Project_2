@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using _Project._Scripts.Core;
 using System;
 using _Project._Scripts.UI;
+using System.Net;
 
 namespace _Project._Scripts.Enemies
 {
@@ -13,11 +14,16 @@ namespace _Project._Scripts.Enemies
 
         //Biến event gửi tín hiệu qua movement để ngừng di chuyển
         public event Action OnDead;
+        public event Action OnRevive;
+
+        public static event Action<string> OnEnemyDefeated;
+
+        EnemyInfo _info;
 
         [SerializeField] private Material _objectDissolve, _damageFlash;
 
-        [SerializeField] private float _maxHealth = 100f; //Lượng máu tối đa
-        private float _currentHealth; //Lượng máu hiện tại
+        [SerializeField] public float _maxHealth = 100f; //Lượng máu tối đa
+        public float _currentHealth; //Lượng máu hiện tại
         [SerializeField] private Image _healthBar; //Health bar của gameobject
 
         [Header("Các thông số khi trúng đòn và chết")]
@@ -41,8 +47,60 @@ namespace _Project._Scripts.Enemies
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            _info = GetComponent<EnemyInfo>();
+
+            if (_info != null)
+            {
+                if (gameObject.GetComponent<IDungeonEnemy>() == null)
+                {
+                    EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+                    SetMaxHealth(stats);
+                }
+            }
+
             _currentHealth = _maxHealth;
             UpdateHealthBar();
+        }
+
+        private void OnEnable()
+        {
+            _isDead = false;
+            GetComponent<SpriteRenderer>().material = _damageFlash;
+            GetComponent<SpriteRenderer>().color = Color.white;
+
+            if (_info != null)
+            {
+                if (gameObject.GetComponent<IDungeonEnemy>() == null)
+                {
+                    EnemyStats stats = _info._enemyData.GetStatsAfterGrowth(HUDController.Instance._currentLevel);
+                    SetMaxHealth(stats);
+                }
+            }
+
+            _currentHealth = _maxHealth;
+            UpdateHealthBar();
+        }
+
+        public void SetMaxHealth(EnemyStats stats)
+        {
+            _maxHealth = stats._enemyHP;
+            _enemyExperience = stats._enemyExperience;
+
+            _currentHealth = _maxHealth;
+            UpdateHealthBar();
+        }
+
+        public void ReviveInDungeon()
+        {
+            _isDead = false;
+            gameObject.SetActive(true);
+            GetComponent<SpriteRenderer>().material = _damageFlash;
+            GetComponent<SpriteRenderer>().color = Color.white;
+
+            _currentHealth = _maxHealth;
+            UpdateHealthBar();
+
+            OnRevive?.Invoke();
         }
 
         #region Take Damage, Update Health Bar Life Cycle
@@ -54,16 +112,21 @@ namespace _Project._Scripts.Enemies
 
             _currentHealth += damage;
             _currentHealth = Mathf.Max(_currentHealth, 0);
-            SoundEffectManager.Play("Hit");
+            SoundEffectManager.Instance.Play("Hit");
             DamageParticle();
             UpdateHealthBar();
             if(_currentHealth <= 0)
             {
                 _isDead = true;
                 _currentHealth = 0;
+
                 OnDead?.Invoke();
+                if(gameObject.activeSelf)
+                    OnEnemyDefeated?.Invoke(_info._enemyData._enemyID);
+
                 HUDController.Instance.AddExperience(_enemyExperience);
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
+
                 StartCoroutine(Die(gameObject, _fade));
             }
 
@@ -109,12 +172,16 @@ namespace _Project._Scripts.Enemies
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.2f);
-            //áo sự kiện chết (cho spawner xử lý)
-            OnDead?.Invoke();
+            yield return new WaitForSeconds(0.15f);
 
-            //  Trả lại pool
-            _pool.ReturnToPool(obj);
+            if(obj.GetComponent<IDungeonEnemy>() != null)
+            {
+                obj.SetActive(false);
+            }
+            else
+            {
+                _pool.ReturnToPool(obj);
+            }
         }
 
         //Hàm Coroutine để sử dụng hiệu ứng Damage Flash

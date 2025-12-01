@@ -23,7 +23,7 @@ namespace _Project._Scripts.Player
         [Tooltip("Thông số dùng cho việc di chuyển")]
         private Rigidbody2D _rb;
         private Animator _anim;
-        [SerializeField] private PlayerState _state;
+        [SerializeField] public PlayerState _state;
         PlayerHealth _playerHealth;
         PlayerStamina _playerStamina;
         PlayerStats _stats;
@@ -33,7 +33,8 @@ namespace _Project._Scripts.Player
         private Vector3 _mousePosition;
         private Vector2 _lastInput;
         private float _currentSpeed; //Tốc độ hiện tại, update trong tương lai
-        [SerializeField] private float _footstepSpeed = 1.5f;
+        [SerializeField] private float _walkFootstepSpeed = 1.5f;
+        [SerializeField] private float _runFootstepSpeed = 1.5f;
         [Tooltip("Thiết lập thông số attack")]
         private float _attackTimer; //Biến đếm thời gian khi cooldown hết
         [SerializeField] private float _attackCD = 2f; //Cooldown mỗi lượt đánh
@@ -106,6 +107,8 @@ namespace _Project._Scripts.Player
         //Dùng FixedUpdate để xử lý ổn định di chuyển của Player
         void FixedUpdate()
         {
+            if (_isKnockbacked) return;
+
             Movement();
         }
 
@@ -189,7 +192,10 @@ namespace _Project._Scripts.Player
                 _playerStamina._currentStamina >= _attackStamina)
             {
                 ChangeState(PlayerState.Attack);
-                SoundEffectManager.Play("Whoosh");
+
+                if (SoundEffectManager.Instance == null) return;
+
+                    SoundEffectManager.Instance.Play("Whoosh");
             }
 
             //Input tương tác
@@ -221,6 +227,12 @@ namespace _Project._Scripts.Player
             {
                 if (_isRunning)
                 {
+                    if(_state != PlayerState.Running)
+                    {
+                        StopFootstep();
+                        StartFootstep();     // cập nhật lại tốc độ bước chân
+                    }
+
                     ChangeState(PlayerState.Running);
                     _staminaTimer -= Time.deltaTime;
                     if(_staminaTimer <= 0f)
@@ -231,6 +243,12 @@ namespace _Project._Scripts.Player
                 }
                 else
                 {
+                    if (_state != PlayerState.Walk)
+                    {
+                        StopFootstep();
+                        StartFootstep();     // cập nhật lại tốc độ bước chân
+                    }
+
                     ChangeState(PlayerState.Walk);
                     if(_staminaTimer < _staminaDrainRate)
                         _staminaTimer = _staminaDrainRate;
@@ -326,7 +344,8 @@ namespace _Project._Scripts.Player
                 case PlayerState.Special:
                     if(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || 
                         _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
-                        _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+                        _anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Running"))
                     {
                         _anim.SetBool("isSpecial", true);
                     }
@@ -349,7 +368,8 @@ namespace _Project._Scripts.Player
 
                     //Chạy animation Attack của Player
                     if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
-                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving"))
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Moving") || 
+                        _anim.GetCurrentAnimatorStateInfo(0).IsName("Running"))
                     {
                         _anim.SetBool("isAttacking", true);
                         _anim.SetFloat("MouseInputX", dir.x);
@@ -378,9 +398,9 @@ namespace _Project._Scripts.Player
         {
             _isKnockbacked = true;
             Vector2 dir = (transform.position - obj.position).normalized;
-            _rb.linearVelocity = dir * knockbackForce;
+            _rb.AddForce(dir * knockbackForce, ForceMode2D.Impulse);
             StartCoroutine(KnockbackCounter(stunTime));
-            //Debug.Log("Player has knockbacked");
+            Debug.Log("Player has knockbacked");
         }
 
         #endregion
@@ -398,12 +418,17 @@ namespace _Project._Scripts.Player
         void StartFootstep()
         {
             _isPlayingFootstep = true;
-            InvokeRepeating(nameof(PlayFootstep), 0f, _footstepSpeed);
+
+            float rate = _isRunning ? _runFootstepSpeed : _walkFootstepSpeed;
+
+            InvokeRepeating(nameof(PlayFootstep), 0f, rate);
         }
 
         void PlayFootstep()
         {
-            SoundEffectManager.Play("Footstep", true);
+            if(SoundEffectManager.Instance == null) return;
+
+            SoundEffectManager.Instance.Play("Footstep", true);
         }
 
         #endregion

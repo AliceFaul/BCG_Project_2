@@ -1,4 +1,5 @@
 using _Project._Scripts.Gameplay;
+using _Project._Scripts.Player;
 using _Project._Scripts.UI;
 using UnityEngine;
 
@@ -26,8 +27,10 @@ namespace _Project._Scripts.Core
                         GiveItemReward(reward._rewardID, reward._amount);
                         break;
                     case RewardType.Exp:
+                        HUDController.Instance.AddExperience(reward._amount);
                         break;
                     case RewardType.Gold:
+                        PlayerWallet.Instance.AddCoin(reward._amount);
                         break;
                     case RewardType.Custom:
                         break;

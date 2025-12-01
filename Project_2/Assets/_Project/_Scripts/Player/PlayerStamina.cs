@@ -6,6 +6,7 @@ namespace _Project._Scripts.Player
     public class PlayerStamina : MonoBehaviour
     {
         PlayerStats _stats;
+        PlayerMovement _player;
 
         [Header("Các thông số Stamina")]
         [SerializeField] private float _maxStamina = 100f; //Thể lực tối đa
@@ -21,6 +22,7 @@ namespace _Project._Scripts.Player
         void Start()
         {
             _stats = GetComponent<PlayerStats>();
+            _player = GetComponent<PlayerMovement>();
             _maxStamina = _stats.Stamina;
             _currentStamina = _maxStamina;
             HUDController.Instance.UpdateStaminaUI(_currentStamina, _maxStamina);
@@ -32,6 +34,12 @@ namespace _Project._Scripts.Player
         // Update is called once per frame
         void Update()
         {
+            if(_player._state == PlayerState.Running ||
+                _player._state == PlayerState.Attack)
+            {
+                return;
+            }
+
             RecoveryStamina(_recoveryAmount);
         }
 

@@ -16,9 +16,12 @@ namespace _Project._Scripts.UI
         [Header("Giao diện HUD của player")]
         [SerializeField] private int _maxLevel;
         [SerializeField] private TMP_Text _levelText;
+        [SerializeField] private TMP_Text _levelInfoText;
         [SerializeField] private Image _experienceImage;
         [SerializeField] private TMP_Text _experienceText;
         [SerializeField] private GameObject _addExpButton;
+        [SerializeField] private GameObject _hotbar;
+        //[SerializeField] private GameObject _saveButton;
 
         [Space(10)]
 
@@ -49,9 +52,16 @@ namespace _Project._Scripts.UI
         [SerializeField] private float _popupDuration;
         private readonly Queue<GameObject> _activePopups = new();
 
+        [Header("Giao diện Quest Notification")]
+        [SerializeField] private GameObject _notificationContainer;
+        [SerializeField] private GameObject _notificationPrefab;
+        [SerializeField] private float _displayDuration;
+        readonly Queue<string> _messagePending = new();
+ 
         [Header("Các property cần thiết cho Level System")]
         [SerializeField] private AnimationCurve _experienceCurve;
-        private int _currentLevel, _totalExperience;
+        public int _currentLevel;
+        private int _totalExperience;
         private int _previousLevelsExperience, _nextLevelsExperience;
         public event Action OnLevelUp;
 
@@ -70,6 +80,7 @@ namespace _Project._Scripts.UI
             UpdateLevel();
 
             _addExpButton.GetComponent<Button>().onClick.AddListener(() => AddExperience(20));
+            //_saveButton.GetComponent<Button>().onClick.AddListener(() => SaveController.Instance.SaveGame());
         }
 
         #region Level UI Controller
@@ -91,7 +102,7 @@ namespace _Project._Scripts.UI
             while(_totalExperience >= _nextLevelsExperience)
             {
                 _currentLevel++;
-                SoundEffectManager.Play("LevelUp");
+                SoundEffectManager.Instance.Play("LevelUp");
                 UpdateLevel();
                 isLevelUp = true;
             }
@@ -118,6 +129,7 @@ namespace _Project._Scripts.UI
             if(start < 0) start = 0;
 
             _levelText.text = _currentLevel.ToString();
+            _levelInfoText.text = $"Level: \t {_currentLevel}";
             _experienceText.text = $"{start} / {end} exp";
             _experienceImage.fillAmount = (float)start / (float)end;
         }
@@ -238,6 +250,47 @@ namespace _Project._Scripts.UI
 
         #endregion
 
+        #region Quest Notification Setting
+
+        public void QueueQuestPopup(string msg)
+            =>  _messagePending.Enqueue(msg);
+
+        public void ShowPendingPopups()
+        {
+            while (_messagePending.Count > 0)
+            {
+                string msg = _messagePending.Dequeue();
+                CreatePopup(msg);
+            }
+        }
+
+        void CreatePopup(string msg)
+        {
+            GameObject popup = Instantiate(_notificationPrefab, _notificationContainer.transform);
+            popup.GetComponentInChildren<TMP_Text>().text = msg;
+
+            Animator anim = popup.GetComponent<Animator>();
+            float hideTime = 1f;
+
+            // delay destroy dựa theo animation Hide
+            StartCoroutine(DestroyAfterAnim(popup, anim, hideTime));
+        }
+
+        IEnumerator DestroyAfterAnim(GameObject popup, Animator anim, float hideTime)
+        {
+            yield return new WaitForSeconds(2f);      // khoảng thời gian đứng yên
+
+            if (anim != null)
+                anim.SetTrigger("End");
+
+            yield return new WaitForSeconds(hideTime);
+
+            if (popup)
+                Destroy(popup);
+        }
+
+        #endregion
+
         public void HidePlayerHUD(bool isActive)
         {
             if (_uiCG == null) return;
@@ -245,6 +298,11 @@ namespace _Project._Scripts.UI
             _uiCG.alpha = isActive ? 0f : 1f;
             _uiCG.interactable = !isActive;
             _uiCG.blocksRaycasts = !isActive;
+        }
+
+        public void HideHotbar(bool enable)
+        {
+            _hotbar.GetComponent<CanvasGroup>().alpha = enable ? 0f : 1f;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using JetBrains.Annotations;
 
 /// <summary>
 /// ScriptableObject lưu lại dữ liệu nhiệm vụ
@@ -42,6 +43,8 @@ public class QuestProgress
 {
     public Quest _quest;
     public List<QuestObjective> _objectives;
+
+    public bool _completionPopupShown = false;
 
     /// <summary>
     /// Hàm khởi tạo của QuestProgress lấy dữ liệu của quest đã tham chiếu

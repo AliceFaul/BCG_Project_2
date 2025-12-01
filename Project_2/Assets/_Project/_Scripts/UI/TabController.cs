@@ -33,7 +33,7 @@ namespace _Project._Scripts.UI
         //Hàm này dùng để tạo âm thanh khi nhấn chuyển các tab và gọi trong event trigger của các tab
         public void PlaySfx()
         {
-            SoundEffectManager.Play("SwitchTab");
+            SoundEffectManager.Instance.Play("SwitchTab");
         }
     }
 }
