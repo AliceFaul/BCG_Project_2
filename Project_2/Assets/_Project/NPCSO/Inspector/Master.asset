@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d276be7fe25012e4eb8c96f0a037fc13, type: 3}
+  m_Name: Master
+  m_EditorClassIdentifier: 
+  _playerName: Froggo
+  _firstLineIsPlayer: 0
+  _npcID: Master
+  _npcName: Master
+  _npcPortrait: {fileID: 21300000, guid: bd2e2ace41cfa1c4285dd4a17656c106, type: 3}
+  _dialogueLines:
+  - "\u2026It can\u2019t be\u2026 Those eyes\u2026 that stance\u2026 Is it really
+    you?"
+  - "So it\u2019s true\u2026 you\u2019ve lost your memories."
+  - "I am your Master, the village chief. I watched you grow up\u2026 and I was the
+    one who first taught you how to hold a kunai."
+  - "It\u2019s alright. Even if you\u2019ve forgotten us\u2026 we never forgot you."
+  - "You were the pride of this village. Fast, determined\u2026 but always carrying
+    something heavy inside your heart."
+  - "Your final mission involved an enemy who used forbidden techniques. Memory loss\u2026
+    is one of their cruel signatures."
+  - "Fear from the past lingers. You disappeared during a terrible betrayal. They
+    don\u2019t fear you \u2014 they fear the wounds that event left behind."
+  - Return to the Northern Ruins, where you vanished years ago. Your memories may
+    still be waiting there.
+  - More than you can imagine. To me, you were like family.
+  - "Rest for now. Tomorrow\u2026 we begin the journey to find who you truly are."
+  - Don't woory about anything. Take a rest.
+  _typingSpeed: 0.05
+  _voiceSound: {fileID: 8300000, guid: 8548c7132559e4640a291ff63ca5d81f, type: 3}
+  _voicePitch: 1
+  _autoProgressLines: 0101010101010101010101
+  _endProgressLines: 0000000000000000000001
+  _autoProgressDelay: 2
+  _choices:
+  - _dialogueIndex: 0
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - "You\u2026 know me? I\u2019m sorry, I don\u2019t remember anything."
+    _nextDialogueIndexes: 01000000
+    _giveQuests: 00
+  - _dialogueIndex: 2
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - I wish I could remember any of that.
+    _nextDialogueIndexes: 03000000
+    _giveQuests: 00
+  - _dialogueIndex: 3
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - Please tell me who I was.
+    _nextDialogueIndexes: 04000000
+    _giveQuests: 00
+  - _dialogueIndex: 4
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - Why did I lose my memories?
+    _nextDialogueIndexes: 05000000
+    _giveQuests: 00
+  - _dialogueIndex: 5
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - Why does everyone look at me so nervously?
+    _nextDialogueIndexes: 06000000
+    _giveQuests: 00
+  - _dialogueIndex: 6
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - How can I recover my memories?
+    _nextDialogueIndexes: 07000000
+    _giveQuests: 00
+  - _dialogueIndex: 7
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - "Are you\u2026 happy I came back?"
+    _nextDialogueIndexes: 08000000
+    _giveQuests: 00
+  - _dialogueIndex: 9
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - "Thank you. It feels\u2026 comforting to hear that."
+    _nextDialogueIndexes: 0a000000
+    _giveQuests: 00
+  _questInProgressIndex: 0
+  _questCompletedIndex: 0
+  _quest: {fileID: 0}

@@ -19,6 +19,7 @@ public class DayAndNightController : MonoBehaviour
     public GameObject rainPrefab;
     public ParticleSystem rainDrops;
     public ParticleSystem rainRipples;
+    public ParticleSystem fireflyParticle;
 
     void OnEnable()
     {
@@ -71,6 +72,7 @@ public class DayAndNightController : MonoBehaviour
         }
 
         HandleRain();
+        HandleFirefly();
     }
 
     void HandleRain()
@@ -88,6 +90,22 @@ public class DayAndNightController : MonoBehaviour
             if (rainRipples.isPlaying) rainRipples.Stop();
 
             rainPrefab.SetActive(false);
+        }
+    }
+
+    void HandleFirefly()
+    {
+        if(timeOfDay >=  19f && timeOfDay < 21f && fireflyParticle != null)
+        {
+            fireflyParticle.gameObject.SetActive(true);
+            fireflyParticle.Play();
+        }
+        else
+        {
+            if(fireflyParticle.isPlaying)
+                fireflyParticle.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
+            fireflyParticle.gameObject.SetActive(false);
         }
     }
 

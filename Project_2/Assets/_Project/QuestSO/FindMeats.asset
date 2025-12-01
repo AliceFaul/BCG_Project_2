@@ -17,11 +17,14 @@ MonoBehaviour:
   _description: It seem some Blue Axolot awaked
   _objectives:
   - _objectiveID: BlueAxolot
-    _description: Defeat 2 Blue Axolot
+    _description: Defeat 3 Blue Axolot
     _type: 1
-    _requireAmount: 2
+    _requireAmount: 3
     _currentAmount: 0
   _rewards:
   - _type: 0
     _rewardID: 1
     _amount: 3
+  - _type: 0
+    _rewardID: 4
+    _amount: 2
