@@ -4,12 +4,13 @@ using UnityEngine;
 public class FireBall : MonoBehaviour
 {
     public float speed = 10f;
-    public float damage = 30f;
+    public float damage;
     private Vector3 direction;
 
-    public void Init(Vector3 dir)
+    public void Init(Vector3 dir, float finalDamage)
     {
         direction = dir.normalized;
+        damage = finalDamage;
         Destroy(gameObject, 3f); // tự hủy sau 5s nếu chưa chạm
     }
 
