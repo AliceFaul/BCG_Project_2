@@ -14,6 +14,7 @@ namespace _Project._Scripts.Core
         CinemachineConfiner2D _cmCam; //Tham chiếu Cinemachine Confiner để đổi boundary
         [SerializeField] private TransitionDirection _dir; //Hướng khi transition camera
         [SerializeField] private TransitionMode _mode;
+        [SerializeField] private Transform _teleportTargetPosition;
         [SerializeField] private float _additivePos = 2f;
         [SerializeField] private string _boundaryNextSceneName = null;
         [SerializeField] private string _nextSceneGroupName = null;
@@ -71,6 +72,12 @@ namespace _Project._Scripts.Core
         //Hàm giúp cho việc transition mượt mà hơn
         void MovePlayerPosition(GameObject player)
         {
+            if (_dir == TransitionDirection.Teleport && _teleportTargetPosition != null)
+            {
+                player.transform.position = _teleportTargetPosition.position;
+                return;
+            }
+
             //Tạo một biến lấy vị trí hiện tại của player
             Vector3 newPos = player.transform.position;
 
@@ -98,5 +105,5 @@ namespace _Project._Scripts.Core
 
     public enum TransitionMode { BoundaryOnly, SceneAndBoundary }
 
-    public enum TransitionDirection { Up, Down, Left, Right }
+    public enum TransitionDirection { Up, Down, Left, Right, Teleport }
 }

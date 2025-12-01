@@ -16,7 +16,7 @@ MonoBehaviour:
   _firstLineIsPlayer: 0
   _npcID: Flam
   _npcName: Flam
-  _npcPortrait: {fileID: -7527145504033472756, guid: 3fc0fc93acf529c49956c0667fa477a6, type: 3}
+  _npcPortrait: {fileID: 21300000, guid: 3fc0fc93acf529c49956c0667fa477a6, type: 3}
   _dialogueLines:
   - Oh! Perfect timing again. I need some material from Blue Axolot for medicine.
     But I can't fight.

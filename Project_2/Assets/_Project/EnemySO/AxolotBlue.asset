@@ -15,8 +15,9 @@ MonoBehaviour:
   _enemyID: BlueAxolot
   _enemyName: Blue Axolot
   _baseHealth: 110
-  _baseDamage: 30
+  _baseDamage: 11
   _baseExperience: 7
+  _dropItemID: 2
   _healthGrowth: 1.15
   _damageGrowth: 1.1
   _experienceGrowth: 1.1

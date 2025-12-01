@@ -31,7 +31,7 @@ MonoBehaviour:
     _type: 0
     _requireAmount: 3
     _currentAmount: 0
-  - _objectiveID: GreenKappa
+  - _objectiveID: Kappa
     _description: Defeat 5 Green Kappa
     _type: 1
     _requireAmount: 5
@@ -40,11 +40,6 @@ MonoBehaviour:
     _description: Defeat 5 Golden Drake
     _type: 1
     _requireAmount: 5
-    _currentAmount: 0
-  - _objectiveID: Master
-    _description: Talk to Master
-    _type: 3
-    _requireAmount: 1
     _currentAmount: 0
   - _objectiveID: Master
     _description: Talk to Master

@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: RoclSpike
   m_EditorClassIdentifier: 
   skillName: RockSpike
-  skillDescription: 
+  skillDescription: 'Unlock at level 22 and 3250 coins.
+
+    Summon a Rock Spike
+    at mouse position.'
   normalSprite: {fileID: 4006003791991473683, guid: 8b22770459d3d1846a8cff3c6b12d1e5, type: 3}
   usedSprite: {fileID: 5721799984867193860, guid: fbc5571a017016c458d95d16b9d1d485, type: 3}
-  cooldown: 5
+  cooldown: 30
   requiredLevel: 1
   requiredCoin: 0
   skillEffectPrefab: {fileID: 6462514576318645720, guid: 1e67d2b2afae584409b1c88458af7031, type: 3}
   effectDuration: 10
   spawnType: 1
   type: 8
+  state: 0
   _energyAmount: 150

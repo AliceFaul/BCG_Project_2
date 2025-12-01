@@ -14,8 +14,16 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: c023ae62df72cae4884e6fdd76ed2b23, type: 3}
     - target: {fileID: 5333933185908339974, guid: 72f5d75df19475f468f030fd138b50d2, type: 3}
       propertyPath: m_Name
-      value: (M)Bear
+      value: (M)Bear Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6535797897676427380, guid: 72f5d75df19475f468f030fd138b50d2, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7143fdc7de5a0014e9c9ca83de3f8fff, type: 2}
+    - target: {fileID: 8920656224082110316, guid: 72f5d75df19475f468f030fd138b50d2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 659797372610145418, guid: bc2b5d961c9bffa4d888e50eed095f88, type: 3}
     - target: {fileID: 9188808968951335742, guid: 72f5d75df19475f468f030fd138b50d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.4649634

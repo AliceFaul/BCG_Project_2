@@ -48,13 +48,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5634877771966441051, guid: 636a44fbbcfec684b9b163b80e5302e2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5650447435669564588, guid: 636a44fbbcfec684b9b163b80e5302e2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 659797372610145418, guid: 48a2842773965dc4f8a4be563d10ffd8, type: 3}
+    - target: {fileID: 8004361209068182452, guid: 636a44fbbcfec684b9b163b80e5302e2, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c070fea42a790c47bcb4d7db35edcab, type: 2}
     - target: {fileID: 8551318334715935854, guid: 636a44fbbcfec684b9b163b80e5302e2, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
       objectReference: {fileID: 7108339969198208228, guid: 008ae71131cfb594092b2cd8016d401a, type: 3}
     - target: {fileID: 9197206322849300166, guid: 636a44fbbcfec684b9b163b80e5302e2, type: 3}
       propertyPath: m_Name
-      value: (M)KappaGreen
+      value: (M)KappaGreen Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

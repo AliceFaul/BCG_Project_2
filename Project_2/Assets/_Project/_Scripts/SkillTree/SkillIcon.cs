@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _Project._Scripts.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,9 +16,12 @@ public class SkillIcon : MonoBehaviour
     [Header("Hotkey")]
     public KeyCode hotkey;   // <- PHÍM DÙNG SKILL
 
+    PlayerEnergy _energy;
+
     private void Start()
     {
         if (skillImage == null) skillImage = GetComponent<Image>();
+        _energy = FindAnyObjectByType<PlayerEnergy>();
         ClearSkill();
     }
     private void Update()
@@ -56,6 +60,9 @@ public class SkillIcon : MonoBehaviour
     public void OnClickSkill()
     {
         if (currentSkill == null || isCoolingDown)
+            return;
+
+        if (_energy._currentEnergy < currentSkill._energyAmount)
             return;
 
         Debug.Log("Dùng kỹ năng: " + currentSkill.skillName);

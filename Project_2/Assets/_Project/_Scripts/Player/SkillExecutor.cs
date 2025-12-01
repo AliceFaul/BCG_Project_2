@@ -3,6 +3,7 @@ using _Project._Scripts.Player;
 using _Project._Scripts.Gameplay;
 using System.Collections;
 using UnityEngine;
+using _Project._Scripts.Core;
 
 public class SkillExecutor : MonoBehaviour
 {
@@ -38,48 +39,83 @@ public class SkillExecutor : MonoBehaviour
         switch (data.type)
         {
             case SkillType.Kunai:
-                SpawnKunai(spawnPos);
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Whoosh");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    SpawnKunai(spawnPos);
+                }
                 break;
 
             case SkillType.Shuriken:
-                SpawnShuriken(spawnPos);
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Whoosh");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    SpawnShuriken(spawnPos);
+                }
                 break;
 
             case SkillType.Cut:
-                StartCoroutine(CutAttack());
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Whoosh");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    StartCoroutine(CutAttack());
+                }
                 break;
 
             case SkillType.Heal:
-                HealPlayer();
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Success");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    HealPlayer();
+                }
                 break;
 
             case SkillType.Defense:
-                ActivateDefense();
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Success");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    ActivateDefense();
+                }
                 break;
 
             case SkillType.Mist:
-                SpawnMist(transform);
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    SpawnMist(transform);
+                }
                 break;
 
             case SkillType.OrbFire:
-                ShootFireBall(spawnPos);
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Whoosh");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    ShootFireBall(spawnPos);
+                }
                 break;
 
             case SkillType.OrbWater:
-                SpawnWaterColumn(spawnPos);
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Whoosh");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    SpawnWaterColumn(spawnPos);
+                }
                 break;
 
             case SkillType.RockSpike:
-                SpawnRockSpike(spawnPos);
-                _energy.ChangeEnergy(-data._energyAmount);
+                if (_energy._currentEnergy >= data._energyAmount)
+                {
+                    SoundEffectManager.Instance.Play("Whoosh");
+                    _energy.ChangeEnergy(-data._energyAmount);
+                    SpawnRockSpike(spawnPos);
+                }
                 break;
         }
     }

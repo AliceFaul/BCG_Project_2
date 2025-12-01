@@ -2125,6 +2125,7 @@ GameObject:
   - component: {fileID: 126400179}
   - component: {fileID: 126400178}
   - component: {fileID: 126400177}
+  - component: {fileID: 126400181}
   m_Layer: 0
   m_Name: SoundEffectManager
   m_TagString: Untagged
@@ -2443,14 +2444,109 @@ MonoBehaviour:
     - {fileID: 8300000, guid: b36fa2cbd218c4e49ab42b4b7a8d8190, type: 3}
     - {fileID: 8300000, guid: 0e072f0d996b3e0439e35ff9ef792a80, type: 3}
     - {fileID: 8300000, guid: 6312099382317fa46b5fcbc6a6e9379b, type: 3}
-    - {fileID: 8300000, guid: 9bd8ead64ca3dcf448d34e3faf811008, type: 3}
-    - {fileID: 8300000, guid: 967b596640bb8d148bb89aa069818017, type: 3}
   - _name: SwitchTab
     _audioClips:
     - {fileID: 8300000, guid: 15d741404ad27ff48ab413a61add22d2, type: 3}
   - _name: Footstep
     _audioClips:
     - {fileID: 8300000, guid: 391c95ab6b4848c459d2055d36f74cb1, type: 3}
+--- !u!82 &126400181
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126400175}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &139000083
 GameObject:
   m_ObjectHideFlags: 0
@@ -4932,7 +5028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &336149374
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9655,7 +9751,7 @@ MonoBehaviour:
   streetLights: []
   streetLightMaxIntensity: 1.5
   timeOfDay: 12
-  dayDuration: 2000
+  dayDuration: 1500
   rainPrefab: {fileID: 3482025916687795509}
   rainDrops: {fileID: 3482025916687795508}
   rainRipples: {fileID: 3482025916687795507}
@@ -16888,7 +16984,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 215.73999, y: 197.66}
+  m_AnchoredPosition: {x: 215.73999, y: 172}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1334034896
@@ -23855,7 +23951,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26, y: -75.04001}
+  m_AnchoredPosition: {x: 26, y: -102}
   m_SizeDelta: {x: 217.73, y: 55.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1827725850
@@ -27754,9 +27850,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1897666078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 100, y: -25}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031408820

@@ -68,7 +68,7 @@ namespace _Project._Scripts.UI
             yield return FadeRoutine(1, null);
 
             duringFade?.Invoke();
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.5f);
 
             yield return FadeRoutine(0, null);
             PauseController.SetPaused(false);

@@ -48,6 +48,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6305514618344002506, guid: 6c7db16596bccfa45b0baea5cfa2336c, type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: c13ad1f57ec12c247983c1850b370d9f, type: 2}
     - target: {fileID: 6330028460391094589, guid: 6c7db16596bccfa45b0baea5cfa2336c, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -71,14 +75,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7354836903965231959, guid: 6c7db16596bccfa45b0baea5cfa2336c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8544294989914002317}
+      addedObject: {fileID: -8267506893361156015}
   m_SourcePrefab: {fileID: 100100000, guid: 6c7db16596bccfa45b0baea5cfa2336c, type: 3}
 --- !u!1 &8827750782548073189 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7354836903965231959, guid: 6c7db16596bccfa45b0baea5cfa2336c, type: 3}
   m_PrefabInstance: {fileID: 2059228748317479346}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8544294989914002317
+--- !u!114 &-8267506893361156015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

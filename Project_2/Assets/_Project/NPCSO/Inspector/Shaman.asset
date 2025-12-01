@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d276be7fe25012e4eb8c96f0a037fc13, type: 3}
+  m_Name: Shaman
+  m_EditorClassIdentifier: 
+  _playerName: Froggo
+  _firstLineIsPlayer: 0
+  _npcID: Shaman
+  _npcName: Shaman
+  _npcPortrait: {fileID: 21300000, guid: 13354f361bdd4a343a86ff59ab332c0c, type: 3}
+  _dialogueLines:
+  - "I write songs about heroes. You\u2026 you\u2019re different. A hero missing
+    his own story."
+  - I can only sing what is, not what was.
+  - "Now that\u2026 I can do."
+  - A quiet storm waiting to break.
+  _typingSpeed: 0.05
+  _voiceSound: {fileID: 8300000, guid: 8548c7132559e4640a291ff63ca5d81f, type: 3}
+  _voicePitch: 1
+  _autoProgressLines: 01010101
+  _endProgressLines: 00000001
+  _autoProgressDelay: 2
+  _choices:
+  - _dialogueIndex: 0
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - Can you help me remember?
+    _nextDialogueIndexes: 01000000
+    _giveQuests: 00
+  - _dialogueIndex: 1
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - Then write a song about what I become.
+    _nextDialogueIndexes: 02000000
+    _giveQuests: 00
+  - _dialogueIndex: 2
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - What does my story sound like to you?
+    _nextDialogueIndexes: 03000000
+    _giveQuests: 00
+  _questInProgressIndex: 0
+  _questCompletedIndex: 0
+  _quest: {fileID: 0}

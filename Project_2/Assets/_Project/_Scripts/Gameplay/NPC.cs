@@ -254,6 +254,7 @@ namespace _Project._Scripts.Gameplay
             foreach(char letter in _dialogueData._dialogueLines[_dialogueIndex])
             {
                 _dialogueUI.SetupDialogueText(_dialogueUI._dialogueText.text += letter);
+                SoundEffectManager.Instance.PlayVoice(_dialogueData._voiceSound, _dialogueData._voicePitch);
                 yield return new WaitForSeconds(_dialogueData._typingSpeed); //Nhập với tốc độ của dialogueData
             }
 
@@ -284,6 +285,7 @@ namespace _Project._Scripts.Gameplay
             foreach(char c in playerText)
             {
                 _dialogueUI.SetupDialogueText(_dialogueUI._dialogueText.text += c);
+                SoundEffectManager.Instance.PlayVoice(_dialogueData._voiceSound, _dialogueData._voicePitch);
                 yield return new WaitForSeconds(_dialogueData._typingSpeed);
             }
 

@@ -1,4 +1,5 @@
 ﻿using _Project._Scripts.Core;
+using _Project._Scripts.Player;
 using UnityEngine;
 
 namespace _Project._Scripts.Gameplay
@@ -47,6 +48,7 @@ namespace _Project._Scripts.Gameplay
             //Chuyển Sprite
             SetOpened(true);
             SoundEffectManager.Instance.Play("Success");
+            PlayerWallet.Instance.AddCoin(100);
 
             //Drop item từ rương, update trong tương lai
             if(_itemPrefab != null)

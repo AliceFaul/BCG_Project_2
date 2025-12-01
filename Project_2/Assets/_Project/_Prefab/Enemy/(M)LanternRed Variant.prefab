@@ -14,8 +14,12 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: a40766b17199470468b988795dc34e05, type: 3}
     - target: {fileID: 5691630542997884151, guid: a80dc4c2f8d19b94ea0978fa2d8cd2b3, type: 3}
       propertyPath: m_Name
-      value: (M)LanternRed
+      value: (M)LanternRed Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6794389933355395461, guid: a80dc4c2f8d19b94ea0978fa2d8cd2b3, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4ad32f9cfab5723479af270fd5717805, type: 2}
     - target: {fileID: 8898093859118543567, guid: a80dc4c2f8d19b94ea0978fa2d8cd2b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.4649634
@@ -56,6 +60,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9166476400307625629, guid: a80dc4c2f8d19b94ea0978fa2d8cd2b3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 659797372610145418, guid: 828b1c0363a182c48ac6c4ec1952c30a, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

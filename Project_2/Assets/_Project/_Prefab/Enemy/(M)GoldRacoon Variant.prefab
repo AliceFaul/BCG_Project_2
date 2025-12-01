@@ -14,8 +14,16 @@ PrefabInstance:
       objectReference: {fileID: 7108339969198208228, guid: 1e98719b919690e4c988d1eba2d14851, type: 3}
     - target: {fileID: 706178749612443821, guid: 715d8983b30084b4bafe0ea9dc0526cb, type: 3}
       propertyPath: m_Name
-      value: (M)GoldRacoon
+      value: (M)GoldRacoon Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1836034487009422815, guid: 715d8983b30084b4bafe0ea9dc0526cb, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 22942c4e333f7574085ab95b3d0d1e9f, type: 2}
+    - target: {fileID: 4036843465263618759, guid: 715d8983b30084b4bafe0ea9dc0526cb, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 659797372610145418, guid: a2cf31c35ed1a4547b111fa5fc38b3ee, type: 3}
     - target: {fileID: 4344851307617269397, guid: 715d8983b30084b4bafe0ea9dc0526cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.4649634

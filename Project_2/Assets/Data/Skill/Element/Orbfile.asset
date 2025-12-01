@@ -13,14 +13,18 @@ MonoBehaviour:
   m_Name: Orbfile
   m_EditorClassIdentifier: 
   skillName: OrbFile
-  skillDescription: 
+  skillDescription: 'Unlock at Level 18 and 2000 coins.
+
+    Shoots a fireball in
+    the direction of the mouse.'
   normalSprite: {fileID: -748796600851884618, guid: f444c6e78b86fb7449bcf1d45606839b, type: 3}
   usedSprite: {fileID: -6943874694722531127, guid: 4eb92a10f328cd444895b92610cdc31f, type: 3}
-  cooldown: 5
+  cooldown: 20
   requiredLevel: 1
   requiredCoin: 0
   skillEffectPrefab: {fileID: 5037087134952130173, guid: 83994191108199847be07dd7c1c0645b, type: 3}
   effectDuration: 10
   spawnType: 1
   type: 6
+  state: 0
   _energyAmount: 120

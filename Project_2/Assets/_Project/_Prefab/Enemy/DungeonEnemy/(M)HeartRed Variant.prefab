@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1333854976243675991, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: ab99c269962f1f34993f2c8b87b08f79, type: 2}
+    - target: {fileID: 1358883617349056928, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 659797372610145418, guid: e94d8992aa128564ba793ac33ec44789, type: 3}
     - target: {fileID: 1626368959215179250, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.4649634
@@ -50,12 +58,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2527327642886171594, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
       propertyPath: m_Name
-      value: (M)HeartRed
+      value: (M)HeartRed Variant
       objectReference: {fileID: 0}
     - target: {fileID: 3034783784146757986, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
       objectReference: {fileID: 7108339969198208228, guid: 96eedffd0a18e7944a550f01ae21ce5d, type: 3}
+    - target: {fileID: 3721347056795979448, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: ab99c269962f1f34993f2c8b87b08f79, type: 2}
+    - target: {fileID: 5987163620512947835, guid: f8be44b9d328b5f4f8346011ee84c0fc, type: 3}
+      propertyPath: _data
+      value: 
+      objectReference: {fileID: 11400000, guid: ab99c269962f1f34993f2c8b87b08f79, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using _Project._Scripts.Core;
 using _Project._Scripts.Gameplay;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -26,6 +27,8 @@ namespace _Project._Scripts.Player
         /// <param name="item"></param>
         public bool UseItem(ItemSO item)
         {
+            SoundEffectManager.Instance.Play("Success");
+
             switch(item._type)
             {
                 case ItemUseType.Consumable:

@@ -8,14 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 169616526936199829, guid: f9754ca5e2176cc47a46c15d4f34e289, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6033bc17b6e829a4fadbce5d81529651, type: 2}
     - target: {fileID: 1363648553990567911, guid: f9754ca5e2176cc47a46c15d4f34e289, type: 3}
       propertyPath: m_Name
-      value: (M)GoldenDrake
+      value: (M)GoldenDrake Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2009678550889313615, guid: f9754ca5e2176cc47a46c15d4f34e289, type: 3}
       propertyPath: m_SpriteLibraryAsset
       value: 
       objectReference: {fileID: 7108339969198208228, guid: 3cbad9b046870844481416bf9f9ed300, type: 3}
+    - target: {fileID: 2532642880940696973, guid: f9754ca5e2176cc47a46c15d4f34e289, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 659797372610145418, guid: 847da6ee620231f498707fb2c57aa7ba, type: 3}
     - target: {fileID: 2840783766365555167, guid: f9754ca5e2176cc47a46c15d4f34e289, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.4649634

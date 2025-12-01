@@ -5,12 +5,14 @@ using _Project._Scripts.Core;
 using System;
 using _Project._Scripts.UI;
 using System.Net;
+using _Project._Scripts.Player;
 
 namespace _Project._Scripts.Enemies
 {
     public class EnemyHealth : MonoBehaviour, IDamageable
     {
         private EnemyPool _pool; // Tham chiếu pool sinh ra enemy này
+        ItemDictionary _dictionary;
 
         //Biến event gửi tín hiệu qua movement để ngừng di chuyển
         public event Action OnDead;
@@ -48,6 +50,7 @@ namespace _Project._Scripts.Enemies
         void Start()
         {
             _info = GetComponent<EnemyInfo>();
+            _dictionary = FindAnyObjectByType<ItemDictionary>();
 
             if (_info != null)
             {
@@ -123,6 +126,11 @@ namespace _Project._Scripts.Enemies
                 OnDead?.Invoke();
                 if(gameObject.activeSelf)
                     OnEnemyDefeated?.Invoke(_info._enemyData._enemyID);
+
+                PlayerWallet.Instance.AddCoin(10);
+
+                GameObject itemDrop = _dictionary.GetItemPrefab(_info._enemyData._dropItemID);
+                Instantiate(itemDrop, transform.position, Quaternion.identity);
 
                 HUDController.Instance.AddExperience(_enemyExperience);
                 gameObject.GetComponent<SpriteRenderer>().color = _deadColor;
