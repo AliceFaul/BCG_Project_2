@@ -129,13 +129,18 @@ public class SkillExecutor : MonoBehaviour
         }
     }
 
-    void SpawnMist(Transform pos)
+    void SpawnMist(Transform playerTransform)
     {
+        if (_mistPrefab == null)
+        {
+            Debug.LogWarning("_mistPrefab chưa được gán!");
+            return;
+        }
+
         Debug.Log("Tạo sương mù giữ enemy đứng yên!");
-        GameObject mist = Instantiate(_mistPrefab, pos.position, Quaternion.identity);
-        FogProjectile mistFlow = mist.GetComponent<FogProjectile>();
-        mistFlow.Init(pos, _mistPrefab, 3);
+        Instantiate(_mistPrefab, transform.position, Quaternion.identity);
     }
+
 
     void ShootFireBall(Vector3 pos)
     {

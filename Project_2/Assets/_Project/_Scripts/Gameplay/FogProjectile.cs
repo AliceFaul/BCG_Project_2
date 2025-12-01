@@ -8,32 +8,23 @@ namespace _Project._Scripts.Gameplay
         [SerializeField] private float _spawnRadius = 3f;
         [SerializeField] private float _moveSpeed = .5f;
         [SerializeField] private float _moveRange = 1.5f;
+        [SerializeField] private int _amount = 3;
 
         private Transform _player;
         private FogInstance[] _fogs;
 
-        public void Init(Transform player, GameObject prefab, int amount)
+        void Start()
         {
-            if (player == null)
-            {
-                Debug.LogError("FogProjectile.Init ERROR: player == null");
-                return;
-            }
+            if(_player == null)
+                _player = GameObject.FindWithTag("Player").transform;
 
-            if (prefab == null)
-            {
-                Debug.LogError("FogProjectile.Init ERROR: prefab == null");
-                return;
-            }
+            _fogs = new FogInstance[_amount];
 
-            _player = player;
-            _fogs = new FogInstance[amount];
-
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < _amount; i++)
             {
                 Vector2 randomPos = (Vector2)_player.position + Random.insideUnitCircle * _spawnRadius;
 
-                GameObject go = Instantiate(prefab, randomPos, Quaternion.identity);
+                GameObject go = Instantiate(this.gameObject, randomPos, Quaternion.identity);
 
                 _fogs[i] = new FogInstance
                 {

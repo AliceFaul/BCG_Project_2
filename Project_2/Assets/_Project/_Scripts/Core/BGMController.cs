@@ -100,7 +100,11 @@ namespace _Project._Scripts.Core
             }
         }
 
-        public void PauseBGM() => _source.Stop();
+        public void PauseBGM()
+        {
+            if(_source != null)
+                _source.Pause();
+        }
 
         public void ChangeMusicMode(MusicMode mode)
         {

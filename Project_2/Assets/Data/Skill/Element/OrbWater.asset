@@ -21,6 +21,6 @@ MonoBehaviour:
   requiredCoin: 0
   skillEffectPrefab: {fileID: 3773846414569486053, guid: 44795c26c29f853489057497178c83d3, type: 3}
   effectDuration: 10
-  spawnType: 0
+  spawnType: 1
   type: 7
   _energyAmount: 100

@@ -19,7 +19,9 @@ MonoBehaviour:
   cooldown: 5
   requiredLevel: 1
   requiredCoin: 0
-  skillEffectPrefab: {fileID: 0}
+  skillEffectPrefab: {fileID: 309356539487964232, guid: 6ddcafcd8b8690a46ba81fb932f185d2, type: 3}
   effectDuration: 10
   spawnType: 0
   type: 5
+  state: 1
+  _energyAmount: 0
