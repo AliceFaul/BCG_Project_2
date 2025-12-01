@@ -7,7 +7,7 @@ using UnityEngine;
 public class SkillExecutor : MonoBehaviour
 {
     PlayerHealth playerHealth;
-
+    PlayerEnergy _energy;
     PlayerStats _stats;
 
     [Header("Projectile Prefabs")]
@@ -25,11 +25,11 @@ public class SkillExecutor : MonoBehaviour
         {
             playerHealth = GetComponent<PlayerHealth>();
         }
-    }
 
-    private void Start()
-    {
-        playerHealth = GetComponent<PlayerHealth>();
+        if(_energy == null)
+        {
+            _energy = GetComponent<PlayerEnergy>();
+        }
     }
 
     public void ExecuteSkill(SkillData data, Vector3 spawnPos)
@@ -39,38 +39,47 @@ public class SkillExecutor : MonoBehaviour
         {
             case SkillType.Kunai:
                 SpawnKunai(spawnPos);
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.Shuriken:
                 SpawnShuriken(spawnPos);
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.Cut:
                 StartCoroutine(CutAttack());
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.Heal:
                 HealPlayer();
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.Defense:
                 ActivateDefense();
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.Mist:
                 SpawnMist(transform);
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.OrbFire:
                 ShootFireBall(spawnPos);
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.OrbWater:
                 SpawnWaterColumn(spawnPos);
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
 
             case SkillType.RockSpike:
                 SpawnRockSpike(spawnPos);
+                _energy.ChangeEnergy(-data._energyAmount);
                 break;
         }
     }

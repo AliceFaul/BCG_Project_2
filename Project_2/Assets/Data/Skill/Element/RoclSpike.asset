@@ -23,3 +23,4 @@ MonoBehaviour:
   effectDuration: 10
   spawnType: 1
   type: 8
+  _energyAmount: 150

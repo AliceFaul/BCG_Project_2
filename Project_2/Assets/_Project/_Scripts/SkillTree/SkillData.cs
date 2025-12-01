@@ -29,6 +29,8 @@ public class SkillData : ScriptableObject
     public SkillSpawnType spawnType = SkillSpawnType.AtPlayer;
     public SkillType type;
 
+    [Header("Năng lượng cần thiết để thi triển chiêu thức")]
+    public int _energyAmount;
 }
 public enum SkillSpawnType
 {
