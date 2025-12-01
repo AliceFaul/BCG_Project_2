@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: FindMeats
   m_EditorClassIdentifier: 
   _questID: C4067937a-f2de-4560-9ec3-fbfc4741b98c
-  _questName: Collect Meats
-  _description: We need to collect meat to deliver
+  _questName: Blue Axolot arrived
+  _description: It seem some Blue Axolot awaked
   _objectives:
-  - _objectiveID: 2
-    _description: Collect 5 meats
-    _type: 0
-    _requireAmount: 5
+  - _objectiveID: BlueAxolot
+    _description: Defeat 2 Blue Axolot
+    _type: 1
+    _requireAmount: 2
     _currentAmount: 0
   _rewards:
   - _type: 0

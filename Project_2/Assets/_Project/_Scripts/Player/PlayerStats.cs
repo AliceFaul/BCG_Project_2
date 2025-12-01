@@ -115,6 +115,12 @@ namespace _Project._Scripts.Player
             _SkillDamage._isDirty = true;
         }
 
+        public void RefreshStats()
+        {
+            OnStatChanged?.Invoke();
+            OnPointChanged?.Invoke();
+        }
+
         #endregion
 
         #region Stats Saving System

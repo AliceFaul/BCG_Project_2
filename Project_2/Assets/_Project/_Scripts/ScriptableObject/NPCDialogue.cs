@@ -12,6 +12,7 @@ public class NPCDialogue : ScriptableObject
     public bool _firstLineIsPlayer;
 
     //Thiết lập các thông tin và lời nói của NPC
+    public string _npcID;
     public string _npcName; //Tên của NPC
     public Sprite _npcPortrait; //Ảnh chân dung của NPC đang nói
     public string[] _dialogueLines; //Là những lời nói của NPC 

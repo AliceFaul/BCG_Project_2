@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Project._Scripts.Core;
 using _Project._Scripts.UI;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace _Project._Scripts.Gameplay
         private bool _isTyping, _isDialogueActive;
 
         private bool _isPlayerSpeaking;
+
+        public static event Action<string> OnNPCTalked;
 
         //Biến trạng thái enum của quest ở NPC này
         private QuestState _questState = QuestState.NotStarted;
@@ -47,6 +50,8 @@ namespace _Project._Scripts.Gameplay
             {
                 StartDialogue();
             }
+
+            OnNPCTalked?.Invoke(_dialogueData._npcID);
         }
 
         #endregion
@@ -193,7 +198,19 @@ namespace _Project._Scripts.Gameplay
         {
             if(giveQuest)
             {
+                string questID = _dialogueData._quest._questID;
+
                 QuestController.Instance.AcceptQuest(_dialogueData._quest);
+
+                if (!QuestController.Instance.HasSeenQuest(questID))
+                {
+                    HUDController.Instance.QueueQuestPopup(
+                        $"Receive quest: {_dialogueData._quest._questName}"
+                    );
+
+                    QuestController.Instance.MarkQuestSeen(questID);
+                }
+
                 _questState = QuestState.InProgress;
             }
 
@@ -307,6 +324,8 @@ namespace _Project._Scripts.Gameplay
             _dialogueUI.ShowDialogueUI(false);
             PauseController.SetPaused(false);
             HUDController.Instance.HidePlayerHUD(false);
+
+            HUDController.Instance.ShowPendingPopups();
         }
 
         //Hàm này giúp trả quest về cho NPC (xóa quest khỏi Quest Log)

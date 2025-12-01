@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using _Project._Scripts.UI;
+using _Project._Scripts.Enemies;
+using _Project._Scripts.Gameplay;
 
 namespace _Project._Scripts.Core
 {
@@ -15,6 +17,7 @@ namespace _Project._Scripts.Core
         [Tooltip("Danh sách chứa các quest đang được người chơi thực hiện")]
         [SerializeField] public List<QuestProgress> _activeQuests = new();
         private QuestUIController _questUI;
+        List<string> _seenQuests = new();
         public List<string> _handinQuestIDs = new();
 
         private void Awake()
@@ -25,6 +28,10 @@ namespace _Project._Scripts.Core
 
             _questUI = FindAnyObjectByType<QuestUIController>();
             InventoryController.Instance.OnInventoryChanged += CheckInventoryChanged;
+
+            EnemyHealth.OnEnemyDefeated += CheckEnemyDefeated;
+
+            NPC.OnNPCTalked += CheckNPCTalked;
         }
 
         /// <summary>
@@ -98,6 +105,22 @@ namespace _Project._Scripts.Core
         /// <returns></returns>
         public bool IsQuestHandedIn(string questID) => _handinQuestIDs.Contains(questID);
 
+        public bool HasSeenQuest(string questID)
+        {
+            return _seenQuests.Contains(questID);
+        }
+
+        public void MarkQuestSeen(string questID)
+        {
+            if (!_seenQuests.Contains(questID))
+                _seenQuests.Add(questID);
+        }
+
+        public void MarkQuestUnseen(string questID)
+        {
+            _seenQuests.Remove(questID);
+        }
+
         #endregion
 
         #region Quest Collect System
@@ -128,6 +151,17 @@ namespace _Project._Scripts.Core
                     if(objective._currentAmount != newAmount)
                     {
                         objective._currentAmount = newAmount;
+                    }
+
+                    if (quest.IsCompleted && !quest._completionPopupShown)
+                    {
+                        quest._completionPopupShown = true;
+
+                        HUDController.Instance.QueueQuestPopup(
+                            $"Quest Completed: {quest._quest._questName}"
+                        );
+
+                        HUDController.Instance.ShowPendingPopups();
                     }
                 }
             }
@@ -191,6 +225,67 @@ namespace _Project._Scripts.Core
             return true;
         }
 
-        #endregion 
+        #endregion
+
+        #region Quest Defeat System
+
+        void CheckEnemyDefeated(string enemyID)
+        {
+            foreach(QuestProgress quest in _activeQuests)
+            {
+                foreach(QuestObjective objective in quest._objectives)
+                {
+                    if(objective._type != ObjectiveType.Defeat) continue;
+                    if(objective._objectiveID != enemyID.ToString()) continue;
+
+                    objective._currentAmount = Mathf.Min(objective._currentAmount + 1, objective._requireAmount);
+                }
+
+                if (quest.IsCompleted && !quest._completionPopupShown)
+                {
+                    quest._completionPopupShown = true;
+
+                    HUDController.Instance.QueueQuestPopup(
+                        $"Quest Completed: {quest._quest._questName}"
+                    );
+
+                    HUDController.Instance.ShowPendingPopups();
+                }
+            }
+            _questUI.UpdateQuestLog();
+        }
+
+        #endregion
+
+        #region Quest Talking System
+
+        void CheckNPCTalked(string npcID)
+        {
+            foreach(QuestProgress quest in _activeQuests)
+            {
+                foreach(QuestObjective objective in quest._objectives)
+                {
+                    if(objective._type != ObjectiveType.Talk) continue;
+                    if(objective._objectiveID != npcID) continue;
+
+                    //Thường quest nói chuyện NPC chỉ nói với một người
+                    objective._currentAmount = 1;
+                }
+
+                if(quest.IsCompleted && !quest._completionPopupShown)
+                {
+                    quest._completionPopupShown = true;
+
+                    HUDController.Instance.QueueQuestPopup(
+                        $"Quest Completed: {quest._quest._questName}"
+                    );
+
+                    HUDController.Instance.ShowPendingPopups();
+                }
+            }
+            _questUI.UpdateQuestLog();
+        }
+
+        #endregion
     }
 }

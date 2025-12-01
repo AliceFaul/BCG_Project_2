@@ -12,12 +12,21 @@ namespace _Project._Scripts.Gameplay
         [SerializeField] private GameObject _itemPrefab;
         [SerializeField] private Sprite _openedSprite;
 
+        [Header("Property của một chest trong Dungeon")]
+        [SerializeField] private DungeonData _dungeonData;
+        [SerializeField] private PolygonCollider2D _dungeonBoundary;
 
+        public bool _isDungeonChest = false;
+
+        private Sprite _closedSprite;
+         
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
             //Dùng Script Global Helper để generate id 
             _ChestID ??= GlobalHelper.GenerateChestUniqueID(gameObject);
+
+            _closedSprite = GetComponent<SpriteRenderer>().sprite;
         }
 
         public bool CanInteract()
@@ -44,6 +53,18 @@ namespace _Project._Scripts.Gameplay
             {
                 GameObject item = Instantiate(_itemPrefab, transform.position + Vector3.down, Quaternion.identity);
                 item.GetComponent<BounceEffect>().Bounce();
+            }
+
+            if(DungeonController.Instance != null)
+            {
+                Debug.Log("Opened chest and clear dungeon");
+
+                if(_isDungeonChest)
+                {
+                    DungeonController.Instance.OnChestOpened(this, _dungeonBoundary, _dungeonData);
+                    GetComponent<SpriteRenderer>().sprite = _closedSprite;
+                    SetOpened(false);
+                }
             }
         }
 

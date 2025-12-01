@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SkillExecutor : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    PlayerHealth playerHealth;
 
     PlayerStats _stats;
 
@@ -25,6 +25,11 @@ public class SkillExecutor : MonoBehaviour
         {
             playerHealth = GetComponent<PlayerHealth>();
         }
+    }
+
+    private void Start()
+    {
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     public void ExecuteSkill(SkillData data, Vector3 spawnPos)

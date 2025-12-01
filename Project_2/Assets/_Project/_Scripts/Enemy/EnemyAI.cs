@@ -16,7 +16,7 @@ namespace _Project._Scripts.Enemies
 
         [Header("Cấu hình Movement")]
         [SerializeField] private float moveSpeed = 2f;   // tốc độ di chuyển
-        [SerializeField] private Rigidbody2D rb;         // rigidbody để di chuyển
+        Rigidbody2D rb;         // rigidbody để di chuyển
         public string _enemyID;
         [SerializeField] private TMP_Text _enemyName;
         private Transform targetPlayer; // player khi phát hiện
@@ -46,6 +46,7 @@ namespace _Project._Scripts.Enemies
             if (health != null)
             {
                 health.OnDead += StopMoving;
+                health.OnRevive += Revive;
                 Debug.Log("Subscribe OnDead!!");
             }
 
@@ -109,6 +110,8 @@ namespace _Project._Scripts.Enemies
         {
             _isDead = true;
         }
+
+        void Revive() => _isDead = false;
 
         #endregion
 
