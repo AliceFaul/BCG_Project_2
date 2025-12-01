@@ -29,10 +29,12 @@ public class SkillData : ScriptableObject
     public SkillSpawnType spawnType = SkillSpawnType.AtPlayer;
     public SkillType type;
 
+    public State state = State.Locked;
+
     [Header("Năng lượng cần thiết để thi triển chiêu thức")]
     public int _energyAmount;
 }
-public enum SkillSpawnType
+    public enum SkillSpawnType
 {
     AtPlayer,
     AtMouse
@@ -48,5 +50,11 @@ public enum SkillType
     OrbFire,
     OrbWater,
     RockSpike
+}
+
+public enum State
+{
+    Locked,
+    Unlocked
 }
 
