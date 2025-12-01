@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using _Project._Scripts.Gameplay;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Project._Scripts.Player
@@ -60,6 +61,9 @@ namespace _Project._Scripts.Player
                         break;
                     case StatType.Stamina:
                         GetComponent<PlayerStamina>().ChangeStamina((int)effect._value);
+                        break;
+                    case StatType.Energy:
+                        GetComponent<PlayerEnergy>().ChangeEnergy((int)effect._value);
                         break;
                 }
             }

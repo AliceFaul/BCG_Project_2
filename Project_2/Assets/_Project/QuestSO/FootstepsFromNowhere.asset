@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e3411dd4f329b4eba6d7f55fb34385, type: 3}
+  m_Name: FootstepsFromNowhere
+  m_EditorClassIdentifier: 
+  _questID: 8b91fd75-6c77-4b80-9c04-126e2684a6ed
+  _questName: Footsteps From Nowhere
+  _description: 
+  _objectives:
+  - _objectiveID: RedSpirit
+    _description: Defeat 3 Red Spirits
+    _type: 1
+    _requireAmount: 3
+    _currentAmount: 0
+  - _objectiveID: Spirit
+    _description: Find and Talk to Blue Spirit
+    _type: 3
+    _requireAmount: 1
+    _currentAmount: 0
+  _rewards:
+  - _type: 0
+    _rewardID: 8
+    _amount: 2
+  - _type: 0
+    _rewardID: 9
+    _amount: 2
+  - _type: 0
+    _rewardID: 10
+    _amount: 2
+  - _type: 1
+    _rewardID: 0
+    _amount: 100
+  - _type: 2
+    _rewardID: 0
+    _amount: 25
