@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dfc85161fbfbd4db7c1a9cca0ed234, type: 3}
+  m_Name: FastFoodShop
+  m_EditorClassIdentifier: 
+  _shopName: Fastfood Shop
+  _items:
+  - {fileID: 11400000, guid: b736b62a98e4be74b95a8bddb0a4b5c9, type: 2}
+  - {fileID: 11400000, guid: bad102f3dd158244f97968b0fcff8b05, type: 2}
+  - {fileID: 11400000, guid: eac16f2500dc74d40aa5aca5ca5b8509, type: 2}
+  - {fileID: 11400000, guid: caca416331b9fb74e8da066074dc0b9b, type: 2}
+  - {fileID: 11400000, guid: 15603956b31c43e4a9e1202b7d699e10, type: 2}
+  - {fileID: 11400000, guid: c50e0c3fdc57d0042abacf3822d17b1a, type: 2}

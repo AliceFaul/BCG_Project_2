@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37dfc85161fbfbd4db7c1a9cca0ed234, type: 3}
+  m_Name: SeafoodShop
+  m_EditorClassIdentifier: 
+  _shopName: Seafood Shop
+  _items:
+  - {fileID: 11400000, guid: 8421063895544a04bb95ff4b245def89, type: 2}
+  - {fileID: 11400000, guid: 6e4707e6c664b6845aa3c8ef617ced9e, type: 2}
+  - {fileID: 11400000, guid: cbc15f66cad00e24c9278b8ae463d4be, type: 2}
+  - {fileID: 11400000, guid: 24bae16ea4de90f45b8fae67c48990dc, type: 2}
+  - {fileID: 11400000, guid: 41d17ac6de87b1a4791acb2bce3dc402, type: 2}

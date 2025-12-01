@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d276be7fe25012e4eb8c96f0a037fc13, type: 3}
+  m_Name: OldMan3
+  m_EditorClassIdentifier: 
+  _playerName: Froggo
+  _firstLineIsPlayer: 0
+  _npcID: OldMan3
+  _npcName: Old Man
+  _npcPortrait: {fileID: 21300000, guid: 8b0539e4326e4574080b5a28594175ad, type: 3}
+  _dialogueLines:
+  - "Hey, ninja! You\u2019re not planning to rob the village, right?"
+  - Good. Just checking.
+  - "\u2026Fair point."
+  - "Only by squirrels. They\u2019re vicious."
+  _typingSpeed: 0.05
+  _voiceSound: {fileID: 8300000, guid: 8548c7132559e4640a291ff63ca5d81f, type: 3}
+  _voicePitch: 1
+  _autoProgressLines: 01010101
+  _endProgressLines: 00000001
+  _autoProgressDelay: 2
+  _choices:
+  - _dialogueIndex: 0
+    _choices:
+    - Answer.
+    _playerReplyLines:
+    - No.
+    _nextDialogueIndexes: 01000000
+    _giveQuests: 00
+  - _dialogueIndex: 1
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - Would I tell you if I was?
+    _nextDialogueIndexes: 02000000
+    _giveQuests: 00
+  - _dialogueIndex: 2
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - Why? Does the village get robbed often?
+    _nextDialogueIndexes: 03000000
+    _giveQuests: 00
+  _questInProgressIndex: 0
+  _questCompletedIndex: 0
+  _quest: {fileID: 0}

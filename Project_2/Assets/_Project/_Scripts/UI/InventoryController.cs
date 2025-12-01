@@ -16,7 +16,7 @@ namespace _Project._Scripts.UI
         [Header("UI hiển thị mô tả Item")]
         [SerializeField] private Image itemImage;          // Kéo object "ItemImage" vào đây
         [SerializeField] private TMP_Text itemNameText;    // Kéo "ItemName"
-        [SerializeField] private TMP_Text itemDescText;    // Kéo "ItemDescription"
+        [SerializeField] private TMP_Text itemLocateText;    // Kéo "ItemDescription"
         [SerializeField] private GameObject descriptionPanel; // Kéo "ItemDescriptionPanel" hoặc panel cha
 
         //Singleton của InventoryController
@@ -52,7 +52,15 @@ namespace _Project._Scripts.UI
         {
             _itemDictionary = FindAnyObjectByType<ItemDictionary>();
             RebuildItemCounts();
+
+            // Ẩn khung mô tả & hình item lúc đầu
+            if (descriptionPanel != null)
+                descriptionPanel.SetActive(false);
+
+            if (itemImage != null)
+                itemImage.gameObject.SetActive(false);
         }
+
 
         #endregion
 
@@ -60,27 +68,21 @@ namespace _Project._Scripts.UI
 
         public void SetupDescriptionPage(ItemSO data)
         {
-            if (data == null)
-            {
-                Debug.LogWarning("ItemSO bị null!");
-                return;
-            }
+            if (data == null) return;
 
-            // Gán dữ liệu vào UI
+            itemImage.gameObject.SetActive(true);   // Hiện hình item
+            descriptionPanel.SetActive(true);       // Hiện panel mô tả
+
             itemImage.sprite = data.ItemImage;
             itemNameText.text = data.Name;
-            itemDescText.text = data.Description;
+            itemLocateText.text = data.Location;
 
-            // Bật panel mô tả
-            if(descriptionPanel != null)
+            if (data.Description != null)
             {
-                SetDescription(true);
-                if (data.Description != null)
-                {
-                    descriptionPanel.GetComponentInChildren<TMP_Text>().text = data.Description;
-                }
+                descriptionPanel.GetComponentInChildren<TMP_Text>().text = data.Description;
             }
         }
+
         public void SetDescription(bool isActive)
         {
             descriptionPanel.SetActive(isActive);

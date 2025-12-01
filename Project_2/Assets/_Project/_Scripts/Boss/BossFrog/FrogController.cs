@@ -1,4 +1,5 @@
-﻿using _Project._Scripts.UI;
+﻿using _Project._Scripts.Core;
+using _Project._Scripts.UI;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -109,6 +110,8 @@ namespace _Project._Scripts.Enemies.Bosses
 
         public void OnPlayerEnter()
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Battle);
+
             if (isActive) return;
             isActive = true;
 
@@ -118,6 +121,8 @@ namespace _Project._Scripts.Enemies.Bosses
 
         public void OnPlayerExit()
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Normal);
+
             isActive = false;
             ForceReturnToStart();
         }

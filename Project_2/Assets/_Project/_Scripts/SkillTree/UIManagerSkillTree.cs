@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using _Project._Scripts.Player;
+using _Project._Scripts.UI;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
@@ -16,13 +17,35 @@ public class UIManager : MonoBehaviour
 
     public void ShowSkillDescription(SkillData skill)
     {
+        if (skill == null) return;
+
+        // Lấy điều kiện từ player
+        int playerLevel = HUDController.Instance != null ? HUDController.Instance.CurrentLevel : 0;
+        int playerCoins = PlayerWallet.Instance != null ? PlayerWallet.Instance.Coins : 0;
+
+        bool enoughLevel = playerLevel >= skill.requiredLevel;
+        bool enoughCoin = playerCoins >= skill.requiredCoin;
+
+        // Thay thế ShowDescription bằng ShowSkill
         if (descriptionUI != null)
-            descriptionUI.ShowDescription(skill);
+            descriptionUI.ShowSkill(skill, enoughLevel, enoughCoin);
 
         if (actionPanel != null)
             actionPanel.Show(skill);
     }
 
+    private void Start()
+    {
+        if (hudSlots.Length >= 6)
+        {
+            hudSlots[0].hotkey = KeyCode.Z;
+            hudSlots[1].hotkey = KeyCode.X;
+            hudSlots[2].hotkey = KeyCode.C;
+            hudSlots[3].hotkey = KeyCode.V;
+            hudSlots[4].hotkey = KeyCode.G;
+            hudSlots[5].hotkey = KeyCode.T;
+        }
+    }
     public void AssignSkillToHud(SkillData skill)
     {
         foreach (SkillIcon slot in hudSlots)
@@ -39,7 +62,7 @@ public class UIManager : MonoBehaviour
     }
     public void RemoveSkillFromHud(SkillData skill)
     {
-        foreach (SkillIcon slot in hudSlots)
+        foreach (SkillIcon slot in hudSlots)    
         {
             if (slot != null && slot.GetSkillData() == skill)
             {

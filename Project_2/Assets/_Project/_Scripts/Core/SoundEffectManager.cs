@@ -15,6 +15,7 @@ namespace _Project._Scripts.Core
         //Thiết lập các component cần thiết
         private AudioSource _sfSource; //AudioSource của các âm thanh không thay đổi tần số
         private AudioSource _randomPitchAudioSource; //AudioSource của các âm thanh sẽ random tần số như Footstep,...
+        private AudioSource _voiceSource;
         private SoundEffectLibrary _dictionary;
 
         [SerializeField] private Slider _sfSlider;
@@ -32,6 +33,7 @@ namespace _Project._Scripts.Core
             AudioSource[] audioSources = GetComponents<AudioSource>();
             _sfSource = audioSources[0];
             _randomPitchAudioSource = audioSources[1];
+            _voiceSource = audioSources[2];
 
             _dictionary = GetComponent<SoundEffectLibrary>();
         }
@@ -40,6 +42,8 @@ namespace _Project._Scripts.Core
         void Start()
         {
             if (!_sfSlider) return;
+
+            LoadSfxVolume();
 
             _sfSlider.onValueChanged.AddListener(delegate { OnValueChanged(); });
         }
@@ -65,10 +69,17 @@ namespace _Project._Scripts.Core
             }
         }
 
+        public void PlayVoice(AudioClip clip, float pitch = 1f)
+        {
+            _voiceSource.pitch = pitch;
+            _voiceSource.PlayOneShot(clip);
+        }
+
         public void SetVolume(float volume)
         {
             _sfSource.volume = volume;
             _randomPitchAudioSource.volume = volume;
+            _voiceSource.volume = volume;
             PlayerPrefs.SetFloat(SfxVolumeKey, volume); //Lưu giá trị âm thanh lại
             PlayerPrefs.SetFloat(RandomPitchVolumeKey, volume);
             PlayerPrefs.Save();

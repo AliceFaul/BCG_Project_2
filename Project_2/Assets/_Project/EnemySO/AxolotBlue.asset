@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d952a0b9a04f14eb1c0acb32196796, type: 3}
   m_Name: AxolotBlue
   m_EditorClassIdentifier: 
-  _enemyID: AxolotBlue
-  _enemyName: Axolot Blue
+  _enemyID: BlueAxolot
+  _enemyName: Blue Axolot
   _baseHealth: 110
-  _baseDamage: 30
+  _baseDamage: 11
   _baseExperience: 7
+  _dropItemID: 2
   _healthGrowth: 1.15
   _damageGrowth: 1.1
   _experienceGrowth: 1.1

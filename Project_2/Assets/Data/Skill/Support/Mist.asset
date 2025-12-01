@@ -13,8 +13,18 @@ MonoBehaviour:
   m_Name: Mist
   m_EditorClassIdentifier: 
   skillName: Mist
-  skillDescription: 
+  skillDescription: 'Unlock at Level 15 and 825 coins.
+
+    Summon a large mist and
+    stun enemies in 3s.'
   normalSprite: {fileID: -6300487355759073710, guid: aaffd3a3bec202e4b8213b9c6167ed32, type: 3}
   usedSprite: {fileID: 5305982934229770357, guid: 8d534369715701a4882f4e651e131e48, type: 3}
-  cooldown: 5
+  cooldown: 60
   requiredLevel: 1
+  requiredCoin: 0
+  skillEffectPrefab: {fileID: 309356539487964232, guid: 6ddcafcd8b8690a46ba81fb932f185d2, type: 3}
+  effectDuration: 10
+  spawnType: 0
+  type: 5
+  state: 1
+  _energyAmount: 70

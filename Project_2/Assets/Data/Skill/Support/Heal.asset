@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   skillName: Heal
-  skillDescription: 
+  skillDescription: 'Unlock at Level 10 and 550 coins.
+
+    Just heal.'
   normalSprite: {fileID: 2903848411162822477, guid: 6a604c14a0d007b479ade4f9650eea7f, type: 3}
   usedSprite: {fileID: -5369262818884664796, guid: 1932f314f4c98df479c31cf54b24dd68, type: 3}
   cooldown: 5
   requiredLevel: 1
+  requiredCoin: 0
   skillEffectPrefab: {fileID: 9038458832658738882, guid: f26cfb120bae19545b09517516a83d0a, type: 3}
   effectDuration: 10
+  spawnType: 0
+  type: 3
+  state: 0
+  _energyAmount: 50

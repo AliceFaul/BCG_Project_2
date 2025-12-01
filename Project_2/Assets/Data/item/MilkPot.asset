@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a205a7f298362a4ba4374e49567dfc3, type: 3}
+  m_Name: MilkPot
+  m_EditorClassIdentifier: 
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Milk Pot
+  <Description>k__BackingField: Recover 200 stamina
+  <ItemImage>k__BackingField: {fileID: 21300000, guid: 8aa4a7887f7e78342a42c619080c79cb, type: 3}
+  <Location>k__BackingField: Everywhere
+  _price: 100
+  _itemPrefab: {fileID: 1131162867406212719, guid: d9a1f3e9fac99724499672867e2360e4, type: 3}
+  _type: 0
+  _effects:
+  - _statType: 2
+    _modifierType: 100
+    _value: 200
+    _duration: 0

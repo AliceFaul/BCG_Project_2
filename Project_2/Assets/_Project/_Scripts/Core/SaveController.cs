@@ -227,8 +227,7 @@ namespace _Project._Scripts.Core
         {
             Initialize();
 
-            GameObject.FindGameObjectWithTag("Player").transform.position = Vector3.zero;
-            FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = GameObject.Find("T1")?.GetComponent<PolygonCollider2D>();
+            FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = GameObject.Find("F6")?.GetComponent<PolygonCollider2D>();
             _invenController.SetInventoryItems(new List<InventorySaveData>());
             _hotbarController.SetHotBarItems(new List<InventorySaveData>());
             Debug.Log("Inventory and hotbar set new");

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d276be7fe25012e4eb8c96f0a037fc13, type: 3}
+  m_Name: Boy
+  m_EditorClassIdentifier: 
+  _playerName: Froggo
+  _firstLineIsPlayer: 0
+  _npcID: Boy
+  _npcName: Boy
+  _npcPortrait: {fileID: 21300000, guid: 39323d0ad0ed11d4786ffd3286a4c5d0, type: 3}
+  _dialogueLines:
+  - "Hey, mister ninja! You look scary\u2026 but kind of cool too!"
+  - Nope! You look lost. My mom says lost people need something warm. Maybe soup!
+  - Yay! But Mom needs some Shrimps to cook it!
+  - Everyone needs soup. Even ninjas.
+  - Only that they jump a lot and disappear! Can you disappear?
+  - "Then let\u2019s fix that with soup!"
+  - Thanks. Like I said, Ninja is so cool.
+  _typingSpeed: 0.05
+  _voiceSound: {fileID: 8300000, guid: 8548c7132559e4640a291ff63ca5d81f, type: 3}
+  _voicePitch: 1
+  _autoProgressLines: 01010101010101
+  _endProgressLines: 00000000000101
+  _autoProgressDelay: 2
+  _choices:
+  - _dialogueIndex: 0
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - "You\u2019re not afraid of me?"
+    _nextDialogueIndexes: 01000000
+    _giveQuests: 00
+  - _dialogueIndex: 1
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - ...Soup sounds good.
+    _nextDialogueIndexes: 02000000
+    _giveQuests: 00
+  - _dialogueIndex: 2
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - "I don\u2019t need soup."
+    _nextDialogueIndexes: 03000000
+    _giveQuests: 00
+  - _dialogueIndex: 3
+    _choices:
+    - Question?
+    _playerReplyLines:
+    - Do you know anything about ninjas?
+    _nextDialogueIndexes: 04000000
+    _giveQuests: 00
+  - _dialogueIndex: 4
+    _choices:
+    - Speak.
+    _playerReplyLines:
+    - "\u2026I don\u2019t remember."
+    _nextDialogueIndexes: 05000000
+    _giveQuests: 01
+  _questInProgressIndex: 5
+  _questCompletedIndex: 6
+  _quest: {fileID: 11400000, guid: 0bf0bd7b0cc186d4e9910dcd031fed05, type: 2}

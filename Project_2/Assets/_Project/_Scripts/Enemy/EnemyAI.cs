@@ -16,7 +16,7 @@ namespace _Project._Scripts.Enemies
 
         [Header("Cấu hình Movement")]
         [SerializeField] private float moveSpeed = 2f;   // tốc độ di chuyển
-        [SerializeField] private Rigidbody2D rb;         // rigidbody để di chuyển
+        Rigidbody2D rb;         // rigidbody để di chuyển
         public string _enemyID;
         [SerializeField] private TMP_Text _enemyName;
         private Transform targetPlayer; // player khi phát hiện
@@ -31,6 +31,8 @@ namespace _Project._Scripts.Enemies
 
         //Các cờ quản lý trạng thái
         private bool _isDead = false;
+        bool isFrozen = false;
+        float frozenTimer = 0f;
 
         #region Unity Life Cycle
 
@@ -45,6 +47,7 @@ namespace _Project._Scripts.Enemies
             if (health != null)
             {
                 health.OnDead += StopMoving;
+                health.OnRevive += Revive;
                 Debug.Log("Subscribe OnDead!!");
             }
 
@@ -64,17 +67,44 @@ namespace _Project._Scripts.Enemies
 
             _isDead = false;
         }
+        public void SetFrozen(float duration)
+        {
+            isFrozen = true;
+            frozenTimer = duration;
+
+            _path.canMove = false;  // khóa Pathfinding
+            rb.linearVelocity = Vector2.zero;
+
+            if (_anim != null)
+                _anim.speed = 0; // đứng hình
+        }
 
         private void Update()
         {
-            if(_isDead) return;
+            if (_isDead) return;
 
+            // ======= FROZEN STATE =======
+            if (isFrozen)
+            {
+                frozenTimer -= Time.deltaTime;
+
+                _path.canMove = false;      // đứng yên
+                rb.linearVelocity = Vector2.zero;
+
+                if (frozenTimer <= 0)
+                    Unfreeze();
+
+                return;
+            }
+
+            // ======= AI bình thường =======
             if (_state != EnemyState.Knockbacked)
             {
                 if (_attackTimer > 0f)
                 {
                     _attackTimer -= Time.deltaTime;
                 }
+
                 CheckForPlayer();
 
                 if (_state == EnemyState.Moving)
@@ -83,16 +113,26 @@ namespace _Project._Scripts.Enemies
                 }
                 else if (_state == EnemyState.Attacking)
                 {
-                    //rb.linearVelocity = Vector2.zero;
                     _path.destination = Vector3.zero;
                 }
             }
+        }
+        void Unfreeze()
+        {
+            isFrozen = false;
+
+            _path.canMove = true;
+
+            if (_anim != null)
+                _anim.speed = 1;
         }
 
         void StopMoving()
         {
             _isDead = true;
         }
+
+        void Revive() => _isDead = false;
 
         #endregion
 

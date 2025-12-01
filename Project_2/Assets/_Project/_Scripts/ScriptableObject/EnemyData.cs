@@ -15,6 +15,8 @@ public class EnemyData : ScriptableObject
     public float _baseDamage;
     public int _baseExperience;
 
+    public int _dropItemID;
+
     [Header("Lượng scale up stat khi người chơi lên level")]
     public float _healthGrowth = 1.15f;
     public float _damageGrowth = 1.10f;

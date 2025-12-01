@@ -34,7 +34,7 @@ public class BossPillar : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             Debug.Log(name + " bị phá!");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -45,8 +45,16 @@ public class BossPillar : MonoBehaviour, IDamageable
             healthFill.fillAmount = currentHealth / maxHealth;
         }
     }
-
     // Tùy chọn: hiện/ẩn thanh máu
     public void ShowHealth() => healthFill?.transform.parent.gameObject.SetActive(true);
     public void HideHealth() => healthFill?.transform.parent.gameObject.SetActive(false);
+    public void ResetPillar()
+    {
+        currentHealth = maxHealth;
+        UpdateHealthBar();
+        ShowHealth();
+
+        //if (anim != null)
+        //    anim.SetTrigger("Reset"); // nếu có animation reset trụ
+    }
 }

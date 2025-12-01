@@ -89,19 +89,35 @@ namespace _Project._Scripts.UI
 
         public void RevivePlayer()
         {
-            HideDeathScreen();
-            Vector3 posCheckpoint = CheckpointController.Instance.GetCheckpointPosition();
-            Vector2 posOffset = Random.insideUnitCircle.normalized * Random.Range(_minDistance, _maxDistance);
-            Vector2 pos = (Vector2)posCheckpoint + posOffset;
-
-            if (_player != null)
+            StartCoroutine(FadeTransition.Instance.FadeOutIn(() =>
             {
-                _player.Revive();
-                _player.transform.position = pos;
-                _player.gameObject.SetActive(true);
-            }
+                HideDeathScreen();
+                Vector3 posCheckpoint = CheckpointController.Instance.GetCheckpointPosition();
+                Vector2 posOffset = Random.insideUnitCircle.normalized * Random.Range(_minDistance, _maxDistance);
+                Vector2 pos = (Vector2)posCheckpoint + posOffset;
 
-            FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = CheckpointController.Instance.GetMapBoundary();
+                if (_player != null)
+                {
+                    _player.Revive();
+                    _player.transform.position = pos;
+                    _player.gameObject.SetActive(true);
+                }
+
+                FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = CheckpointController.Instance.GetMapBoundary();
+            }));
+            //HideDeathScreen();
+            //Vector3 posCheckpoint = CheckpointController.Instance.GetCheckpointPosition();
+            //Vector2 posOffset = Random.insideUnitCircle.normalized * Random.Range(_minDistance, _maxDistance);
+            //Vector2 pos = (Vector2)posCheckpoint + posOffset;
+
+            //if (_player != null)
+            //{
+            //    _player.Revive();
+            //    _player.transform.position = pos;
+            //    _player.gameObject.SetActive(true);
+            //}
+
+            //FindAnyObjectByType<CinemachineConfiner2D>().BoundingShape2D = CheckpointController.Instance.GetMapBoundary();
         }
 
         void SetJokeText()

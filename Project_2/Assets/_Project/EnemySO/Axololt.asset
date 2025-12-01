@@ -15,8 +15,9 @@ MonoBehaviour:
   _enemyID: Axolot
   _enemyName: Axolot
   _baseHealth: 100
-  _baseDamage: 25
+  _baseDamage: 10
   _baseExperience: 5
+  _dropItemID: 2
   _healthGrowth: 1.15
   _damageGrowth: 1.1
   _experienceGrowth: 1.1

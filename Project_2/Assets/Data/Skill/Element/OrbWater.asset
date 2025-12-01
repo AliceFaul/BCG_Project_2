@@ -13,10 +13,18 @@ MonoBehaviour:
   m_Name: OrbWater
   m_EditorClassIdentifier: 
   skillName: OrbWater
-  skillDescription: 
+  skillDescription: 'Unlock at Level 15 and 1250 coins.
+
+    Summon a water pillar
+    and stun enemies in 3s.'
   normalSprite: {fileID: -7148899402789621793, guid: e9d84090dd9e0dc48970fc1fd148f19c, type: 3}
   usedSprite: {fileID: -6943874694722531127, guid: 4eb92a10f328cd444895b92610cdc31f, type: 3}
-  cooldown: 5
+  cooldown: 15
   requiredLevel: 1
+  requiredCoin: 0
   skillEffectPrefab: {fileID: 3773846414569486053, guid: 44795c26c29f853489057497178c83d3, type: 3}
   effectDuration: 10
+  spawnType: 1
+  type: 7
+  state: 0
+  _energyAmount: 100

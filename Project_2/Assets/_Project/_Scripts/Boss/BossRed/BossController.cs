@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using _Project._Scripts.Core;
+using UnityEngine;
 
 namespace _Project._Scripts.Enemies.Bosses
 {
     public class BossController : MonoBehaviour
     {
+        BossHealth health;
+
         [Header("Boss Logic")]
         public bool isActive = false;
         public bool hasStarted = false;
@@ -45,6 +48,7 @@ namespace _Project._Scripts.Enemies.Bosses
         {
             anim = GetComponent<Animator>();
             rb = GetComponent<Rigidbody2D>();
+            health = GetComponent<BossHealth>();
 
             rb.simulated = false;
             anim.enabled = false;
@@ -52,6 +56,24 @@ namespace _Project._Scripts.Enemies.Bosses
             targetPoint = pointA;
 
             _attackTimer = _attackCD;
+        }
+
+        private void OnEnable()
+        {
+            if (health != null)
+            {
+                health.OnBossDead += ResetBoss;
+                Debug.Log("Boss Red has subscribe revive");
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (health != null)
+            {
+                health.OnBossDead -= ResetBoss;
+                Debug.Log("Boss Red has subscribe revive");
+            }
         }
 
         private void Update()
@@ -67,7 +89,6 @@ namespace _Project._Scripts.Enemies.Bosses
             {
                 Patrol();
             }
-
             if (_attackTimer > 0)
             {
                 _attackTimer -= Time.deltaTime;
@@ -94,6 +115,8 @@ namespace _Project._Scripts.Enemies.Bosses
         // ---------------------------------------------------------
         public void ActivateBoss()
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Battle);
+
             if (!hasStarted)
             {
                 anim.enabled = true;
@@ -123,6 +146,8 @@ namespace _Project._Scripts.Enemies.Bosses
         // ---------------------------------------------------------
         public void StopBoss()
         {
+            BGMController.Instance?.ChangeMusicMode(MusicMode.Normal);
+
             isActive = false;
             rb.linearVelocity = Vector2.zero;
 
@@ -132,6 +157,7 @@ namespace _Project._Scripts.Enemies.Bosses
         // ---------------------------------------------------------
         // Patrol A ↔ B
         // ---------------------------------------------------------
+
         void Patrol()
         {
             if (targetPoint == null)
@@ -241,9 +267,29 @@ namespace _Project._Scripts.Enemies.Bosses
                 currentTarget = GetRandomPointInZone();
             }
         }
+        // --------------- Reset trạng thái boss ----------------
+        public void ResetBoss()
+        {
+            transform.position = pointA.position;
+            targetPoint = pointA;
+            useRandomPatrol = false;
 
+            speed = 2f;
+            randomPatrolSpeed = 2f;
 
-    }   
+            anim.enabled = true;
+            rb.simulated = true;
+            CancelInvoke(); // dừng bắn cũ
+
+            pillarA.ResetPillar();
+            pillarB.ResetPillar();
+
+            isActive = false;
+            hasStarted = false;
+
+            ChangeState(BossRedState.Idle);
+        }
+    }
 
     public enum BossRedState
     {
