@@ -37,6 +37,8 @@ namespace _Project._Scripts.UI
 
             if(_coinText != null)
                 PlayerWallet.Instance.OnCoinChanged += OnCoinChangedHandler;
+
+            PlayerWallet.Instance.RefreshCoinUI();
         }
 
         private void Update()
@@ -73,9 +75,11 @@ namespace _Project._Scripts.UI
             _currentData = data;
 
             HUDController.Instance.HidePlayerHUD(true);
+            HUDController.Instance.HideHotbar(true);
             PauseController.SetPaused(true);
 
             PlayerWallet.Instance.RefreshCoinUI();
+            _coinText.text = PlayerWallet.Instance.Coins.ToString();
 
             foreach(Transform child in _shopListContent)
             {
@@ -130,6 +134,7 @@ namespace _Project._Scripts.UI
             _shopPanel.SetActive(false);
 
             HUDController.Instance.HidePlayerHUD(false);
+            HUDController.Instance.HideHotbar(false);
             PauseController.SetPaused(false);
         }
 
@@ -143,6 +148,7 @@ namespace _Project._Scripts.UI
                 return;
             }
 
+            PlayerWallet.Instance.RefreshCoinUI();
             InventoryController.Instance.AddItem(_currentItem._itemPrefab);
             CloseDetail();
             Debug.Log("Bought successful");

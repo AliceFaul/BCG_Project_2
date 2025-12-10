@@ -10,6 +10,7 @@ TagManager:
   - Skill
   - Bullet
   - Waylight
+  - Hotbar
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Tile
   - BloomCamera
   - trigger
-  - 
+  - Minimap
   - 
   - 
   - 

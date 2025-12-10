@@ -126,6 +126,10 @@ namespace _Project._Scripts.Gameplay
         {
             // Lấy component Item đang được click
             Item item = GetComponent<Item>();
+
+            _ogTransform = transform.parent;
+            Slot ogSlot = _ogTransform.GetComponent<Slot>();
+
             if (item == null || item._itemSO == null)
             {
                 Debug.LogWarning("Không có dữ liệu ItemSO để hiển thị");
@@ -134,6 +138,9 @@ namespace _Project._Scripts.Gameplay
 
             // Gọi hàm có sẵn trong InventoryController để hiển thị mô tả
             InventoryController.Instance.SetupDescriptionPage(item._itemSO);
+
+            if (ogSlot != null || item != null)
+                InventoryController.Instance.SetItemButtonInInventory(item, ogSlot);
 
             Debug.Log($"Click item: {item._name}");
         }
