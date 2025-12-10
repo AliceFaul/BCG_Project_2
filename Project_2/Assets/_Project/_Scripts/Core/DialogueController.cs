@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using _Project._Scripts.UI;
 
 namespace _Project._Scripts.Core
 {
@@ -44,6 +45,7 @@ namespace _Project._Scripts.Core
         public void ShowDialogueUI(bool show)
         {
             _dialoguePanel.SetActive(show);
+            HUDController.Instance.HideHotbar(show);
         }
 
         public void SetUpPlayerInfo(string name)

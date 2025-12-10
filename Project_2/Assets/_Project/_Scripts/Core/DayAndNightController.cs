@@ -44,8 +44,11 @@ public class DayAndNightController : MonoBehaviour
 
         foreach (var light in allLights)
         {
-            if (light.gameObject.name == "WayLight")
+            if (light.gameObject.tag == "Waylight")
+            {
+                light.intensity = 0f;
                 list.Add(light);
+            }
         }
 
         streetLights = list.ToArray();

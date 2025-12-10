@@ -324,6 +324,7 @@ namespace _Project._Scripts.Gameplay
             _isDialogueActive = false;
             _dialogueUI.SetupDialogueText("");
             _dialogueUI.ShowDialogueUI(false);
+            _dialogueUI.HideHotbar(false);
             PauseController.SetPaused(false);
             HUDController.Instance.HidePlayerHUD(false);
 

@@ -5,6 +5,7 @@ using System;
 using UnityEngine.UI;
 using TMPro;
 using System.Data.Common;
+using _Project._Scripts.Gameplay;
 
 namespace _Project._Scripts.UI
 {
@@ -18,6 +19,9 @@ namespace _Project._Scripts.UI
         [SerializeField] private TMP_Text itemNameText;    // Kéo "ItemName"
         [SerializeField] private TMP_Text itemLocateText;    // Kéo "ItemDescription"
         [SerializeField] private GameObject descriptionPanel; // Kéo "ItemDescriptionPanel" hoặc panel cha
+
+        [SerializeField] private Button _useButton;
+        [SerializeField] private Button _dropButton;
 
         //Singleton của InventoryController
         public static InventoryController Instance { get; private set; }
@@ -87,6 +91,61 @@ namespace _Project._Scripts.UI
         {
             descriptionPanel.SetActive(isActive);
         }
+
+        public void SetItemButtonInInventory(Item item, Slot ogSlot)
+        {
+            if(_useButton == null && _dropButton == null) return;
+
+            if(item == null && ogSlot == null) return;
+
+            _useButton.onClick.RemoveAllListeners();
+            _dropButton.onClick.RemoveAllListeners();
+
+            _useButton.onClick.AddListener(item.UseItem);
+            _dropButton.onClick.AddListener(() => DropItem(item, ogSlot)); 
+        }
+
+        void DropItem(Item item, Slot ogSlot)
+        {
+            if (item == null) return;
+
+            int quantity = item._quantity;
+            if(quantity > 1)
+            {
+                item.RemoveFromStack();
+
+                quantity = 1;
+            }
+            else
+            {
+                ogSlot._currentItem = null;
+            }
+
+            Transform player = GameObject.FindGameObjectWithTag("Player")?.transform;
+            if (player == null)
+            {
+                Debug.LogWarning("Không tìm thấy người chơi");
+                return;
+            }
+            //Drop item ngẫu nhiên xung quanh người chơi
+            Vector2 dropOffset = UnityEngine.Random.insideUnitCircle.normalized * UnityEngine.Random.Range(2, 3);
+            Vector2 dropPosition = (Vector2)player.transform.position + dropOffset;
+
+            //Tạo item drop ngoài scene
+            GameObject itemPrefab = Instantiate(item.gameObject, dropPosition, Quaternion.identity);
+            Item dropItem = itemPrefab.GetComponent<Item>();
+            dropItem._quantity = 1;
+            itemPrefab.GetComponent<BounceEffect>().Bounce();
+
+            //Xóa item trong UI 
+            if (quantity <= 1 && ogSlot._currentItem == null)
+            {
+                Destroy(item.gameObject);
+            }
+
+            RebuildItemCounts();
+        }
+
         //Hàm này giúp kiểm tra inventory và thêm prefab item vào inventory khi người chơi nhặt item, gọi ở PlayerItemCollector
         public bool AddItem(GameObject itemPrefab)
         {
